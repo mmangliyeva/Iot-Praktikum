@@ -44,7 +44,7 @@
         {
             "label": "Build, Flash, Monitor",
             "type": "shell",
-            "command": "${config:esp_idf_command} -p ${config:esp_device_port} -b ${config:esp_device_baud} build flash monitor",
+            "command": "${config:esp_idf_command} -p ${config:esp_device_port} -b 115200 build flash monitor",
             "options": {
                 "env": {
                     "PATH": "${config:esp_extra_paths}"
@@ -55,7 +55,7 @@
         {
             "label": "Flash Device",
             "type": "shell",
-            "command": "${config:esp_idf_command} -p ${config:esp_device_port} -b ${config:esp_device_baud} flash",
+            "command": "${config:esp_idf_command} -p ${config:esp_device_port} -b ${config:idf.baudRate} flash",
             "options": {
                 "env": {
                     "PATH": "${config:esp_extra_paths}"
