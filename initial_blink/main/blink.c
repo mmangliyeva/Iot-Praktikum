@@ -24,6 +24,7 @@
 
 // for the interrupts
 SemaphoreHandle_t xSemaphore_switchProg = NULL;
+// SemaphoreHandle_t xSemaphore_blink = NULL;
 // QueueHandle_t queue = NULL;
 TaskHandle_t xCurRunProg = NULL;
 
@@ -40,7 +41,7 @@ void switchProgramms(int64_t* lastTime, int64_t* threshold, int* programmMode, i
 void programm_0(void*);
 void programm_1(void*);
 void programm_2(void*);
-
+void IRAM_ATTR isr_led_button(void* args);
 
 
 void app_main(void){
@@ -54,7 +55,7 @@ void app_main(void){
 	ESP_ERROR_CHECK(gpio_set_direction(PIN_SWITCH_PROGS, GPIO_MODE_INPUT));
 	ESP_ERROR_CHECK(gpio_pulldown_en(PIN_SWITCH_PROGS));
 	// set up button for blinking LED
-	// gpio_pad_select_gpio(BLINK_BUTTON);
+	gpio_pad_select_gpio(BLINK_BUTTON);
 	ESP_ERROR_CHECK(gpio_set_direction(BLINK_BUTTON, GPIO_MODE_INPUT));
 	ESP_ERROR_CHECK(gpio_pulldown_en(BLINK_BUTTON));
 
@@ -71,9 +72,11 @@ void app_main(void){
 	
 	
 	xSemaphore_switchProg = xSemaphoreCreateBinary();
+	// xSemaphore_blink = xSemaphoreCreateBinary();
 	// xSemaphore_blinkLED = xSemaphoreCreateBinary();
 
 	gpio_set_intr_type(PIN_SWITCH_PROGS, GPIO_INTR_POSEDGE);
+	// gpio_set_intr_type(BLINK_BUTTON, GPIO_INTR_POSEDGE);
 	// gpio_set_intr_type(BLINK_BUTTON, GPIO_INTR_ANYEDGE);
 
 	// start task, send debounce data to 
@@ -82,6 +85,7 @@ void app_main(void){
 	gpio_install_isr_service(0);
 	//(void *)(&switchProgramm_IO)
     gpio_isr_handler_add(PIN_SWITCH_PROGS, isr_button, NULL);
+    // gpio_isr_handler_add(BLINK_BUTTON, isr_led_button, NULL);
     // gpio_isr_handler_add(BLINK_BUTTON, isr_button, (void*)BLINK_BUTTON);
 
 
@@ -99,6 +103,9 @@ void app_main(void){
 void IRAM_ATTR isr_button(void* args){
 	xSemaphoreGiveFromISR(xSemaphore_switchProg, NULL);
 }
+// void IRAM_ATTR isr_led_button(void* args){
+// 	xSemaphoreGiveFromISR(xSemaphore_blink, NULL);
+// }
 
 
 // increses the program mode in order to switch programms
@@ -210,17 +217,15 @@ void programm_0(void* args){
 }
 void programm_1(void* args){
 	static const char *TAG_1 = "BLINK_PROG_1";
-
+	int toggle = 0;
 	while(1){
 		// ------------------- programm 1 --------------------
 		// -----------blink external LED with button----------
 		while(gpio_get_level(BLINK_BUTTON)){
-			ESP_LOGI(TAG_1, "external OFF");
-			ESP_ERROR_CHECK(gpio_set_level(EXTERNAL_LED, 0));
+			ESP_ERROR_CHECK(gpio_set_level(EXTERNAL_LED, toggle));
 			vTaskDelay(blickingSpeed / portTICK_PERIOD_MS);
-			ESP_LOGI(TAG_1, "external ON");
-			ESP_ERROR_CHECK(gpio_set_level(EXTERNAL_LED, 1));
-			vTaskDelay(blickingSpeed / portTICK_PERIOD_MS);
+			toggle = !toggle;
+			ESP_LOGI(TAG_1, "blink");
 		}
 
 		vTaskDelay(10 / portTICK_PERIOD_MS);
