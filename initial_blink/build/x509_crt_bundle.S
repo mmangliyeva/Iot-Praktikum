@@ -1,4 +1,4 @@
-/* * Data converted from C:/Users/Lars/Documents/Iot-Praktikum/initial_blink/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

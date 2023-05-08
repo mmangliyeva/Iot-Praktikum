@@ -68,27 +68,27 @@ esp-idf/soc/libsoc.a(gpio_periph.c.obj)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj) (GPIO_PIN_MUX_REG)
 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash.c.obj) (esp_rom_spiflash_wait_idle)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_sha.c.obj) (__bswapsi2)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj) (__divdi3)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj) (__udivdi3)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
                               esp-idf/main/libmain.a(bootloader_start.c.obj) (_global_impure_ptr)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj) (memcmp)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj) (memcpy)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
                               esp-idf/main/libmain.a(bootloader_start.c.obj) (memset)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj) (strcspn)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj) (strlen)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj) (strncpy)
-c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
                               esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj) (strstr)
 
 Allocating common symbols
@@ -99,30 +99,30 @@ bootloader_image_hdr
 
 Discarded input sections
 
- .literal       0x0000000000000000        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .text          0x0000000000000000        0x6 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .debug_line    0x0000000000000000       0xa1 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .debug_info    0x0000000000000000       0x26 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .debug_abbrev  0x0000000000000000       0x14 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .literal       0x0000000000000000        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .text          0x0000000000000000        0x6 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .debug_line    0x0000000000000000       0xa4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .debug_info    0x0000000000000000       0x26 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .debug_abbrev  0x0000000000000000       0x14 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .debug_str     0x0000000000000000       0xfc c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .text          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
- .literal       0x0000000000000000       0x44 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
- .fini.literal  0x0000000000000000        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
- .init.literal  0x0000000000000000        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
- .text          0x0000000000000000       0xa6 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
- .data          0x0000000000000000        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
- .bss           0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
- .eh_frame      0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .debug_str     0x0000000000000000      0x102 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .text          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+ .literal       0x0000000000000000       0x44 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .fini.literal  0x0000000000000000        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .init.literal  0x0000000000000000        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .text          0x0000000000000000       0xa6 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .data          0x0000000000000000        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .bss           0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .eh_frame      0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
  .tm_clone_table
-                0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
- .fini          0x0000000000000000        0x6 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
- .init          0x0000000000000000        0x6 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+                0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .fini          0x0000000000000000        0x6 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .init          0x0000000000000000        0x6 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
  .text          0x0000000000000000        0x0 CMakeFiles/bootloader.elf.dir/project_elf_src_esp32.c.obj
  .data          0x0000000000000000        0x0 CMakeFiles/bootloader.elf.dir/project_elf_src_esp32.c.obj
  .bss           0x0000000000000000        0x0 CMakeFiles/bootloader.elf.dir/project_elf_src_esp32.c.obj
@@ -456,8 +456,8 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x40 esp-idf/hal/libhal.a(cpu_hal.c.obj)
  .debug_ranges  0x0000000000000000       0xa8 esp-idf/hal/libhal.a(cpu_hal.c.obj)
- .debug_line    0x0000000000000000      0x7d1 esp-idf/hal/libhal.a(cpu_hal.c.obj)
- .debug_str     0x0000000000000000     0x12c4 esp-idf/hal/libhal.a(cpu_hal.c.obj)
+ .debug_line    0x0000000000000000      0x861 esp-idf/hal/libhal.a(cpu_hal.c.obj)
+ .debug_str     0x0000000000000000     0x12d0 esp-idf/hal/libhal.a(cpu_hal.c.obj)
  .comment       0x0000000000000000       0x2d esp-idf/hal/libhal.a(cpu_hal.c.obj)
  .text          0x0000000000000000        0x0 esp-idf/hal/libhal.a(efuse_hal.c.obj)
  .data          0x0000000000000000        0x0 esp-idf/hal/libhal.a(efuse_hal.c.obj)
@@ -477,8 +477,8 @@ Discarded input sections
  .debug_abbrev  0x0000000000000000      0x1e0 esp-idf/soc/libsoc.a(gpio_periph.c.obj)
  .debug_aranges
                 0x0000000000000000       0x18 esp-idf/soc/libsoc.a(gpio_periph.c.obj)
- .debug_line    0x0000000000000000      0x382 esp-idf/soc/libsoc.a(gpio_periph.c.obj)
- .debug_str     0x0000000000000000      0x8e9 esp-idf/soc/libsoc.a(gpio_periph.c.obj)
+ .debug_line    0x0000000000000000      0x406 esp-idf/soc/libsoc.a(gpio_periph.c.obj)
+ .debug_str     0x0000000000000000      0x8f5 esp-idf/soc/libsoc.a(gpio_periph.c.obj)
  .comment       0x0000000000000000       0x2d esp-idf/soc/libsoc.a(gpio_periph.c.obj)
  .literal.esp_rom_spiflash_read_statushigh
                 0x0000000000000000        0xc esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
@@ -519,147 +519,147 @@ Discarded input sections
                 0x0000000000000000       0x94 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
  .text.esp_rom_spiflash_write_disable
                 0x0000000000000000       0x18 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
- .literal       0x0000000000000000        0x8 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .text          0x0000000000000000       0x26 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .debug_frame   0x0000000000000000       0x28 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .debug_info    0x0000000000000000      0xb01 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .debug_abbrev  0x0000000000000000      0x1b1 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .debug_loc     0x0000000000000000       0x25 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
+ .literal       0x0000000000000000        0x8 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .text          0x0000000000000000       0x26 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .debug_frame   0x0000000000000000       0x28 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .debug_info    0x0000000000000000      0xb01 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .debug_abbrev  0x0000000000000000      0x1b1 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .debug_loc     0x0000000000000000       0x25 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .debug_line    0x0000000000000000      0x39d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .debug_str     0x0000000000000000      0x712 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .comment       0x0000000000000000       0x2d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .text          0x0000000000000000      0x2aa c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .debug_frame   0x0000000000000000       0x28 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .eh_frame      0x0000000000000000       0x28 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .debug_info    0x0000000000000000     0x114a c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .debug_abbrev  0x0000000000000000      0x28e c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .debug_loc     0x0000000000000000      0xb09 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .debug_line    0x0000000000000000      0x3af /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .debug_str     0x0000000000000000      0x718 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .comment       0x0000000000000000       0x2d /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .text          0x0000000000000000      0x2aa /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .debug_frame   0x0000000000000000       0x28 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .eh_frame      0x0000000000000000       0x28 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .debug_info    0x0000000000000000     0x114a /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .debug_abbrev  0x0000000000000000      0x28e /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .debug_loc     0x0000000000000000      0xb09 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .debug_ranges  0x0000000000000000       0xa0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .debug_line    0x0000000000000000      0xb97 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .debug_str     0x0000000000000000      0x78b c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .comment       0x0000000000000000       0x2d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .text          0x0000000000000000      0x26e c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .debug_frame   0x0000000000000000       0x28 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .eh_frame      0x0000000000000000       0x28 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .debug_info    0x0000000000000000     0x10fc c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .debug_abbrev  0x0000000000000000      0x27a c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .debug_loc     0x0000000000000000      0xa8a c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .debug_ranges  0x0000000000000000       0xa0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .debug_line    0x0000000000000000      0xba9 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .debug_str     0x0000000000000000      0x791 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .comment       0x0000000000000000       0x2d /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .text          0x0000000000000000      0x26e /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .debug_frame   0x0000000000000000       0x28 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .eh_frame      0x0000000000000000       0x28 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .debug_info    0x0000000000000000     0x10fc /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .debug_abbrev  0x0000000000000000      0x27a /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .debug_loc     0x0000000000000000      0xa8a /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .debug_ranges  0x0000000000000000       0xa0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .debug_line    0x0000000000000000      0xaee c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .debug_str     0x0000000000000000      0x78c c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .comment       0x0000000000000000       0x2d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .text          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .bss           0x0000000000000000        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .debug_info    0x0000000000000000      0x915 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .debug_abbrev  0x0000000000000000      0x169 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .debug_ranges  0x0000000000000000       0xa0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .debug_line    0x0000000000000000      0xb00 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .debug_str     0x0000000000000000      0x792 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .comment       0x0000000000000000       0x2d /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .text          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .debug_info    0x0000000000000000      0x915 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .debug_abbrev  0x0000000000000000      0x169 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
  .debug_aranges
-                0x0000000000000000       0x18 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .debug_line    0x0000000000000000      0x131 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .debug_str     0x0000000000000000      0x5cc c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .comment       0x0000000000000000       0x2d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .text          0x0000000000000000       0x52 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .debug_frame   0x0000000000000000       0x28 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .debug_info    0x0000000000000000      0x9ca c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .debug_abbrev  0x0000000000000000      0x1af c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .debug_loc     0x0000000000000000      0x17f c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
+                0x0000000000000000       0x18 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .debug_line    0x0000000000000000      0x137 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .debug_str     0x0000000000000000      0x5d2 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .comment       0x0000000000000000       0x2d /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .text          0x0000000000000000       0x52 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .debug_frame   0x0000000000000000       0x28 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .debug_info    0x0000000000000000      0x9ca /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .debug_abbrev  0x0000000000000000      0x1af /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .debug_loc     0x0000000000000000      0x17f /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .debug_line    0x0000000000000000      0x347 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .debug_str     0x0000000000000000      0x5dc c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .comment       0x0000000000000000       0x2d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .literal       0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .text          0x0000000000000000      0x135 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .debug_line    0x0000000000000000      0x36d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .debug_info    0x0000000000000000       0x26 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .debug_abbrev  0x0000000000000000       0x14 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .debug_line    0x0000000000000000      0x353 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .debug_str     0x0000000000000000      0x5e2 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .comment       0x0000000000000000       0x2d /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .literal       0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .text          0x0000000000000000      0x135 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .debug_line    0x0000000000000000      0x370 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .debug_info    0x0000000000000000       0x26 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .debug_abbrev  0x0000000000000000       0x14 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .debug_str     0x0000000000000000      0x114 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .literal       0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .text          0x0000000000000000       0x74 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .debug_line    0x0000000000000000      0x1a4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .debug_info    0x0000000000000000       0x26 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .debug_abbrev  0x0000000000000000       0x14 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .debug_str     0x0000000000000000      0x11a /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .literal       0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .text          0x0000000000000000       0x74 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .debug_line    0x0000000000000000      0x1a7 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .debug_info    0x0000000000000000       0x26 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .debug_abbrev  0x0000000000000000       0x14 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .debug_str     0x0000000000000000      0x114 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .text          0x0000000000000000       0x2b c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .debug_frame   0x0000000000000000       0x28 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .debug_info    0x0000000000000000      0x979 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .debug_abbrev  0x0000000000000000      0x1b9 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .debug_loc     0x0000000000000000       0x83 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .debug_str     0x0000000000000000      0x11a /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .text          0x0000000000000000       0x2b /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .debug_frame   0x0000000000000000       0x28 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .debug_info    0x0000000000000000      0x979 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .debug_abbrev  0x0000000000000000      0x1b9 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .debug_loc     0x0000000000000000       0x83 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .debug_line    0x0000000000000000      0x2fa c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .debug_str     0x0000000000000000      0x5de c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .comment       0x0000000000000000       0x2d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .literal       0x0000000000000000        0xc c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .text          0x0000000000000000       0x63 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .debug_line    0x0000000000000000      0x180 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .debug_info    0x0000000000000000       0x26 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .debug_abbrev  0x0000000000000000       0x14 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .debug_line    0x0000000000000000      0x306 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .debug_str     0x0000000000000000      0x5e4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .comment       0x0000000000000000       0x2d /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .literal       0x0000000000000000        0xc /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .text          0x0000000000000000       0x63 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .debug_line    0x0000000000000000      0x183 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .debug_info    0x0000000000000000       0x26 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .debug_abbrev  0x0000000000000000       0x14 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .debug_str     0x0000000000000000      0x114 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .literal       0x0000000000000000        0xc c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .text          0x0000000000000000      0x113 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .debug_line    0x0000000000000000      0x307 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .debug_info    0x0000000000000000       0x26 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .debug_abbrev  0x0000000000000000       0x14 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .debug_str     0x0000000000000000      0x11a /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .literal       0x0000000000000000        0xc /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .text          0x0000000000000000      0x113 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .debug_line    0x0000000000000000      0x30a /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .debug_info    0x0000000000000000       0x26 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .debug_abbrev  0x0000000000000000       0x14 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .debug_str     0x0000000000000000      0x115 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .text          0x0000000000000000       0x36 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .debug_frame   0x0000000000000000       0x28 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .debug_info    0x0000000000000000      0x979 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .debug_abbrev  0x0000000000000000      0x1b9 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .debug_loc     0x0000000000000000       0x44 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .debug_str     0x0000000000000000      0x11b /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .text          0x0000000000000000       0x36 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .debug_frame   0x0000000000000000       0x28 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .debug_info    0x0000000000000000      0x979 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .debug_abbrev  0x0000000000000000      0x1b9 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .debug_loc     0x0000000000000000       0x44 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
  .debug_aranges
-                0x0000000000000000       0x20 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .debug_line    0x0000000000000000      0x318 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .debug_str     0x0000000000000000      0x5dc c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .comment       0x0000000000000000       0x2d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .literal       0x0000000000000000        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
- .init.literal  0x0000000000000000        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
- .text          0x0000000000000000       0x16 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
- .eh_frame      0x0000000000000000        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+                0x0000000000000000       0x20 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .debug_line    0x0000000000000000      0x324 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .debug_str     0x0000000000000000      0x5e2 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .comment       0x0000000000000000       0x2d /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .literal       0x0000000000000000        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .init.literal  0x0000000000000000        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .text          0x0000000000000000       0x16 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .eh_frame      0x0000000000000000        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
  .tm_clone_table
-                0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
- .init          0x0000000000000000        0x6 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
- .text          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
- .data          0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
- .bss           0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
- .init          0x0000000000000000        0x2 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
- .fini          0x0000000000000000        0x2 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
+                0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .init          0x0000000000000000        0x6 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .text          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
+ .data          0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
+ .bss           0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
+ .init          0x0000000000000000        0x2 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
+ .fini          0x0000000000000000        0x2 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
 
 Memory Configuration
 
@@ -671,9 +671,9 @@ dram_seg         0x000000003fff0000 0x0000000000010000 rw
 
 Linker script and memory map
 
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
 LOAD CMakeFiles/bootloader.elf.dir/project_elf_src_esp32.c.obj
 LOAD esp-idf/hal/libhal.a
 LOAD esp-idf/soc/libsoc.a
@@ -736,14 +736,14 @@ LOAD esp-idf/xtensa/libxtensa.a
 LOAD esp-idf/esp_common/libesp_common.a
 LOAD esp-idf/esp_rom/libesp_rom.a
 LOAD esp-idf/log/liblog.a
-LOAD C:/Users/Lars/esp/esp-idf/components/xtensa/esp32/libxt_hal.a
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libnosys.a
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
-LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
+LOAD /Users/larsleimbach/esp/esp-idf/components/xtensa/esp32/libxt_hal.a
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libnosys.a
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+LOAD /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
                 0x000000003ff40000                PROVIDE (UART0 = 0x3ff40000)
                 0x000000003ff42000                PROVIDE (SPI1 = 0x3ff42000)
                 [!provide]                        PROVIDE (SPI0 = 0x3ff43000)
@@ -2876,8 +2876,8 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
  *fill*         0x0000000040078da2        0x2 
  .text.esp_log_early_timestamp
                 0x0000000040078da4       0x1f esp-idf/log/liblog.a(log_noos.c.obj)
-                0x0000000040078da4                esp_log_early_timestamp
                 0x0000000040078da4                esp_log_timestamp
+                0x0000000040078da4                esp_log_early_timestamp
  *libgcc.a:(.literal .text .literal.* .text.*)
  *libbootloader_support.a:bootloader_clock_loader.*(.literal .text .literal.* .text.*)
  *libbootloader_support.a:bootloader_common_loader.*(.literal .text .literal.* .text.*)
@@ -3243,8 +3243,8 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
                 0x000000004007b374                rtc_clk_bbpll_configure
  .text.rtc_clk_xtal_freq_get
                 0x000000004007b4f4       0x26 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
-                0x000000004007b4f4                rtc_clk_xtal_freq_get
                 0x000000004007b4f4                rtc_get_xtal
+                0x000000004007b4f4                rtc_clk_xtal_freq_get
  *fill*         0x000000004007b51a        0x2 
  .text.rtc_clk_cpu_freq_mhz_to_config
                 0x000000004007b51c       0x57 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
@@ -3309,7 +3309,7 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
  *(.fini.literal)
  *(.fini)
  *fill*         0x000000004007ba59        0x3 
- .fini          0x000000004007ba5c        0x3 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+ .fini          0x000000004007ba5c        0x3 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
                 0x000000004007ba5c                _fini
  *(.gnu.version)
                 0x000000004007ba5f                _loader_text_end = ABSOLUTE (.)
@@ -3319,7 +3319,7 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
  *(.entry.text)
  *(.init.literal)
  *(.init)
- .init          0x0000000040080400        0x3 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+ .init          0x0000000040080400        0x3 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
                 0x0000000040080400                _init
                 0x0000000040080403                _stext = .
                 0x0000000040080403                _text_start = ABSOLUTE (.)
@@ -3547,7 +3547,7 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
  *(.jcr)
                 0x000000003fff0034                _data_end = ABSOLUTE (.)
 
-.dram0.rodata   0x000000003fff0034     0x1a04
+.dram0.rodata   0x000000003fff0034     0x1a08
                 0x000000003fff0034                _rodata_start = ABSOLUTE (.)
  *(.rodata)
  .rodata        0x000000003fff0034        0x8 esp-idf/bootloader_support/libbootloader_support.a(bootloader_clock_init.c.obj)
@@ -3638,69 +3638,69 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
  .rodata.bootloader_enable_random.str1.1
                 0x000000003fff1670       0x3c esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
  .rodata.bootloader_print_banner.str1.1
-                0x000000003fff16ac       0x6b esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
+                0x000000003fff16ac       0x71 esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
  .rodata.rtc_clk_cpu_freq_to_pll_mhz.str1.1
-                0x000000003fff1717       0x31 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
+                0x000000003fff171d       0x31 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
  .rodata.rtc_clk_cpu_freq_get_config.str1.1
-                0x000000003fff1748       0x3b esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
+                0x000000003fff174e       0x3b esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
  .rodata.rtc_clk_xtal_freq_estimate.str1.1
-                0x000000003fff1783       0xe3 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
+                0x000000003fff1789       0xe3 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
  .rodata.rtc_clk_init.str1.1
-                0x000000003fff1866       0xd9 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
+                0x000000003fff186c       0xd9 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
  .rodata.rtc_clk_cal_internal.str1.1
-                0x000000003fff193f       0x9e esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
+                0x000000003fff1945       0x9e esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
  .rodata.rtc_clk_wait_for_slow_cycle.str1.1
-                0x000000003fff19dd       0x33 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
+                0x000000003fff19e3       0x33 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
  .rodata.__func__$4046
-                0x000000003fff1a10       0x15 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
+                0x000000003fff1a16       0x15 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
  *(.gnu.linkonce.r.*)
  *(.rodata1)
  *(.sdata2 .sdata2.*)
-                0x000000003fff1a25                __XT_EXCEPTION_TABLE_ = ABSOLUTE (.)
+                0x000000003fff1a2b                __XT_EXCEPTION_TABLE_ = ABSOLUTE (.)
  *(.xt_except_table)
  *(.gcc_except_table)
  *(.gnu.linkonce.e.*)
  *(.gnu.version_r)
  *(.eh_frame)
-                0x000000003fff1a28                . = ((. + 0x3) & 0xfffffffffffffffc)
- *fill*         0x000000003fff1a25        0x3 
-                0x000000003fff1a28                __init_array_start = ABSOLUTE (.)
+                0x000000003fff1a2c                . = ((. + 0x3) & 0xfffffffffffffffc)
+ *fill*         0x000000003fff1a2b        0x1 
+                0x000000003fff1a2c                __init_array_start = ABSOLUTE (.)
  *crtbegin.*(.ctors)
- .ctors         0x000000003fff1a28        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .ctors         0x000000003fff1a2c        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
  *(EXCLUDE_FILE(*crtend.*) .ctors)
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
- .ctors         0x000000003fff1a2c        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
-                0x000000003fff1a30                __init_array_end = ABSOLUTE (.)
+ .ctors         0x000000003fff1a30        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+                0x000000003fff1a34                __init_array_end = ABSOLUTE (.)
  *crtbegin.*(.dtors)
- .dtors         0x000000003fff1a30        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .dtors         0x000000003fff1a34        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
  *(EXCLUDE_FILE(*crtend.*) .dtors)
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
- .dtors         0x000000003fff1a34        0x4 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
-                0x000000003fff1a34                __DTOR_END__
-                0x000000003fff1a38                __XT_EXCEPTION_DESCS_ = ABSOLUTE (.)
+ .dtors         0x000000003fff1a38        0x4 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+                0x000000003fff1a38                __DTOR_END__
+                0x000000003fff1a3c                __XT_EXCEPTION_DESCS_ = ABSOLUTE (.)
  *(.xt_except_desc)
  *(.gnu.linkonce.h.*)
-                0x000000003fff1a38                __XT_EXCEPTION_DESCS_END__ = ABSOLUTE (.)
+                0x000000003fff1a3c                __XT_EXCEPTION_DESCS_END__ = ABSOLUTE (.)
  *(.xt_except_desc_end)
  *(.dynamic)
  *(.gnu.version_d)
-                0x000000003fff1a38                _rodata_end = ABSOLUTE (.)
-                0x000000003fff1a38                _lit4_start = ABSOLUTE (.)
+                0x000000003fff1a3c                _rodata_end = ABSOLUTE (.)
+                0x000000003fff1a3c                _lit4_start = ABSOLUTE (.)
  *(*.lit4)
  *(.lit4.*)
  *(.gnu.linkonce.lit4.*)
-                0x000000003fff1a38                _lit4_end = ABSOLUTE (.)
-                0x000000003fff1a38                . = ALIGN (0x4)
-                0x000000003fff1a38                _dram_end = ABSOLUTE (.)
+                0x000000003fff1a3c                _lit4_end = ABSOLUTE (.)
+                0x000000003fff1a3c                . = ALIGN (0x4)
+                0x000000003fff1a3c                _dram_end = ABSOLUTE (.)
 
 .xt.prop        0x0000000000000000     0x2e20
  *(.xt.prop .gnu.linkonce.prop.*)
- .xt.prop       0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .xt.prop       0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
                                          0x24 (size before relaxing)
- .xt.prop       0x0000000000000000       0x30 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
- .xt.prop       0x0000000000000030       0x18 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .xt.prop       0x0000000000000000       0x30 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+ .xt.prop       0x0000000000000030       0x18 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
                                         0x15c (size before relaxing)
  .xt.prop       0x0000000000000048       0x60 esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
  .xt.prop       0x00000000000000a8       0x6c esp-idf/main/libmain.a(bootloader_start.c.obj)
@@ -3759,36 +3759,36 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
                                          0x18 (size before relaxing)
  .xt.prop       0x00000000000029f4      0x414 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
                                         0x828 (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
                                          0x30 (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
                                         0x1bc (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
                                         0x1a4 (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
                                          0x84 (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
                                         0x15c (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
                                          0xd8 (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
                                          0x90 (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
                                          0xc0 (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
                                         0x1a4 (size before relaxing)
- .xt.prop       0x0000000000002e08        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
+ .xt.prop       0x0000000000002e08        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
                                          0x78 (size before relaxing)
- .xt.prop       0x0000000000002e08       0x18 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .xt.prop       0x0000000000002e08       0x18 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
                                          0x84 (size before relaxing)
- .xt.prop       0x0000000000002e20        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
+ .xt.prop       0x0000000000002e20        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
                                          0x30 (size before relaxing)
 
 .xt.lit         0x0000000000000000      0x2c0
  *(.xt.lit .gnu.linkonce.p.*)
- .xt.lit        0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .xt.lit        0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
                                           0x8 (size before relaxing)
- .xt.lit        0x0000000000000000        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .xt.lit        0x0000000000000000        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
                                          0x18 (size before relaxing)
  .xt.lit        0x0000000000000000       0x10 esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
  .xt.lit        0x0000000000000010        0x8 esp-idf/main/libmain.a(bootloader_start.c.obj)
@@ -3842,13 +3842,13 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
                                          0x18 (size before relaxing)
  .xt.lit        0x0000000000000288       0x38 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
                                          0x88 (size before relaxing)
- .xt.lit        0x00000000000002c0        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
+ .xt.lit        0x00000000000002c0        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
                                           0x8 (size before relaxing)
- .xt.lit        0x00000000000002c0        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
+ .xt.lit        0x00000000000002c0        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
                                           0x8 (size before relaxing)
- .xt.lit        0x00000000000002c0        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
+ .xt.lit        0x00000000000002c0        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
                                           0x8 (size before relaxing)
- .xt.lit        0x00000000000002c0        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .xt.lit        0x00000000000002c0        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
                                          0x10 (size before relaxing)
                 0x0000000040008550                PROVIDE (ets_update_cpu_frequency = 0x40008550)
                 [!provide]                        PROVIDE (MD5Final = 0x4005db1c)
@@ -3860,9 +3860,9 @@ LOAD c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xte
 OUTPUT(bootloader.elf elf32-xtensa-le)
 
 .xtensa.info    0x0000000000000000       0x38
- .xtensa.info   0x0000000000000000       0x38 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .xtensa.info   0x0000000000000000       0x38 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
  .xtensa.info   0x0000000000000038        0x0 CMakeFiles/bootloader.elf.dir/project_elf_src_esp32.c.obj
  .xtensa.info   0x0000000000000038        0x0 esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
  .xtensa.info   0x0000000000000038        0x0 esp-idf/main/libmain.a(bootloader_start.c.obj)
@@ -3898,22 +3898,22 @@ OUTPUT(bootloader.elf elf32-xtensa-le)
  .xtensa.info   0x0000000000000038        0x0 esp-idf/hal/libhal.a(efuse_hal.c.obj)
  .xtensa.info   0x0000000000000038        0x0 esp-idf/soc/libsoc.a(gpio_periph.c.obj)
  .xtensa.info   0x0000000000000038        0x0 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
- .xtensa.info   0x0000000000000038        0x0 c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .xtensa.info   0x0000000000000038        0x0 /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtn.o
 
 .comment        0x0000000000000000       0x2c
- .comment       0x0000000000000000       0x2c c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+ .comment       0x0000000000000000       0x2c /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
                                          0x2d (size before relaxing)
  .comment       0x000000000000002c       0x2d esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
  .comment       0x000000000000002c       0x2d esp-idf/main/libmain.a(bootloader_start.c.obj)
@@ -3947,7 +3947,7 @@ OUTPUT(bootloader.elf elf32-xtensa-le)
  .comment       0x000000000000002c       0x2d esp-idf/hal/libhal.a(efuse_hal.c.obj)
  .comment       0x000000000000002c       0x2d esp-idf/hal/libhal.a(efuse_hal.c.obj)
  .comment       0x000000000000002c       0x2d esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
- .comment       0x000000000000002c       0x2d c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+ .comment       0x000000000000002c       0x2d /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
 
 .debug_frame    0x0000000000000000     0x1370
  .debug_frame   0x0000000000000000       0x40 esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
@@ -4181,105 +4181,105 @@ OUTPUT(bootloader.elf elf32-xtensa-le)
  .debug_ranges  0x00000000000014a0       0x90 esp-idf/hal/libhal.a(efuse_hal.c.obj)
  .debug_ranges  0x0000000000001530       0xf0 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
 
-.debug_line     0x0000000000000000    0x184d2
- .debug_line    0x0000000000000000      0x5a5 esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
- .debug_line    0x00000000000005a5      0x6ed esp-idf/main/libmain.a(bootloader_start.c.obj)
- .debug_line    0x0000000000000c92     0x10ca esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
- .debug_line    0x0000000000001d5c     0x1d51 esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash.c.obj)
- .debug_line    0x0000000000003aad     0x2281 esp-idf/bootloader_support/libbootloader_support.a(bootloader_utility.c.obj)
- .debug_line    0x0000000000005d2e     0x249f esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
- .debug_line    0x00000000000081cd      0x82a esp-idf/bootloader_support/libbootloader_support.a(flash_partitions.c.obj)
- .debug_line    0x00000000000089f7       0xe3 esp-idf/bootloader_support/libbootloader_support.a(bootloader_console_loader.c.obj)
- .debug_line    0x0000000000008ada      0x878 esp-idf/bootloader_support/libbootloader_support.a(bootloader_sha.c.obj)
- .debug_line    0x0000000000009352       0x9c esp-idf/bootloader_support/libbootloader_support.a(bootloader_soc.c.obj)
- .debug_line    0x00000000000093ee     0x194d esp-idf/bootloader_support/libbootloader_support.a(bootloader_esp32.c.obj)
- .debug_line    0x000000000000ad3b      0xc58 esp-idf/bootloader_support/libbootloader_support.a(bootloader_common_loader.c.obj)
- .debug_line    0x000000000000b993      0x68c esp-idf/bootloader_support/libbootloader_support.a(bootloader_clock_init.c.obj)
- .debug_line    0x000000000000c01f      0x469 esp-idf/bootloader_support/libbootloader_support.a(bootloader_mem.c.obj)
- .debug_line    0x000000000000c488      0x5d9 esp-idf/bootloader_support/libbootloader_support.a(bootloader_random.c.obj)
- .debug_line    0x000000000000ca61      0x7f8 esp-idf/bootloader_support/libbootloader_support.a(bootloader_random_esp32.c.obj)
- .debug_line    0x000000000000d259      0xbbe esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash_config_esp32.c.obj)
- .debug_line    0x000000000000de17      0x454 esp-idf/bootloader_support/libbootloader_support.a(bootloader_efuse.c.obj)
- .debug_line    0x000000000000e26b      0xa78 esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
- .debug_line    0x000000000000ece3      0x5a1 esp-idf/bootloader_support/libbootloader_support.a(bootloader_console.c.obj)
- .debug_line    0x000000000000f284      0x7b4 esp-idf/esp_hw_support/libesp_hw_support.a(cpu_util.c.obj)
- .debug_line    0x000000000000fa38     0x1f11 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
- .debug_line    0x0000000000011949      0xb5d esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
- .debug_line    0x00000000000124a6      0xb8a esp-idf/esp_hw_support/libesp_hw_support.a(rtc_init.c.obj)
- .debug_line    0x0000000000013030      0xca3 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
- .debug_line    0x0000000000013cd3      0x5e2 esp-idf/esp_rom/libesp_rom.a(esp_rom_uart.c.obj)
- .debug_line    0x00000000000142b5      0x4d8 esp-idf/log/liblog.a(log_noos.c.obj)
- .debug_line    0x000000000001478d     0x157b esp-idf/hal/libhal.a(wdt_hal_iram.c.obj)
- .debug_line    0x0000000000015d08      0x508 esp-idf/hal/libhal.a(mpu_hal.c.obj)
- .debug_line    0x0000000000016210      0x36f esp-idf/hal/libhal.a(efuse_hal.c.obj)
- .debug_line    0x000000000001657f      0x532 esp-idf/hal/libhal.a(efuse_hal.c.obj)
- .debug_line    0x0000000000016ab1     0x1a21 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
+.debug_line     0x0000000000000000    0x1976e
+ .debug_line    0x0000000000000000      0x641 esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
+ .debug_line    0x0000000000000641      0x789 esp-idf/main/libmain.a(bootloader_start.c.obj)
+ .debug_line    0x0000000000000dca     0x1184 esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
+ .debug_line    0x0000000000001f4e     0x1e05 esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash.c.obj)
+ .debug_line    0x0000000000003d53     0x233b esp-idf/bootloader_support/libbootloader_support.a(bootloader_utility.c.obj)
+ .debug_line    0x000000000000608e     0x2565 esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
+ .debug_line    0x00000000000085f3      0x8c0 esp-idf/bootloader_support/libbootloader_support.a(flash_partitions.c.obj)
+ .debug_line    0x0000000000008eb3       0xef esp-idf/bootloader_support/libbootloader_support.a(bootloader_console_loader.c.obj)
+ .debug_line    0x0000000000008fa2      0x908 esp-idf/bootloader_support/libbootloader_support.a(bootloader_sha.c.obj)
+ .debug_line    0x00000000000098aa       0xa2 esp-idf/bootloader_support/libbootloader_support.a(bootloader_soc.c.obj)
+ .debug_line    0x000000000000994c     0x1a13 esp-idf/bootloader_support/libbootloader_support.a(bootloader_esp32.c.obj)
+ .debug_line    0x000000000000b35f      0xd12 esp-idf/bootloader_support/libbootloader_support.a(bootloader_common_loader.c.obj)
+ .debug_line    0x000000000000c071      0x728 esp-idf/bootloader_support/libbootloader_support.a(bootloader_clock_init.c.obj)
+ .debug_line    0x000000000000c799      0x4f9 esp-idf/bootloader_support/libbootloader_support.a(bootloader_mem.c.obj)
+ .debug_line    0x000000000000cc92      0x663 esp-idf/bootloader_support/libbootloader_support.a(bootloader_random.c.obj)
+ .debug_line    0x000000000000d2f5      0x894 esp-idf/bootloader_support/libbootloader_support.a(bootloader_random_esp32.c.obj)
+ .debug_line    0x000000000000db89      0xc6c esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash_config_esp32.c.obj)
+ .debug_line    0x000000000000e7f5      0x4d8 esp-idf/bootloader_support/libbootloader_support.a(bootloader_efuse.c.obj)
+ .debug_line    0x000000000000eccd      0xb38 esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
+ .debug_line    0x000000000000f805      0x63d esp-idf/bootloader_support/libbootloader_support.a(bootloader_console.c.obj)
+ .debug_line    0x000000000000fe42      0x856 esp-idf/esp_hw_support/libesp_hw_support.a(cpu_util.c.obj)
+ .debug_line    0x0000000000010698     0x1fbf esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
+ .debug_line    0x0000000000012657      0xc05 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
+ .debug_line    0x000000000001325c      0xc20 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_init.c.obj)
+ .debug_line    0x0000000000013e7c      0xd39 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
+ .debug_line    0x0000000000014bb5      0x66c esp-idf/esp_rom/libesp_rom.a(esp_rom_uart.c.obj)
+ .debug_line    0x0000000000015221      0x562 esp-idf/log/liblog.a(log_noos.c.obj)
+ .debug_line    0x0000000000015783     0x160b esp-idf/hal/libhal.a(wdt_hal_iram.c.obj)
+ .debug_line    0x0000000000016d8e      0x598 esp-idf/hal/libhal.a(mpu_hal.c.obj)
+ .debug_line    0x0000000000017326      0x3ed esp-idf/hal/libhal.a(efuse_hal.c.obj)
+ .debug_line    0x0000000000017713      0x5b0 esp-idf/hal/libhal.a(efuse_hal.c.obj)
+ .debug_line    0x0000000000017cc3     0x1aab esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
 
-.debug_str      0x0000000000000000     0xa9b5
- .debug_str     0x0000000000000000     0x119d esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
-                                       0x124a (size before relaxing)
- .debug_str     0x000000000000119d      0x691 esp-idf/main/libmain.a(bootloader_start.c.obj)
-                                        0xd26 (size before relaxing)
- .debug_str     0x000000000000182e     0x2c9a esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
-                                       0x3a0f (size before relaxing)
- .debug_str     0x00000000000044c8     0x19c1 esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash.c.obj)
-                                       0x306c (size before relaxing)
- .debug_str     0x0000000000005e89      0x973 esp-idf/bootloader_support/libbootloader_support.a(bootloader_utility.c.obj)
-                                       0x4b5c (size before relaxing)
- .debug_str     0x00000000000067fc      0x722 esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
-                                       0x21e5 (size before relaxing)
- .debug_str     0x0000000000006f1e       0xbe esp-idf/bootloader_support/libbootloader_support.a(flash_partitions.c.obj)
-                                        0x890 (size before relaxing)
- .debug_str     0x0000000000006fdc       0x6e esp-idf/bootloader_support/libbootloader_support.a(bootloader_console_loader.c.obj)
-                                        0x1f8 (size before relaxing)
- .debug_str     0x000000000000704a       0xf5 esp-idf/bootloader_support/libbootloader_support.a(bootloader_sha.c.obj)
-                                       0x12a2 (size before relaxing)
- .debug_str     0x000000000000713f       0x99 esp-idf/bootloader_support/libbootloader_support.a(bootloader_soc.c.obj)
-                                        0x1d6 (size before relaxing)
- .debug_str     0x00000000000071d8      0x551 esp-idf/bootloader_support/libbootloader_support.a(bootloader_esp32.c.obj)
-                                       0x5cff (size before relaxing)
- .debug_str     0x0000000000007729      0x1ac esp-idf/bootloader_support/libbootloader_support.a(bootloader_common_loader.c.obj)
-                                       0x3614 (size before relaxing)
- .debug_str     0x00000000000078d5      0x20a esp-idf/bootloader_support/libbootloader_support.a(bootloader_clock_init.c.obj)
-                                       0x37b5 (size before relaxing)
- .debug_str     0x0000000000007adf       0x8b esp-idf/bootloader_support/libbootloader_support.a(bootloader_mem.c.obj)
-                                       0x1197 (size before relaxing)
- .debug_str     0x0000000000007b6a       0x74 esp-idf/bootloader_support/libbootloader_support.a(bootloader_random.c.obj)
-                                       0x11d5 (size before relaxing)
- .debug_str     0x0000000000007bde      0xbe8 esp-idf/bootloader_support/libbootloader_support.a(bootloader_random_esp32.c.obj)
-                                       0x45a6 (size before relaxing)
- .debug_str     0x00000000000087c6      0x102 esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash_config_esp32.c.obj)
-                                        0xda1 (size before relaxing)
- .debug_str     0x00000000000088c8       0xa3 esp-idf/bootloader_support/libbootloader_support.a(bootloader_efuse.c.obj)
-                                        0x6b8 (size before relaxing)
- .debug_str     0x000000000000896b      0x2fd esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
-                                       0x4457 (size before relaxing)
- .debug_str     0x0000000000008c68      0x632 esp-idf/bootloader_support/libbootloader_support.a(bootloader_console.c.obj)
-                                       0x3fea (size before relaxing)
- .debug_str     0x000000000000929a      0x1db esp-idf/esp_hw_support/libesp_hw_support.a(cpu_util.c.obj)
-                                       0x362a (size before relaxing)
- .debug_str     0x0000000000009475      0x5ec esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
-                                       0x4402 (size before relaxing)
- .debug_str     0x0000000000009a61      0x106 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
-                                       0x3c89 (size before relaxing)
- .debug_str     0x0000000000009b67       0xe8 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_init.c.obj)
-                                       0x373d (size before relaxing)
- .debug_str     0x0000000000009c4f      0x1bc esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
-                                       0x3179 (size before relaxing)
- .debug_str     0x0000000000009e0b       0x94 esp-idf/esp_rom/libesp_rom.a(esp_rom_uart.c.obj)
-                                       0x105d (size before relaxing)
- .debug_str     0x0000000000009e9f       0x91 esp-idf/log/liblog.a(log_noos.c.obj)
-                                       0x11dc (size before relaxing)
- .debug_str     0x0000000000009f30      0x405 esp-idf/hal/libhal.a(wdt_hal_iram.c.obj)
-                                       0x24e1 (size before relaxing)
- .debug_str     0x000000000000a335       0xab esp-idf/hal/libhal.a(mpu_hal.c.obj)
-                                       0x1206 (size before relaxing)
- .debug_str     0x000000000000a3e0       0x56 esp-idf/hal/libhal.a(efuse_hal.c.obj)
-                                        0x64d (size before relaxing)
- .debug_str     0x000000000000a436      0x100 esp-idf/hal/libhal.a(efuse_hal.c.obj)
-                                        0x73e (size before relaxing)
- .debug_str     0x000000000000a536      0x47f esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
-                                       0x2606 (size before relaxing)
+.debug_str      0x0000000000000000     0xaa7b
+ .debug_str     0x0000000000000000     0x11a9 esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
+                                       0x1256 (size before relaxing)
+ .debug_str     0x00000000000011a9      0x697 esp-idf/main/libmain.a(bootloader_start.c.obj)
+                                        0xd32 (size before relaxing)
+ .debug_str     0x0000000000001840     0x2ca0 esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
+                                       0x3a1b (size before relaxing)
+ .debug_str     0x00000000000044e0     0x19c7 esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash.c.obj)
+                                       0x3078 (size before relaxing)
+ .debug_str     0x0000000000005ea7      0x979 esp-idf/bootloader_support/libbootloader_support.a(bootloader_utility.c.obj)
+                                       0x4b68 (size before relaxing)
+ .debug_str     0x0000000000006820      0x728 esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
+                                       0x21f1 (size before relaxing)
+ .debug_str     0x0000000000006f48       0xc4 esp-idf/bootloader_support/libbootloader_support.a(flash_partitions.c.obj)
+                                        0x89c (size before relaxing)
+ .debug_str     0x000000000000700c       0x74 esp-idf/bootloader_support/libbootloader_support.a(bootloader_console_loader.c.obj)
+                                        0x204 (size before relaxing)
+ .debug_str     0x0000000000007080       0xfb esp-idf/bootloader_support/libbootloader_support.a(bootloader_sha.c.obj)
+                                       0x12ae (size before relaxing)
+ .debug_str     0x000000000000717b       0x9f esp-idf/bootloader_support/libbootloader_support.a(bootloader_soc.c.obj)
+                                        0x1e2 (size before relaxing)
+ .debug_str     0x000000000000721a      0x557 esp-idf/bootloader_support/libbootloader_support.a(bootloader_esp32.c.obj)
+                                       0x5d0b (size before relaxing)
+ .debug_str     0x0000000000007771      0x1b2 esp-idf/bootloader_support/libbootloader_support.a(bootloader_common_loader.c.obj)
+                                       0x3620 (size before relaxing)
+ .debug_str     0x0000000000007923      0x210 esp-idf/bootloader_support/libbootloader_support.a(bootloader_clock_init.c.obj)
+                                       0x37c1 (size before relaxing)
+ .debug_str     0x0000000000007b33       0x91 esp-idf/bootloader_support/libbootloader_support.a(bootloader_mem.c.obj)
+                                       0x11a3 (size before relaxing)
+ .debug_str     0x0000000000007bc4       0x7a esp-idf/bootloader_support/libbootloader_support.a(bootloader_random.c.obj)
+                                       0x11e1 (size before relaxing)
+ .debug_str     0x0000000000007c3e      0xbee esp-idf/bootloader_support/libbootloader_support.a(bootloader_random_esp32.c.obj)
+                                       0x45b2 (size before relaxing)
+ .debug_str     0x000000000000882c      0x108 esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash_config_esp32.c.obj)
+                                        0xdad (size before relaxing)
+ .debug_str     0x0000000000008934       0xa9 esp-idf/bootloader_support/libbootloader_support.a(bootloader_efuse.c.obj)
+                                        0x6c4 (size before relaxing)
+ .debug_str     0x00000000000089dd      0x303 esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
+                                       0x4463 (size before relaxing)
+ .debug_str     0x0000000000008ce0      0x638 esp-idf/bootloader_support/libbootloader_support.a(bootloader_console.c.obj)
+                                       0x3ff6 (size before relaxing)
+ .debug_str     0x0000000000009318      0x1e1 esp-idf/esp_hw_support/libesp_hw_support.a(cpu_util.c.obj)
+                                       0x3636 (size before relaxing)
+ .debug_str     0x00000000000094f9      0x5f2 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk.c.obj)
+                                       0x440e (size before relaxing)
+ .debug_str     0x0000000000009aeb      0x10c esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
+                                       0x3c95 (size before relaxing)
+ .debug_str     0x0000000000009bf7       0xee esp-idf/esp_hw_support/libesp_hw_support.a(rtc_init.c.obj)
+                                       0x3749 (size before relaxing)
+ .debug_str     0x0000000000009ce5      0x1c2 esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
+                                       0x3185 (size before relaxing)
+ .debug_str     0x0000000000009ea7       0x9a esp-idf/esp_rom/libesp_rom.a(esp_rom_uart.c.obj)
+                                       0x1069 (size before relaxing)
+ .debug_str     0x0000000000009f41       0x97 esp-idf/log/liblog.a(log_noos.c.obj)
+                                       0x11e8 (size before relaxing)
+ .debug_str     0x0000000000009fd8      0x40b esp-idf/hal/libhal.a(wdt_hal_iram.c.obj)
+                                       0x24ed (size before relaxing)
+ .debug_str     0x000000000000a3e3       0xb1 esp-idf/hal/libhal.a(mpu_hal.c.obj)
+                                       0x1212 (size before relaxing)
+ .debug_str     0x000000000000a494       0x5c esp-idf/hal/libhal.a(efuse_hal.c.obj)
+                                        0x659 (size before relaxing)
+ .debug_str     0x000000000000a4f0      0x106 esp-idf/hal/libhal.a(efuse_hal.c.obj)
+                                        0x74a (size before relaxing)
+ .debug_str     0x000000000000a5f6      0x485 esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
+                                       0x2612 (size before relaxing)
 
 Cross Reference Table
 
@@ -4308,12 +4308,12 @@ TIMERG1                                           esp-idf/hal/libhal.a(wdt_hal_i
 UART0                                             esp-idf/esp_rom/libesp_rom.a(esp_rom_uart.c.obj)
 UART1                                             esp-idf/esp_rom/libesp_rom.a(esp_rom_uart.c.obj)
 UART2                                             esp-idf/esp_rom/libesp_rom.a(esp_rom_uart.c.obj)
-_ITM_deregisterTMCloneTable                       c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
-_ITM_registerTMCloneTable                         c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
-__DTOR_END__                                      c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
-                                                  c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
-__TMC_END__                                       c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
-                                                  c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+_ITM_deregisterTMCloneTable                       /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+_ITM_registerTMCloneTable                         /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+__DTOR_END__                                      /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+                                                  /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+__TMC_END__                                       /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtend.o
+                                                  /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
 __assert_func                                     esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
                                                   esp-idf/log/liblog.a(log_noos.c.obj)
                                                   esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
@@ -4322,17 +4322,17 @@ __assert_func                                     esp-idf/bootloader_support/lib
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_sha.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash.c.obj)
-__bswapsi2                                        c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_bswapsi2.o)
+__bswapsi2                                        /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_bswapsi2.o)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_sha.c.obj)
-__deregister_frame_info                           c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
-__divdi3                                          c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_divdi3.o)
+__deregister_frame_info                           /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+__divdi3                                          /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_divdi3.o)
                                                   esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
                                                   esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
-__dso_handle                                      c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+__dso_handle                                      /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
 __getreent                                        esp-idf/main/libmain.a(bootloader_start.c.obj)
-__register_frame_info                             c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
-__udivdi3                                         c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti\libgcc.a(_udivdi3.o)
+__register_frame_info                             /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crtbegin.o
+__udivdi3                                         /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/libgcc.a(_udivdi3.o)
                                                   esp-idf/esp_hw_support/libesp_hw_support.a(rtc_time.c.obj)
                                                   esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
@@ -4344,13 +4344,13 @@ _data_end                                         esp-idf/bootloader_support/lib
 _data_start                                       esp-idf/bootloader_support/libbootloader_support.a(bootloader_esp32.c.obj)
 _dram_end                                         esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
 _dram_start                                       esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
-_fini                                             c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
-_global_impure_ptr                                c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-impure.o)
+_fini                                             /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+_global_impure_ptr                                /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-impure.o)
                                                   esp-idf/main/libmain.a(bootloader_start.c.obj)
-_init                                             c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
+_init                                             /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/no-rtti/crti.o
 _loader_text_end                                  esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
 _loader_text_start                                esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
-_start                                            c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+_start                                            /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
 abort                                             esp-idf/bootloader_support/libbootloader_support.a(bootloader_panic.c.obj)
                                                   esp-idf/hal/libhal.a(wdt_hal_iram.c.obj)
                                                   esp-idf/esp_hw_support/libesp_hw_support.a(rtc_clk_init.c.obj)
@@ -4630,18 +4630,18 @@ g_rom_spiflash_chip                               esp-idf/spi_flash/libspi_flash
 g_rom_spiflash_dummy_len_plus                     esp-idf/spi_flash/libspi_flash.a(spi_flash_rom_patch.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash_config_esp32.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_flash.c.obj)
-main                                              c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
-memcmp                                            c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcmp.o)
+main                                              /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/crt0.o
+memcmp                                            /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcmp.o)
                                                   esp-idf/bootloader_support/libbootloader_support.a(flash_partitions.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
-memcpy                                            c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memcpy.o)
+memcpy                                            /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memcpy.o)
                                                   esp-idf/esp_hw_support/libesp_hw_support.a(cpu_util.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_common_loader.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_utility.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
-memset                                            c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-memset.o)
+memset                                            /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-memset.o)
                                                   esp-idf/hal/libhal.a(wdt_hal_iram.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(esp_image_format.c.obj)
@@ -4724,13 +4724,13 @@ rtc_vddsdio_set_config                            esp-idf/esp_hw_support/libesp_
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
 soc_hal_stall_core                                esp-idf/esp_hw_support/libesp_hw_support.a(cpu_util.c.obj)
 soc_hal_unstall_core                              esp-idf/esp_hw_support/libesp_hw_support.a(cpu_util.c.obj)
-strcspn                                           c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strcspn.o)
+strcspn                                           /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strcspn.o)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
-strlen                                            c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strlen.o)
+strlen                                            /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strlen.o)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
-strncpy                                           c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strncpy.o)
+strncpy                                           /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strncpy.o)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
-strstr                                            c:/users/lars/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti\libc.a(lib_a-strstr.o)
+strstr                                            /Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/../lib/gcc/xtensa-esp32-elf/8.4.0/../../../../xtensa-esp32-elf/lib/no-rtti/libc.a(lib_a-strstr.o)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_common.c.obj)
 wdt_hal_config_stage                              esp-idf/hal/libhal.a(wdt_hal_iram.c.obj)
                                                   esp-idf/bootloader_support/libbootloader_support.a(bootloader_init.c.obj)

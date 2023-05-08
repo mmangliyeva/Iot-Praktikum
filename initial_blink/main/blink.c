@@ -223,6 +223,9 @@ void programm_1(void* args){
 		// -----------blink external LED with button----------
 		while(gpio_get_level(BLINK_BUTTON)){
 			ESP_ERROR_CHECK(gpio_set_level(EXTERNAL_LED, toggle));
+			ESP_ERROR_CHECK(gpio_set_level(GREEN_INTERNAL_LED, 1-toggle));
+			ESP_ERROR_CHECK(gpio_set_level(BLUE_INTERNAL_LED, 1-toggle));
+			ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1-toggle));
 			vTaskDelay(blickingSpeed / portTICK_PERIOD_MS);
 			toggle = !toggle;
 			ESP_LOGI(TAG_1, "blink");

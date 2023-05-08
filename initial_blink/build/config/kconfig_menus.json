@@ -13262,7 +13262,10 @@
                                 "help": "Modbus slave ID value to identify modbus device\nin the network using <Report Slave ID> command.\nMost significant byte of ID is used as short device ID and\nother three bytes used as long ID.",
                                 "id": "FMB_CONTROLLER_SLAVE_ID",
                                 "name": "FMB_CONTROLLER_SLAVE_ID",
-                                "range": null,
+                                "range": [
+                                    0,
+                                    285960729237
+                                ],
                                 "title": "Modbus controller slave ID",
                                 "type": "hex"
                             }

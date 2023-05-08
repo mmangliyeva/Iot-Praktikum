@@ -4,16 +4,19 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "C:/Users/Lars/esp/esp-idf/components/bootloader/subproject"
-  "C:/Users/Lars/Documents/Iot-Praktikum/initial_blink/build/bootloader"
-  "C:/Users/Lars/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix"
-  "C:/Users/Lars/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/tmp"
-  "C:/Users/Lars/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src/bootloader-stamp"
-  "C:/Users/Lars/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src"
-  "C:/Users/Lars/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src/bootloader-stamp"
+  "/Users/larsleimbach/esp/esp-idf/components/bootloader/subproject"
+  "/Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/bootloader"
+  "/Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix"
+  "/Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/tmp"
+  "/Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src/bootloader-stamp"
+  "/Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src"
+  "/Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "C:/Users/Lars/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
+if(cfgdir)
+  file(MAKE_DIRECTORY "/Users/larsleimbach/Documents/Iot-Praktikum/initial_blink/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+endif()

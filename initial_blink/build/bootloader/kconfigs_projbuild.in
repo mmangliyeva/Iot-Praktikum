@@ -1,4 +1,4 @@
-source "C:/Users/Lars/esp/esp-idf/components/bootloader/Kconfig.projbuild"
-source "C:/Users/Lars/esp/esp-idf/components/esp_rom/Kconfig.projbuild"
-source "C:/Users/Lars/esp/esp-idf/components/esptool_py/Kconfig.projbuild"
-source "C:/Users/Lars/esp/esp-idf/components/partition_table/Kconfig.projbuild"
+source "/Users/larsleimbach/esp/esp-idf/components/bootloader/Kconfig.projbuild"
+source "/Users/larsleimbach/esp/esp-idf/components/esp_rom/Kconfig.projbuild"
+source "/Users/larsleimbach/esp/esp-idf/components/esptool_py/Kconfig.projbuild"
+source "/Users/larsleimbach/esp/esp-idf/components/partition_table/Kconfig.projbuild"
