@@ -11,9 +11,12 @@
 #define BUFF_STRING_COUNT 4 //size of the buffer to display the number
 #define PIN_DETECT_1 4
 #define PIN_DETECT_2 2
-#define THRESHOLD_DEBOUCE 50000
-#define PRIO_ANALIZER 5
-#define PRIO_SHOW_COUNT 1
+#define THRESHOLD_DEBOUCE 50000 // for isr 
+#define THRESHOLD_ANALIZER 10  	// when process starts analizing
+#define PRIO_ANALIZER 5			// process prio
+#define PRIO_SHOW_COUNT 1		// process prio
+#define SIZE_QUEUE 20			// xTaskQueue size
+#define SIZE_BUFFER 10			// buffer size in analizer task
 
 typedef struct Barrier_data
 {
@@ -22,8 +25,6 @@ typedef struct Barrier_data
 	int64_t time;
 } Barrier_data;
 
-// for the interrupts
-SemaphoreHandle_t xSemaphore_switchProg = NULL;
 
 // inter process communicaiton:
 QueueHandle_t queue = NULL;
@@ -44,7 +45,7 @@ uint8_t lastState2 = 0;
 void analyzer(void* args);
 void IRAM_ATTR isr_barrier1(void* args);
 void IRAM_ATTR isr_barrier2(void* args);
-void showRoomState(void);
+void showRoomState(void* args);
  
 
 void app_main(void){
@@ -72,7 +73,7 @@ void app_main(void){
 
 	// xSemaphore_switchProg = xSemaphoreCreateBinary();
 	// queue for interprocess communication:
-	queue = xQueueCreate(20,sizeof(Barrier_data));
+	queue = xQueueCreate(SIZE_QUEUE,sizeof(Barrier_data));
 	if (queue == 0){
     	ESP_LOGI("ERROR", "Failed to create queue!");
 		// exit(9);
@@ -88,6 +89,10 @@ void app_main(void){
 
 	// start task, for analyzing the 
 	xTaskCreate(analyzer, "analizer", 4096, NULL, PRIO_ANALIZER, NULL);
+	xTaskCreate(showRoomState, "show count", 2048, NULL, PRIO_SHOW_COUNT, NULL);
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
+// ----------------------------------------------------------------
 }
 
 
@@ -96,15 +101,21 @@ void app_main(void){
  *  -> de-/increases count
 */
 void analyzer(void *args){
-	Barrier_data data;
+	Barrier_data buffer[SIZE_BUFFER];
+	// points to the last element in the buffer and shows how full the buffer is
+	uint8_t head = 0;
+	
 	// an array of funciton pointers
 	while(1){
-		if( xQueueReceive(queue, &data, (TickType_t)5) ){
-			// sprintf(outputMessage,"id: %d state: %d time %ld", data.id, data.state, (long)data.time);
-			ESP_LOGI("MY_ANALIZER", "id: %d state: %d time %ld", data.id, data.state, (long)data.time);
-			count++;
+		if(xQueueReceive(queue, buffer+head, (TickType_t)5)){
+			ESP_LOGI("MY_ANALIZER", "id: %d state: %d time %ld", buffer[head].id, buffer[head].state, (long)buffer[head].time);
+			head += 1 % SIZE_BUFFER;
 		}
-		vTaskDelay(100 / portTICK_PERIOD_MS);
+		if(head > THRESHOLD_ANALIZER){
+			// TODO analize here the buffer
+		}
+		
+		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 	
 							
@@ -112,11 +123,18 @@ void analyzer(void *args){
 /**
  * this function print the current count of people on the LCD
 */
-void showRoomState(void){	
+void showRoomState(void* args){	
 	char str[BUFF_STRING_COUNT];
-	//converts int to string
-	sprintf(str,"%d",count);
-	ssd1306_printFixedN(0,16,str,STYLE_BOLD,2);
+	uint8_t oldCount = count;
+	while(1){
+		if(oldCount != count){
+			//converts int to string
+			sprintf(str,"%d",count);
+			ssd1306_printFixedN(0,16,str,STYLE_BOLD,2);
+			oldCount = count;
+		}
+		vTaskDelay(1000 / portTICK_PERIOD_MS);
+	}
 }
 
 
