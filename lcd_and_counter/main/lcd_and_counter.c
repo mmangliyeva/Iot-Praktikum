@@ -43,8 +43,8 @@ volatile uint8_t count = 0;
 // buffer the events form the queue
 Barrier_data buffer[SIZE_BUFFER];
 // points to the last element in the buffer and shows how full the buffer is
-uint8_t head = 0;
-uint8_t fillSize = 0;
+volatile uint8_t head = 0;
+volatile uint8_t fillSize = 0;
 
 //for debounce detector:
 int64_t lastTime1 = 0;
@@ -62,7 +62,8 @@ void showRoomState(void* args);
 
 void app_main(void){
 	//esp_log_level_set("BLINK", ESP_LOG_ERROR);       
-	esp_log_level_set("APP", ESP_LOG_INFO);
+	// esp_log_level_set("*", ESP_LOG_INFO);
+	// esp_log_level_set("*",  ESP_LOG_ERROR);
 // ----------------------------------------------------------------
 // -------------------------set up ESP32---------------------------
 // ----------------------------------------------------------------
@@ -118,7 +119,7 @@ void app_main(void){
 
 void pushInBuffer(void* args){
 	while(1){
-		if(xSemaphoreTake(xAccessBuffer,(TickType_t)10) == pdTRUE){
+		if(xSemaphoreTake(xAccessBuffer,(TickType_t)0) == pdTRUE){
 			if(xQueueReceive(queue, buffer+((head+fillSize)%SIZE_BUFFER),(TickType_t)5)){
 				ESP_LOGI("pushInBuffer()", "id: %d state: %d time %ld", buffer[((head+fillSize)%SIZE_BUFFER)].id, buffer[((head+fillSize)%SIZE_BUFFER)].state, (long)buffer[((head+fillSize)%SIZE_BUFFER)].time);
 				if(fillSize == SIZE_BUFFER-1){
