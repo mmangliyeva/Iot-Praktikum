@@ -6,15 +6,28 @@ void setup_display(void);
 static void event_handler(void* arg, esp_event_base_t event_base,
                            int32_t event_id, void* event_data);
 void wifi_init_sta(void);
-// void test_wifi(void);
+void test_mqtt(void);
+void setup_mqtt(void);// has to be setup after wifi
 
+// gloabal vars
+int wifi_conn_retry_num = 0, wifi_conn_max_retry = 10;
+esp_mqtt_client_config_t my_mqtt_client_cfg = {
+    .event_handle = my_mqtt_event_handler,
+    .host = "mqtt.caps-platform.live",
+    .port = 1883,
+    .username = "JWT",
+    .password = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQzMzY3MjYsImlzcyI6ImlvdHBsYXRmb3JtIiwic3ViIjoiMzQvODIifQ.x1Vv2qN0NfV2TTx9HGjTv1Qh8yxZfIJAvDPXK1R7dcRgsKMMqOS_NL7skBFqmEyhPe30Tnu4UQeH0OdXl7lOCGIkya-SKi4K2oVZYvByGQHoHToWuOpE-e62ohW0QCXMLq2Np5qV9zkaUb5BibQOt8qE7gzZKFAbjvYRPq9xyJAFeLVCii5160CevLP5ZOCcEN_6iOaq9kDyY-JaIHKssNMWuyo-X_j9Jz53-FzgLgB-omAjd1TP5DRQQS7RdgWDmd0BlfeNvPg-1rCt7gCDNo3uA_tpoUaNVPWYOe4jF5BFph6f_ZToQwEGGk_y5OTz9Y9c9Jw823ZHjm3FJ3PtcrhvdErJJkh8d2NausVIwCZ9llWUdFCT7-buMUF2Li-TRoG0OXvb2232n5BCv6Vc26kNhrJcBvD9gmjfyNVYso1r0EjsoMLSEmcRH8RbscPUcb5-p0rCUkCZNM9xF2-fH5Okq25wZQCsZpqUMugive6lYyZKGQ7e2cZerYEyiSfE70XvVpF5vsF83AYHFlWBS82gTZfAp_Dw-9Um3PoOzdEZmkhmD5csoAiX169acQat_rD2hZh8It4f7oE2KTouBSQUFrnBhDJKrWZO0HE7Dvhu9GwYbw-CvyE8x1UBokxVpY-Id1jyAki3Vm4ClUk2rTN15sayVbA_koVTJTkVtNA",
+};
+EventGroupHandle_t my_wifi_event_group;
+esp_mqtt_client_handle_t my_client;
 
 
 void setup_myESP(void){
     // set up log levels:
-    esp_log_level_set("*", ESP_LOG_INFO);
+    // esp_log_level_set("*", ESP_LOG_INFO);
     // esp_log_level_set("test_mqtt", ESP_LOG_VERBOSE);
-
+    // init global variables:
+    
     setup_display();
     //init light barrier 1
 	gpio_pad_select_gpio(PIN_DETECT_1);
@@ -38,7 +51,19 @@ void setup_myESP(void){
     gpio_isr_handler_add(PIN_DETECT_2, isr_barrier2, NULL);
  
     wifi_init_sta();
-    
+    EventBits_t bits = xEventGroupWaitBits(my_wifi_event_group, MY_WIFI_CONN_BIT | MY_WIFI_FAIL_BIT,
+										   pdFALSE, pdFALSE, portMAX_DELAY);
+	if(bits & MY_WIFI_CONN_BIT) {
+		ESP_LOGI("MAIN", "WiFi connected!");
+		setup_mqtt();
+        test_mqtt();
+	}
+	else if(bits & MY_WIFI_FAIL_BIT) {
+		ESP_LOGE("MAIN", "WiFi failed to connect");
+	} 
+	else {
+		ESP_LOGW("MAIN", "Unexpected event");
+	}
 	// start task, for analyzing the 
 	// xTaskCreate(analyzer, "analizer", 4096, NULL, PRIO_ANALIZER, NULL);
 	// xTaskCreate(showRoomState, "show count", 2048, NULL, PRIO_SHOW_COUNT, NULL);
@@ -46,13 +71,32 @@ void setup_myESP(void){
 }
 
 
+void setup_mqtt(void){
+    my_client = esp_mqtt_client_init(&my_mqtt_client_cfg);
+    esp_mqtt_client_register_event(my_client, ESP_EVENT_ANY_ID, my_mqtt_event_handler, my_client);
+    esp_mqtt_client_start(my_client);
 
-void setup_display(void){
-    ssd1306_128x64_i2c_init();
-	ssd1306_setFixedFont(ssd1306xled_font6x8);
-	ssd1306_clearScreen();
-	ssd1306_printFixed(0,0,"People count:",STYLE_NORMAL);
-	ssd1306_printFixedN(0,16,"0",STYLE_BOLD,2);
+}
+void test_mqtt(void){
+	char* mqtt_msg;
+	// always send 42 
+	const char* my_user_id_mqtt = "34";
+	const char* my_device_id_mqtt = "82";
+
+
+	int bytes = asprintf(&mqtt_msg,
+				"{\"sensors\":[{\"name\": \"light_barrier\", \"values\":[{\"timestamp\":%lld, \"countPeople\": %d}]}]}", 
+				(long long)1684394386976, 42);
+	ESP_LOGI("test_mqtt", "The message is %s", mqtt_msg);
+	
+	char topic[50];
+	sprintf(topic,"%s/%s/data",my_user_id_mqtt,my_device_id_mqtt);
+	ESP_LOGI("test_mqtt", "The topic is %s", topic);
+	int msg_id = esp_mqtt_client_publish(my_client, topic, mqtt_msg, bytes, Q0S, 0) ;
+	// We only support Q05 0 or 1
+	if(msg_id < 0) {
+		ESP_LOGE("test_mqtt", "MQTT could not publish your message");
+	}
 }
 
 void wifi_init_sta(void) {
@@ -66,13 +110,16 @@ void wifi_init_sta(void) {
         err = nvs_flash_init();
     }
     ESP_ERROR_CHECK( err );
-    
+
+    my_wifi_event_group = xEventGroupCreate();
     /**
     Creates an event group with 24 bits and it stores
     the flags in individual bits.
     The tasks can wait for the flag to be raised
     **/
-    my_wifi_event_group = xEventGroupCreate();
+    
+    // my_wifi_event_group = &my_wifi;
+
     // Init Network Interface
     ESP_ERROR_CHECK(esp_netif_init());
     /**
@@ -161,8 +208,17 @@ static void event_handler(void* arg, esp_event_base_t event_base,
     }
 }
 
-int64_t get_timestamp(void) {
+
+void setup_display(void){
+    ssd1306_128x64_i2c_init();
+	ssd1306_setFixedFont(ssd1306xled_font6x8);
+	ssd1306_clearScreen();
+	ssd1306_printFixed(0,0,"People count:",STYLE_NORMAL);
+	ssd1306_printFixedN(0,16,"0",STYLE_BOLD,2);
+}
+
+uint64_t get_timestamp(void) {
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    return (tv.tv sec) * 1000LL + (tv.tv usec/1000LL):
+    return (tv.tv_sec)*(uint64_t)1000 + (tv.tv_usec/(uint64_t)1000);
 }

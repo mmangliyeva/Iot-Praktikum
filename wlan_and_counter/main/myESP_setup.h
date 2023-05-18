@@ -2,6 +2,7 @@
 #define SETUP_HEADER
 
 #include <stdio.h>
+#include <inttypes.h>           // for using int64_t
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"      // to create tasks
 #include "freertos/semphr.h"    // for using sempahores/mutex
@@ -29,7 +30,7 @@
 #define GOING_IN_EVENT 69 		// Flag that is set if we found an going-in evnet
 #define GOING_OUT_EVENT 42      // Flag that is set if we found an going-out evnet
 #define NO_EVENT -1             // Flag that is set if we found no event
-#define MQTT_TOPIC 1            // 0 for just sending message, 1 for sending and getting a confirmation
+#define Q0S 1            // 0 for just sending message, 1 for sending and getting a confirmation
 
 /* These settings are taken from the Kconfig file */
 #define MY_WIFI_SSID "olchinet"
@@ -38,21 +39,19 @@
 #define MY_WIFI_CONN_BIT BIT0
 #define MY_WIFI_FAIL_BIT BIT1
 /* FreeRTOS event group to signal when we are connected */
-static EventGroupHandle_t my_wifi_event_group;
 
-static int wifi_conn_retry_num = 0, wifi_conn_max_retry = 10;
 
 // call this function to setup up your ESP32
 void setup_myESP(void);
 
+uint64_t get_timestamp(void);
 
-const esp_mqtt_client_config_t mqtt_client_cfg = {
-    .event_handle = mqtt_event_handler,
-    .host = "mqtt.caps-platform.live",
-    .port = 1883,
-    .username = "JWT",
-    .password = ""
-}
-int64_t get_timestamp(void);
 
+
+
+extern int wifi_conn_retry_num, wifi_conn_max_retry;
+extern EventGroupHandle_t my_wifi_event_group;
+extern esp_mqtt_client_handle_t my_client;
+// mach nur den pointer darauf extern !!!
+extern esp_mqtt_client_config_t my_mqtt_client_cfg; 
 #endif
