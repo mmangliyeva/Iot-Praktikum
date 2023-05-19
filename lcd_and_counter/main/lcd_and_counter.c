@@ -11,7 +11,7 @@
 #define BUFF_STRING_COUNT 4 //size of the buffer to display the number
 #define PIN_DETECT_1 4
 #define PIN_DETECT_2 2
-#define THRESHOLD_DEBOUCE 50000 // for isr 
+#define THRESHOLD_DEBOUCE 10000 // for isr 
 #define THRESHOLD_ANALIZER 4  	// when process starts analizing
 #define PRIO_ANALIZER 10			// process prio
 #define PRIO_SHOW_COUNT 1		// process prio
@@ -98,8 +98,8 @@ void app_main(void){
 		// exit(9);
     }
 	
-	gpio_set_intr_type(PIN_DETECT_1, GPIO_INTR_POSEDGE);
-	gpio_set_intr_type(PIN_DETECT_2, GPIO_INTR_POSEDGE);
+	gpio_set_intr_type(PIN_DETECT_1, GPIO_INTR_ANYEDGE);
+	gpio_set_intr_type(PIN_DETECT_2, GPIO_INTR_ANYEDGE);
 	// init isr
 	gpio_install_isr_service(0);
 	//(void*)PIN_DETECT_1
@@ -120,6 +120,7 @@ void app_main(void){
 void pushInBuffer(void* args){
 	while(1){
 		if(xSemaphoreTake(xAccessBuffer,(TickType_t)0) == pdTRUE){
+			
 			if(xQueueReceive(queue, buffer+((head+fillSize)%SIZE_BUFFER),(TickType_t)5)){
 				ESP_LOGI("pushInBuffer()", "id: %d state: %d time %ld", buffer[((head+fillSize)%SIZE_BUFFER)].id, buffer[((head+fillSize)%SIZE_BUFFER)].state, (long)buffer[((head+fillSize)%SIZE_BUFFER)].time);
 				if(fillSize == SIZE_BUFFER-1){
@@ -200,9 +201,11 @@ void analyzer(void *args){
 				}
 				if(eventType == NO_EVENT){
 					ESP_LOGI("analyzer()", "No event -> delte head");
-					//no event found -> delte head
 					head = (head+1)%SIZE_BUFFER;
 					fillSize--;
+					// ESP_LOGI("analyzer()", " delete all elments in buffer");
+					// head = (head+fillSize)%SIZE_BUFFER;
+					// fillSize = 0;
 				}
 				else{
 					// delte first 4 elements out of the buffer
@@ -240,7 +243,7 @@ void showRoomState(void* args){
 			xSemaphoreGive(xAccessCount);
 			// ESP_LOGI("showRoomState()", "released semaphore");
 		}
-		vTaskDelay(500 / portTICK_PERIOD_MS);
+		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 }
 
@@ -252,13 +255,14 @@ void IRAM_ATTR isr_barrier1(void* args){
 	// //debounce code
 	if(lastState1 != curState){
 		int64_t curTime = esp_timer_get_time();
+		
 		if (curTime - lastTime1 > THRESHOLD_DEBOUCE){
 			// AND last statechange long ago
 			Barrier_data data = {1,curState,curTime};
 			xQueueSendFromISR(queue,&data,(TickType_t)0);
 			lastState1 = curState;
+			lastTime1 = curTime;
 		}
-		lastTime1 = curTime;
 	}	
 }
 void IRAM_ATTR isr_barrier2(void* args){
@@ -271,7 +275,7 @@ void IRAM_ATTR isr_barrier2(void* args){
 			Barrier_data data = {2,curState,curTime};
 			xQueueSendFromISR(queue,&data,(TickType_t)0);
 			lastState2 = curState;
+			lastTime2 = curTime;
 		}
-		lastTime2 = curTime;
 	}	
 }
