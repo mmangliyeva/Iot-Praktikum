@@ -129,5 +129,30 @@ void initMQTT(void)
 	xEventGroupWaitBits(mqtt_event_group, CONNECTED_BIT, false, true, portMAX_DELAY);
 	ESP_LOGI(TAG, "Finished initMQTT");
 }
-
-
+#ifdef SEND_EVERY_EVENT
+/**
+ * here we send the additional information of the current state to our database
+*/
+void sendToSensorBarrier(const char* barrierName, uint8_t countPeople, time_t time, uint8_t state){
+    char msg[256];
+    sprintf(msg, "{\"sensors\":[{\"name\": \"%s\", \"values\":[{\"timestamp\":%lld000, \"state\": %d, \"countPeople\": %d}]}]}",barrierName, (long long)time, state, countPeople);
+    ESP_LOGI("MQTT_SEND", "Topic %s: %s\n", TOPIC, msg);
+    int msg_id = esp_mqtt_client_publish(mqttClient, TOPIC, msg, strlen(msg), QOS_FAST, 0);
+    if (msg_id==-1){
+        ESP_LOGE(TAG, "msg_id returned by publish is -1!\n");
+    } 
+}
+#endif
+/**
+ * we want to send to the 'non-existing' sensor 'counter' only
+ *  the count of the current poeple
+*/
+void sendToSensorCounter(uint8_t countPeople,time_t time){
+    char msg[256];
+    sprintf(msg, "{\"sensors\":[{\"name\": \"counter\", \"values\":[{\"timestamp\":%lld000, \"countPeople\": %d}]}]}",(long long)time, countPeople);
+    ESP_LOGI("MQTT_SEND", "Topic %s: %s\n", TOPIC, msg);
+    int msg_id = esp_mqtt_client_publish(mqttClient, TOPIC, msg, strlen(msg), QOS_SAFE, 0);
+    if (msg_id==-1){
+        ESP_LOGE(TAG, "msg_id returned by publish is -1!\n");
+    } 
+}

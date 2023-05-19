@@ -13,7 +13,6 @@ void initDisplay(void);
 
 void my_setup(void){
     
-    static const char *TAG = "SETUP";
     
     initWifi();
     initSNTP();
@@ -22,8 +21,7 @@ void my_setup(void){
     initDisplay();
 #endif
 
-
-    // setup pins:
+	// setup pins:
     //init light barrier 1
 	gpio_pad_select_gpio(PIN_DETECT_1);
 	ESP_ERROR_CHECK(gpio_set_direction(PIN_DETECT_1, GPIO_MODE_INPUT));
@@ -35,9 +33,6 @@ void my_setup(void){
 	ESP_ERROR_CHECK(gpio_set_direction(PIN_DETECT_2, GPIO_MODE_INPUT));
 	ESP_ERROR_CHECK(gpio_pulldown_en(PIN_DETECT_2));
 	gpio_set_intr_type(PIN_DETECT_2, GPIO_INTR_ANYEDGE);
-
-    ESP_LOGI(TAG, "[APP] Free memory: %d bytes", esp_get_free_heap_size());
-    ESP_LOGI(TAG, "[APP] IDF version: %s", esp_get_idf_version());
 }
 
 #ifdef WITH_DISPLAY
@@ -46,9 +41,26 @@ void initDisplay(void){
 
 	ssd1306_128x64_i2c_init();
 	ssd1306_setFixedFont(ssd1306xled_font6x8);
-    ssd1306_clearScreen();
-	ssd1306_printFixed(0,0,"Group 8",STYLE_NORMAL);
-	ssd1306_printFixed(0,16,"People count:",STYLE_NORMAL);
-	ssd1306_printFixedN(0,Y_POS_COUNT,"0",STYLE_BOLD,2);
+    displayCountPreTime(0,0);
+}
+
+void displayCountPreTime(uint8_t prediction, uint8_t curCount){
+	char count_str[BUFF_STRING_COUNT];
+	char prediction_str[BUFF_STRING_COUNT];
+	char time_str[17];
+	time_t now;
+	struct tm *now_tm;
+	sprintf(count_str,"%d",curCount);
+	sprintf(prediction_str,"%d",prediction);
+
+	time(&now);
+	now_tm = localtime(&now);
+	sprintf(time_str,"Group 8  %0d:%0d",now_tm->tm_hour,now_tm->tm_min);
+
+	ssd1306_clearScreen();
+	ssd1306_printFixed(0,0,time_str,STYLE_NORMAL);
+	ssd1306_printFixed(0,16,"cur count | predict",STYLE_NORMAL);
+	ssd1306_printFixedN(0,Y_POS_COUNT,count_str,STYLE_BOLD,2);
+	ssd1306_printFixedN(64,Y_POS_COUNT,prediction_str,STYLE_BOLD,1);
 }
 #endif

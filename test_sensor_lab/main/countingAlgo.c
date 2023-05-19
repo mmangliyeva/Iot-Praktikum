@@ -1,9 +1,11 @@
 #include "mySetup.h"
 #include "countingAlgo.h"
+#include "mqtt.h"
 #include "ssd1306.h"
 #include "freertos/semphr.h"
 #include "freertos/queue.h"
 #include "driver/gpio.h"
+
  
 // -------------------------------------------------------------------------
 // --------------------capsel this data-------------------------------------
@@ -20,7 +22,7 @@ typedef struct Barrier_data
 {
 	uint8_t id; // is the pin 
 	uint8_t state; // 0 NO obsical, 1 there is an obsical
-	int64_t time;
+	time_t time;
 } Barrier_data;
 // poeple count variable
 volatile uint8_t count = 0;
@@ -37,11 +39,17 @@ int64_t lastTime2 = 0;
 uint8_t lastState1 = 0;
 uint8_t lastState2 = 0;
 
+// all tasks:
 void pushInBuffer(void* args);
 void showRoomState(void* args);
+void sendCountToDatabase(void* args);
 void analyzer(void *args);
+// all interrupt routines:
 void IRAM_ATTR isr_barrier1(void* args);
 void IRAM_ATTR isr_barrier2(void* args);
+#ifdef SEND_EVERY_EVENT
+void sendToDatabase(uint8_t delteItemsCount);
+#endif
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
@@ -60,10 +68,10 @@ void start_counting_algo(void){
 	// queue for interprocess communication:
 	queue = xQueueCreate(SIZE_QUEUE,sizeof(Barrier_data));
 	if (queue == 0){
-    	ESP_LOGI("ERROR", "Failed to create queue!");
-		// exit(9);
+    	ESP_LOGI("PROGRESS", "Failed to create queue!");
     }
 	
+
 	// init isr
 	gpio_install_isr_service(0);
 	//(void*)PIN_DETECT_1
@@ -74,6 +82,10 @@ void start_counting_algo(void){
 	xTaskCreate(analyzer, "analizer", 4096, NULL, PRIO_ANALIZER, NULL);
 	xTaskCreate(showRoomState, "show count", 2048, NULL, PRIO_SHOW_COUNT, NULL);
 	xTaskCreate(pushInBuffer, "push in Buffer", 2048, NULL, PRIO_IN_BUFFER, NULL);
+	xTaskCreate(sendCountToDatabase, "send count to database", 2048, NULL, PRIO_SEND_TO_DB, NULL);
+    
+    
+    ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", esp_get_free_heap_size());
 }
 
 
@@ -163,20 +175,24 @@ void analyzer(void *args){
 						}
 					}
 				}
+                uint8_t delteItemsCount = 0;
+                // send here stuff to mqtt with for-loop
 				if(eventType == NO_EVENT){
-					ESP_LOGI("analyzer()", "No event -> delte head");
-					head = (head+1)%SIZE_BUFFER;
-					fillSize--;
+                    delteItemsCount = 1;
 					// ESP_LOGI("analyzer()", " delete all elments in buffer");
 					// head = (head+fillSize)%SIZE_BUFFER;
 					// fillSize = 0;
 				}
 				else{
+                    delteItemsCount = 4;
 					// delte first 4 elements out of the buffer
-					ESP_LOGI("analyzer()", " delete 4 elments in buffer");
-					head = (head+4)%SIZE_BUFFER;
-					fillSize -= 4;
 				}
+#ifdef SEND_EVERY_EVENT
+                sendToDatabase(delteItemsCount);
+#endif                
+                // delte events form buffer:
+                head = (head+delteItemsCount)%SIZE_BUFFER;
+                fillSize -= delteItemsCount;
 			}
 			xSemaphoreGive(xAccessBuffer);
 		}
@@ -186,21 +202,40 @@ void analyzer(void *args){
 	}							
 }
 
+#ifdef SEND_EVERY_EVENT
+void sendToDatabase(uint8_t delteItemsCount){
+    for(uint8_t i = head; i < (head+delteItemsCount)%SIZE_BUFFER; i = ((i+1)%SIZE_BUFFER)){
+        if(buffer[i].id == 1){
+            const char* barrierName = "outdoor_barrier";
+            sendToSensorBarrier(barrierName, count, buffer[i].time, buffer[i].state);
+        }
+        else{
+            const char* barrierName = "indoor_barrier";
+            sendToSensorBarrier(barrierName, count, buffer[i].time, buffer[i].state);
+        }
+
+    }
+}
+#endif                
 
 /**
  * this function print the current count of people on the LCD
 */
 void showRoomState(void* args){	
-	char str[BUFF_STRING_COUNT];
-	uint8_t oldCount = count;
+	uint8_t oldCount = 0;
+    uint8_t prediction = 0;
+    if(xSemaphoreTake(xAccessCount,portMAX_DELAY) == pdTRUE){
+	    oldCount = count;
+        xSemaphoreGive(xAccessCount);
+    }
 	while(1){
 		// ESP_LOGI("showRoomState()", "wait for semaphore");
 		if(xSemaphoreTake(xAccessCount,portMAX_DELAY) == pdTRUE){
 			if(oldCount != count){
 				//converts int to string
-				sprintf(str,"%d",count);
-				ssd1306_printFixedN(0,Y_POS_COUNT,str,STYLE_BOLD,2);
+                displayCountPreTime(prediction,count);
 				oldCount = count;
+
 			}
 			xSemaphoreGive(xAccessCount);
 			// ESP_LOGI("showRoomState()", "released semaphore");
@@ -208,7 +243,34 @@ void showRoomState(void* args){
 		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 }
-
+/**
+ * this task sends the current count of people
+ * to our database
+*/
+void sendCountToDatabase(void* args){
+    time_t now = 0;
+    uint8_t oldCount = 0;
+    if(xSemaphoreTake(xAccessCount,portMAX_DELAY) == pdTRUE){
+	    oldCount = count;
+        time(&now);
+        sendToSensorCounter(count,now);
+        xSemaphoreGive(xAccessCount);
+    }
+	while(1){
+		// ESP_LOGI("showRoomState()", "wait for semaphore");
+		if(xSemaphoreTake(xAccessCount,portMAX_DELAY) == pdTRUE){
+			if(oldCount != count){	
+				oldCount = count;
+                time(&now);
+                sendToSensorCounter(count,now);
+			}
+			xSemaphoreGive(xAccessCount);
+			// ESP_LOGI("showRoomState()", "released semaphore");
+		}
+        // dont send soo often 
+		vTaskDelay((1000*SEND_DELAY) / portTICK_PERIOD_MS);
+	}
+}	
 
 
 // for detector PIN_DETECT_1
@@ -216,11 +278,15 @@ void IRAM_ATTR isr_barrier1(void* args){
 	uint8_t curState = gpio_get_level(PIN_DETECT_1);
 	// //debounce code
 	if(lastState1 != curState){
-		int64_t curTime = esp_timer_get_time();
-		
+        int64_t curTime = esp_timer_get_time();
+
+        // ets_printf("curTime1: %ld, lastTime1 %ld, difference: %ld\n",(long)curTime, (long)lastTime1, (long)(curTime - lastTime1));
 		if (curTime - lastTime1 > THRESHOLD_DEBOUCE){
+            //  ets_printf("registered 1\n");
 			// AND last statechange long ago
-			Barrier_data data = {1,curState,curTime};
+            time_t now = 0;
+            time(&now);
+			Barrier_data data = {1,curState,now};
 			xQueueSendFromISR(queue,&data,(TickType_t)0);
 			lastState1 = curState;
 			lastTime1 = curTime;
@@ -231,10 +297,15 @@ void IRAM_ATTR isr_barrier2(void* args){
 	uint8_t curState = gpio_get_level(PIN_DETECT_2);
 	// //debounce code
 	if(lastState2 != curState){
-		int64_t curTime = esp_timer_get_time();
+		
+        int64_t curTime = esp_timer_get_time();
+        // ets_printf("curTime2: %ld, lastTime2 %ld, difference: %ld\n",(long)curTime, (long)lastTime2, (long)(curTime - lastTime2));
 		if (curTime - lastTime2 > THRESHOLD_DEBOUCE){
+            //  ets_printf("registered 2\n");
 			// AND last statechange long ago
-			Barrier_data data = {2,curState,curTime};
+            time_t now = 0;
+            time(&now);
+			Barrier_data data = {2,curState,now};
 			xQueueSendFromISR(queue,&data,(TickType_t)0);
 			lastState2 = curState;
 			lastTime2 = curTime;
