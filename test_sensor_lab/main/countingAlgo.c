@@ -1,19 +1,27 @@
-#include "myESP_setup.h"
+#include "mySetup.h"
+#include "countingAlgo.h"
+#include "ssd1306.h"
+#include "freertos/semphr.h"
+#include "freertos/queue.h"
+#include "driver/gpio.h"
+ 
+// -------------------------------------------------------------------------
+// --------------------capsel this data-------------------------------------
+// ----------------that it is only accsable from countingAlgo.c-------------
+// inter process communicaiton:
+QueueHandle_t queue = NULL;
+TaskHandle_t xAnalyzeProc = NULL;
+TaskHandle_t xShowStateProc = NULL;
+SemaphoreHandle_t xAccessCount = NULL;
+SemaphoreHandle_t xAccessBuffer = NULL;
 
-
+// struct with data that is inside the buffer
 typedef struct Barrier_data
 {
 	uint8_t id; // is the pin 
 	uint8_t state; // 0 NO obsical, 1 there is an obsical
 	int64_t time;
 } Barrier_data;
-
-
-// inter process communicaiton:
-QueueHandle_t queue = NULL;
-SemaphoreHandle_t xAccessCount = NULL;
-SemaphoreHandle_t xAccessBuffer = NULL;
-
 // poeple count variable
 volatile uint8_t count = 0;
 
@@ -29,20 +37,25 @@ int64_t lastTime2 = 0;
 uint8_t lastState1 = 0;
 uint8_t lastState2 = 0;
 
-// test function declerations
-void test_mqtt(void);
+void pushInBuffer(void* args);
+void showRoomState(void* args);
+void analyzer(void *args);
+void IRAM_ATTR isr_barrier1(void* args);
+void IRAM_ATTR isr_barrier2(void* args);
+// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
 
-void app_main(void){
-	//esp_log_level_set("BLINK", ESP_LOG_ERROR);       
-	// esp_log_level_set("*", ESP_LOG_INFO);
-	// esp_log_level_set("*",  ESP_LOG_ERROR);
-// -------------------------set up ESP32---------------------------
-	// set up semaphore for accessing the shared variable count...
+
+
+void start_counting_algo(void){
+    // set up semaphore for accessing the shared variable count...
 	xAccessCount = xSemaphoreCreateBinary();
 	xAccessBuffer = xSemaphoreCreateBinary();
 	
 	xSemaphoreGive(xAccessCount);
 	xSemaphoreGive(xAccessBuffer);
+	// xAccessHead = xSemaphoreCreateBinary();
 
 	// queue for interprocess communication:
 	queue = xQueueCreate(SIZE_QUEUE,sizeof(Barrier_data));
@@ -50,35 +63,30 @@ void app_main(void){
     	ESP_LOGI("ERROR", "Failed to create queue!");
 		// exit(9);
     }
-	setup_myESP();
-	// start wifi
-// ----------------------------------------------------------------
+	
+	// init isr
+	gpio_install_isr_service(0);
+	//(void*)PIN_DETECT_1
+    gpio_isr_handler_add(PIN_DETECT_1, isr_barrier1, NULL);
+    gpio_isr_handler_add(PIN_DETECT_2, isr_barrier2, NULL);
+
+    // start task, for analyzing the 
+	xTaskCreate(analyzer, "analizer", 4096, NULL, PRIO_ANALIZER, NULL);
+	xTaskCreate(showRoomState, "show count", 2048, NULL, PRIO_SHOW_COUNT, NULL);
+	xTaskCreate(pushInBuffer, "push in Buffer", 2048, NULL, PRIO_IN_BUFFER, NULL);
 }
 
 
 
 
-
-
-
-
-
-
-// ------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------
-// -----------------------------------------OLD CODE FROM LAST WEEK-----------------------------------------
-// ------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------
-
 void pushInBuffer(void* args){
 	while(1){
 		if(xSemaphoreTake(xAccessBuffer,(TickType_t)0) == pdTRUE){
+			
 			if(xQueueReceive(queue, buffer+((head+fillSize)%SIZE_BUFFER),(TickType_t)5)){
 				ESP_LOGI("pushInBuffer()", "id: %d state: %d time %ld", buffer[((head+fillSize)%SIZE_BUFFER)].id, buffer[((head+fillSize)%SIZE_BUFFER)].state, (long)buffer[((head+fillSize)%SIZE_BUFFER)].time);
 				if(fillSize == SIZE_BUFFER-1){
-					ESP_LOGI("pushInBuffer()", "ERROR: Buffer overflow, make SIZE_BUFFER larger!");
+					ESP_LOGI("ERROR", "ERROR: Buffer overflow, make SIZE_BUFFER larger!");
 				}
 				fillSize++;
 			}
@@ -87,6 +95,8 @@ void pushInBuffer(void* args){
 		vTaskDelay(100 / portTICK_PERIOD_MS);
 	}
 }
+
+
 
 /**
  * this task analyzes the queue for inconsitency and correctness
@@ -155,9 +165,11 @@ void analyzer(void *args){
 				}
 				if(eventType == NO_EVENT){
 					ESP_LOGI("analyzer()", "No event -> delte head");
-					//no event found -> delte head
 					head = (head+1)%SIZE_BUFFER;
 					fillSize--;
+					// ESP_LOGI("analyzer()", " delete all elments in buffer");
+					// head = (head+fillSize)%SIZE_BUFFER;
+					// fillSize = 0;
 				}
 				else{
 					// delte first 4 elements out of the buffer
@@ -175,8 +187,6 @@ void analyzer(void *args){
 }
 
 
-
-
 /**
  * this function print the current count of people on the LCD
 */
@@ -189,15 +199,13 @@ void showRoomState(void* args){
 			if(oldCount != count){
 				//converts int to string
 				sprintf(str,"%d",count);
-				// ESP_LOGI("showRoomState()", "before access display");
-				ssd1306_printFixedN(0,16,str,STYLE_BOLD,2);
-				// ESP_LOGI("showRoomState()", "after access display");
+				ssd1306_printFixedN(0,Y_POS_COUNT,str,STYLE_BOLD,2);
 				oldCount = count;
 			}
 			xSemaphoreGive(xAccessCount);
 			// ESP_LOGI("showRoomState()", "released semaphore");
 		}
-		vTaskDelay(500 / portTICK_PERIOD_MS);
+		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 }
 
@@ -209,13 +217,14 @@ void IRAM_ATTR isr_barrier1(void* args){
 	// //debounce code
 	if(lastState1 != curState){
 		int64_t curTime = esp_timer_get_time();
+		
 		if (curTime - lastTime1 > THRESHOLD_DEBOUCE){
 			// AND last statechange long ago
 			Barrier_data data = {1,curState,curTime};
 			xQueueSendFromISR(queue,&data,(TickType_t)0);
 			lastState1 = curState;
+			lastTime1 = curTime;
 		}
-		lastTime1 = curTime;
 	}	
 }
 void IRAM_ATTR isr_barrier2(void* args){
@@ -228,7 +237,7 @@ void IRAM_ATTR isr_barrier2(void* args){
 			Barrier_data data = {2,curState,curTime};
 			xQueueSendFromISR(queue,&data,(TickType_t)0);
 			lastState2 = curState;
+			lastTime2 = curTime;
 		}
-		lastTime2 = curTime;
 	}	
 }

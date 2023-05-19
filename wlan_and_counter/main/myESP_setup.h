@@ -33,8 +33,8 @@
 #define Q0S 1            // 0 for just sending message, 1 for sending and getting a confirmation
 
 /* These settings are taken from the Kconfig file */
-#define MY_WIFI_SSID "olchinet"
-#define MY_WIFI_PASS "hahaihropfer"
+#define MY_WIFI_SSID ""
+#define MY_WIFI_PASS ""
 /* Bits to determine the result of the connection process*/
 #define MY_WIFI_CONN_BIT BIT0
 #define MY_WIFI_FAIL_BIT BIT1
