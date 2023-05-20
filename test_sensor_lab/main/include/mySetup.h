@@ -60,6 +60,8 @@
 #define NO_EVENT -1             // flag if detected no event
 #define Y_POS_COUNT 32          // the y position where to display, count on lcd
 
+#define SIZE_STRING_JSON 3900   // bytes size of max char for one key in nvs
+
 void my_setup(void);
 
 void displayCountPreTime(uint8_t prediction, uint8_t curCount);

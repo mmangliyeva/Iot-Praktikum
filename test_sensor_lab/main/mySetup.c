@@ -72,7 +72,7 @@ void displayCountPreTime(uint8_t prediction, uint8_t curCount){
 
 	time(&now);
 	now_tm = localtime(&now);
-	sprintf(time_str,"Group 8  %02d:%02d",now_tm->tm_hour,now_tm->tm_min);
+	sprintf(time_str,"Group 8    %02d:%02d",now_tm->tm_hour,now_tm->tm_min);
 
 	ssd1306_clearScreen();
 	ssd1306_printFixed(0,0,time_str,STYLE_NORMAL);
