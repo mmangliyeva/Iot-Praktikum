@@ -40,12 +40,19 @@
 #define BUFF_STRING_COUNT 4 //size of the buffer to display the number
 #define PIN_DETECT_1 4      // pin for outdoor barrier
 #define PIN_DETECT_2 2      // pin for indoor barrier
+#define PIN_TEST_MODE 5      // pin entering test mode
+#define RED_INTERNAL_LED 16     // internal red led pin
+
 #define THRESHOLD_DEBOUCE 15000 // for isr in mu_seconds
+#define THRESHOLD_DEBOUCE_TEST_MODE 200000 // for isr in mu_seconds
 #define THRESHOLD_ANALIZER 4  	// when process starts analizing
+
 #define PRIO_ANALIZER 10		// process prio
 #define PRIO_SHOW_COUNT 2		// process prio
 #define PRIO_SEND_TO_DB 5		// process prio
 #define PRIO_IN_BUFFER 7       // process prio
+#define PRIO_TEST_MODE 3       // process prio
+
 #define SIZE_QUEUE 15			// xTaskQueue size
 #define SIZE_BUFFER 10			// buffer size in analizer task
 #define GOING_IN_EVENT 69 		// flag if detected go-in-event 
@@ -56,4 +63,10 @@
 void my_setup(void);
 
 void displayCountPreTime(uint8_t prediction, uint8_t curCount);
+// test mode flag and task that should stop if testModeActive == 1
+extern uint8_t testModeActive;
+extern TaskHandle_t xProgAnalizer;
+extern TaskHandle_t xProgShowCount;
+extern TaskHandle_t xProgSendToDB;
+extern TaskHandle_t xProgInBuffer;
 #endif

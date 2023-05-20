@@ -8,7 +8,12 @@
 //  if one uncomment following line, esp32 sends only the count
 #define SEND_EVERY_EVENT
 
+// for bugfixing pourpuses maybe you want to deactivate sending data
+#define SEND_DATA
+
+
 // delay the sending of current count of people
 #define SEND_DELAY 10 //Seconds
+
 
 #endif

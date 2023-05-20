@@ -16,6 +16,7 @@ TaskHandle_t xAnalyzeProc = NULL;
 TaskHandle_t xShowStateProc = NULL;
 SemaphoreHandle_t xAccessCount = NULL;
 SemaphoreHandle_t xAccessBuffer = NULL;
+SemaphoreHandle_t xPressedButton = NULL;
 
 // struct with data that is inside the buffer
 typedef struct Barrier_data
@@ -26,6 +27,7 @@ typedef struct Barrier_data
 } Barrier_data;
 // poeple count variable
 volatile uint8_t count = 0;
+uint8_t prediction = 0;
 
 // buffer the events form the queue
 Barrier_data buffer[SIZE_BUFFER];
@@ -38,18 +40,25 @@ int64_t lastTime1 = 0;
 int64_t lastTime2 = 0;
 uint8_t lastState1 = 0;
 uint8_t lastState2 = 0;
+//button
+int64_t lastTimeISR = 0;
 
 // all tasks:
 void pushInBuffer(void* args);
 void showRoomState(void* args);
 void sendCountToDatabase(void* args);
 void analyzer(void *args);
+void testMode(void* args);
+
 // all interrupt routines:
 void IRAM_ATTR isr_barrier1(void* args);
 void IRAM_ATTR isr_barrier2(void* args);
+void IRAM_ATTR isr_test_mode(void* args);
+//helper functions
 #ifdef SEND_EVERY_EVENT
 void sendToDatabase(uint8_t delteItemsCount);
 #endif
+void pauseOtherTasks(uint8_t* testModeActive,TickType_t blocktime);
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
@@ -79,13 +88,16 @@ void start_counting_algo(void){
     gpio_isr_handler_add(PIN_DETECT_2, isr_barrier2, NULL);
 
     // start task, for analyzing the 
-	xTaskCreate(analyzer, "analizer", 4096, NULL, PRIO_ANALIZER, NULL);
-	xTaskCreate(showRoomState, "show count", 2048, NULL, PRIO_SHOW_COUNT, NULL);
-	xTaskCreate(pushInBuffer, "push in Buffer", 2048, NULL, PRIO_IN_BUFFER, NULL);
-	xTaskCreate(sendCountToDatabase, "send count to database", 2048, NULL, PRIO_SEND_TO_DB, NULL);
-    
-    
-    ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", esp_get_free_heap_size());
+	xTaskCreate(analyzer, "analizer", 4096, NULL, PRIO_ANALIZER, &xProgAnalizer);
+	xTaskCreate(showRoomState, "show count", 2048, NULL, PRIO_SHOW_COUNT, &xProgShowCount);
+	xTaskCreate(pushInBuffer, "push in Buffer", 2048, NULL, PRIO_IN_BUFFER, &xProgInBuffer);
+	xTaskCreate(sendCountToDatabase, "send count to database", 2048, NULL, PRIO_SEND_TO_DB, &xProgSendToDB);
+
+    // test mode code:
+    xPressedButton = xSemaphoreCreateBinary();
+    gpio_isr_handler_add(PIN_TEST_MODE, isr_test_mode, NULL);
+    xTaskCreate(testMode, "test mode", 1024, NULL, PRIO_TEST_MODE, NULL);
+
 }
 
 
@@ -223,7 +235,6 @@ void sendToDatabase(uint8_t delteItemsCount){
 */
 void showRoomState(void* args){	
 	uint8_t oldCount = 0;
-    uint8_t prediction = 0;
     if(xSemaphoreTake(xAccessCount,portMAX_DELAY) == pdTRUE){
 	    oldCount = count;
         xSemaphoreGive(xAccessCount);
@@ -271,6 +282,64 @@ void sendCountToDatabase(void* args){
 		vTaskDelay((1000*SEND_DELAY) / portTICK_PERIOD_MS);
 	}
 }	
+/**
+ * this tasks simply waits until button is pressed and then
+ * pause all other tasks
+*/
+void testMode(void* args){
+        // time_t now = 0;
+        // time(&now);
+        // todo maybe implement that automatically switches back to normal-mode
+        while(1){
+            pauseOtherTasks(&testModeActive,portMAX_DELAY);
+            while(testModeActive){
+                ssd1306_clearScreen();
+                ssd1306_printFixedN(8,16,"TEST",STYLE_BOLD,2);
+                ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1));
+                vTaskDelay(1000 / portTICK_PERIOD_MS);
+                ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 0));
+                ssd1306_clearScreen();
+                vTaskDelay(1000 / portTICK_PERIOD_MS);
+                
+                pauseOtherTasks(&testModeActive,0);
+            }
+        }
+}
+
+void pauseOtherTasks(uint8_t* testModeActive,TickType_t blocktime){
+    if(xSemaphoreTake(xPressedButton,0) == pdTRUE) {
+        *testModeActive = !(*testModeActive);
+        // ets_printf("test mode %d", *testModeActive);
+        if(*testModeActive == 1){
+            vTaskSuspend(xProgAnalizer);
+            vTaskSuspend(xProgShowCount);
+            vTaskSuspend(xProgSendToDB);
+            vTaskSuspend(xProgInBuffer);
+            gpio_isr_handler_remove(PIN_DETECT_1);
+            gpio_isr_handler_remove(PIN_DETECT_2);
+            // taskDISABLE_INTERRUPTS();
+        }
+        else{
+            vTaskResume(xProgAnalizer);
+            vTaskResume(xProgShowCount);
+            vTaskResume(xProgSendToDB);
+            vTaskResume(xProgInBuffer);
+            gpio_isr_handler_add(PIN_DETECT_1, isr_barrier1, NULL);
+            gpio_isr_handler_add(PIN_DETECT_2, isr_barrier2, NULL);
+            ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1));
+            ssd1306_clearScreen();
+            displayCountPreTime(prediction,count);
+            // taskENABLE_INTERRUPTS();
+        }
+    }
+}
+
+
+
+//------------------------------------------------------------------------------
+//-----------------------------ISR routines-------------------------------------
+//------------------------------------------------------------------------------
+
 
 
 // for detector PIN_DETECT_1
@@ -311,4 +380,14 @@ void IRAM_ATTR isr_barrier2(void* args){
 			lastTime2 = curTime;
 		}
 	}	
+}
+// interrupt for test mode button
+void IRAM_ATTR isr_test_mode(void* args){
+	// //debounce code		
+    int64_t curTime = esp_timer_get_time();
+    if (curTime - lastTimeISR > THRESHOLD_DEBOUCE_TEST_MODE){
+        // ets_printf("curTime: %ld, difference: %ld\n",(long)curTime, (long)(curTime - lastTimeISR));
+        xSemaphoreGiveFromISR(xPressedButton,NULL);
+        lastTimeISR = curTime;
+    }
 }

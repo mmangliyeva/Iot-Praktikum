@@ -134,6 +134,7 @@ void initMQTT(void)
  * here we send the additional information of the current state to our database
 */
 void sendToSensorBarrier(const char* barrierName, uint8_t countPeople, time_t time, uint8_t state){
+#ifdef SEND_DATA
     char msg[256];
     sprintf(msg, "{\"sensors\":[{\"name\": \"%s\", \"values\":[{\"timestamp\":%lld000, \"state\": %d, \"countPeople\": %d}]}]}",barrierName, (long long)time, state, countPeople);
     ESP_LOGI("MQTT_SEND", "Topic %s: %s\n", TOPIC, msg);
@@ -141,6 +142,7 @@ void sendToSensorBarrier(const char* barrierName, uint8_t countPeople, time_t ti
     if (msg_id==-1){
         ESP_LOGE(TAG, "msg_id returned by publish is -1!\n");
     } 
+#endif
 }
 #endif
 /**
@@ -148,6 +150,7 @@ void sendToSensorBarrier(const char* barrierName, uint8_t countPeople, time_t ti
  *  the count of the current poeple
 */
 void sendToSensorCounter(uint8_t countPeople,time_t time){
+#ifdef SEND_DATA
     char msg[256];
     sprintf(msg, "{\"sensors\":[{\"name\": \"counter\", \"values\":[{\"timestamp\":%lld000, \"countPeople\": %d}]}]}",(long long)time, countPeople);
     ESP_LOGI("MQTT_SEND", "Topic %s: %s\n", TOPIC, msg);
@@ -155,4 +158,5 @@ void sendToSensorCounter(uint8_t countPeople,time_t time){
     if (msg_id==-1){
         ESP_LOGE(TAG, "msg_id returned by publish is -1!\n");
     } 
+#endif
 }

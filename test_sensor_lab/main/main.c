@@ -1,7 +1,8 @@
 #include "mySetup.h"
 #include "countingAlgo.h"
-
-// static const char *TAG = "TEST_SENSOR";
+#include "ssd1306.h"
+#include "freertos/semphr.h"
+#include "driver/gpio.h"
 
 
 void app_main(void)
@@ -18,6 +19,13 @@ void app_main(void)
 
 
     my_setup();
+    // counting algo contains a pause-mode
     start_counting_algo();
-
+    
+    ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", esp_get_free_heap_size());
 }
+
+
+
+
+
