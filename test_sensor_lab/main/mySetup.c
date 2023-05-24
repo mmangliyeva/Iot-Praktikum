@@ -5,30 +5,87 @@
 #include "mqtt.h"
 #include "driver/gpio.h"
 #include <driver/adc.h>
+#include "nvs.h"
+#include "esp_timer.h"
+#include "caps_ota.h"
 
 
 #ifdef WITH_DISPLAY
 void initDisplay(void);
 #endif
+void initPins(void);
+void sendFromNVS(void* args);
+void updateOTA(void* args);
 
 uint8_t testModeActive = 0;
 TaskHandle_t xProgAnalizer = NULL;
 TaskHandle_t xProgShowCount = NULL;
 TaskHandle_t xProgSendToDB = NULL;
 TaskHandle_t xProgInBuffer = NULL;
-
+TaskHandle_t xSendToMQTT = NULL;
+TaskHandle_t xOTA = NULL;
 void my_setup(void){
 
 #ifdef WITH_DISPLAY
     initDisplay();
 #endif
-    
+    initMY_nvs(); //must before wifi
     initWifi();
     initSNTP();
     initMQTT();
 
+	initPins();
+
 	displayCountPreTime(0,0);
+
+	//start sending from nvs task
+	xTaskCreate(sendFromNVS, "send nvs to mqtt", 8000, NULL, PRIO_SEND_NVS, &xSendToMQTT);
+	// xTaskCreate(updateOTA, "update OTA", 4000, NULL, PRIO_OTA_TASK, &xOTA);
+
+}
+
+
+void updateOTA(void* args){
+	while(1){
+		vTaskDelay((UPDATE_OTA*1000) / portTICK_PERIOD_MS);
+		if(ota_update() == ESP_OK){
+			ESP_LOGI("PROGRESS","UPDATES ESP");
+			
+			esp_restart();
+		}
+		else{
+			ESP_LOGI("BUG","NO ESP UPDATE");
+		}
+
+	}
+}
+
+void sendFromNVS(void* args){
+	while(1){
+		vTaskDelay((1000*SEND_DELAY_FROM_NVS) / portTICK_PERIOD_MS);
+		sendDataFromJSON_toDB(NULL);
+	}
+}
+
+void initTimer(void){
+	ESP_LOGI("PROGRESS", "Initializing timer");
+
+	// init timer for sending data to 
+	const esp_timer_create_args_t my_timer_args = {
+      .callback = sendDataFromJSON_toDB,
+      .name = "send to mqtt timer"};
+	esp_timer_handle_t timer_handler;
+	ESP_ERROR_CHECK(esp_timer_create(&my_timer_args, &timer_handler));
+	uint64_t microSec = 1000*1000*SEND_DELAY_FROM_NVS;// every 10 sec
+	ESP_ERROR_CHECK(esp_timer_start_periodic(timer_handler, microSec));	
+}
+
+void initPins(void){
+	ESP_LOGI("PROGRESS", "Initializing pins");
+
 	// setup pins:
+	gpio_install_isr_service(0);
+
     //init light barrier 1
 	gpio_pad_select_gpio(PIN_DETECT_1);
 	ESP_ERROR_CHECK(gpio_set_direction(PIN_DETECT_1, GPIO_MODE_INPUT));
@@ -51,6 +108,7 @@ void my_setup(void){
 	ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1));
 }
 
+
 #ifdef WITH_DISPLAY
 void initDisplay(void){
     ESP_LOGI("PROGRESS", "Initializing display");
@@ -64,7 +122,7 @@ void initDisplay(void){
 void displayCountPreTime(uint8_t prediction, uint8_t curCount){
 	char count_str[BUFF_STRING_COUNT];
 	char prediction_str[BUFF_STRING_COUNT];
-	char time_str[17];
+	char time_str[20];
 	time_t now;
 	struct tm *now_tm;
 	sprintf(count_str,"%d",curCount);
@@ -72,7 +130,7 @@ void displayCountPreTime(uint8_t prediction, uint8_t curCount){
 
 	time(&now);
 	now_tm = localtime(&now);
-	sprintf(time_str,"Group 8    %02d:%02d",now_tm->tm_hour,now_tm->tm_min);
+	sprintf(time_str,"Group 8      %02d:%02d",now_tm->tm_hour,now_tm->tm_min);
 
 	ssd1306_clearScreen();
 	ssd1306_printFixed(0,0,time_str,STYLE_NORMAL);
@@ -80,5 +138,6 @@ void displayCountPreTime(uint8_t prediction, uint8_t curCount){
 	ssd1306_printFixedN(0,Y_POS_COUNT,count_str,STYLE_BOLD,2);
 	ssd1306_printFixedN(64,Y_POS_COUNT,prediction_str,STYLE_BOLD,1);
 }
+
 
 #endif

@@ -5,7 +5,6 @@
 #include "esp_log.h"
 
 #include "esp_sntp.h"
-#include "nvs_flash.h"
 
 
 /* The examples use WiFi configuration that you can set via project configuration menu
@@ -55,12 +54,6 @@ static void event_handler(void* arg, esp_event_base_t event_base,
 
 void initWifi(void)
 {
-     esp_err_t ret = nvs_flash_init();
-	if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-		ESP_ERROR_CHECK(nvs_flash_erase());
-		ret = nvs_flash_init();
-	}
-	ESP_ERROR_CHECK(ret);
     
     ESP_LOGI("PROGRESS", "Initializing wifi");
     s_wifi_event_group = xEventGroupCreate();
@@ -109,22 +102,25 @@ void initWifi(void)
 
     /* Waiting until either the connection is established (WIFI_CONNECTED_BIT) or connection failed for the maximum
      * number of re-tries (WIFI_FAIL_BIT). The bits are set by event_handler() (see above) */
+    
     EventBits_t bits = xEventGroupWaitBits(s_wifi_event_group,
             WIFI_CONNECTED_BIT | WIFI_FAIL_BIT,
             pdFALSE,
-            pdFALSE,
-            portMAX_DELAY);
+            pdFALSE, // origiaanl pdFALSE
+            60000 / portTICK_PERIOD_MS);// wait 10 sec
 
     /* xEventGroupWaitBits() returns the bits before the call returned, hence we can test which event actually
      * happened. */
     if (bits & WIFI_CONNECTED_BIT) {
-        ESP_LOGI(TAG, "connected to ap SSID:%s password:%s",
+        ESP_LOGI("PROGRESS", "connected to ap SSID:%s password:%s",
                  WIFI_SSID, WIFI_PASS);
     } else if (bits & WIFI_FAIL_BIT) {
-        ESP_LOGI(TAG, "Failed to connect to SSID:%s, password:%s",
+        ESP_LOGI("PROGRESS", "Failed to connect to SSID:%s, password:%s -> restart.",
                  WIFI_SSID, WIFI_PASS);
+        esp_restart();
     } else {
-        ESP_LOGE(TAG, "UNEXPECTED EVENT");
+        ESP_LOGE("PROGRESS", "UNEXPECTED EVENT");
+        esp_restart();
     }
 
     /* The event will not be processed after unregister */

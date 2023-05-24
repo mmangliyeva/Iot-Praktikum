@@ -46,12 +46,11 @@ void initSNTP(void)
     tzset();
     localtime_r(&now, &timeinfo);
     strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
-    ESP_LOGI(TAG, "The current date/time in Germany is: %s", strftime_buf);
+    ESP_LOGI("PROGRESS", "The current date/time in Germany is: %s", strftime_buf);
 	
 }
 
-uint64_t get_timestamp(void) {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (tv.tv_sec)*(uint64_t)1000 + (tv.tv_usec/(uint64_t)1000);
+time_t get_timestamp(void) {
+    // time_t now = times(NULL);
+    return time(NULL);
 }

@@ -1,0 +1,3 @@
+.es(index=34_82_231,timefield=timestamp,metric=max:value.countPeople).label(people_count).yaxis(min=-5,max=30).color(blue),
+.es(index=34_82_229,timefield=timestamp).label(indoor_barrier).points().color(green),
+.es(index=34_82_230,timefield=timestamp).label(indoor_barrier).points().color(orange)

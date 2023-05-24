@@ -2,6 +2,6 @@
 #define TIMEMGMT_H
 
 void initSNTP(void);
-uint64_t get_timestamp(void);
+time_t get_timestamp(void);
 
 #endif
