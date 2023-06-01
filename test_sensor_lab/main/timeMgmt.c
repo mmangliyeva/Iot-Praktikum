@@ -4,6 +4,8 @@
 #include "esp_sntp.h"
 #include "timeMgmt.h"
 #include "main.h"
+#include "nvs.h"
+
 
 static const char *TAG = "time management";
 
@@ -37,6 +39,8 @@ void initSNTP(void)
     }
 	if (retry==retry_count){
 		ESP_LOGE(TAG,"Could not retrieve time.!\n");
+        writeToNVM("system_report","unable to set up sntp", 1, -1, get_timestamp());
+
 		esp_restart();
 	}
     time(&now);

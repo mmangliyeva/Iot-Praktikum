@@ -14,8 +14,8 @@ void app_main(void)
     esp_log_level_set("MQTT_SEND", ESP_LOG_INFO);
     esp_log_level_set("PROGRESS",ESP_LOG_INFO);
     esp_log_level_set("NVS",ESP_LOG_INFO);
-    esp_log_level_set("pushInBuffer()",ESP_LOG_INFO);
-    esp_log_level_set("analyzer()",ESP_LOG_INFO);
+    // esp_log_level_set("pushInBuffer()",ESP_LOG_INFO);
+    // esp_log_level_set("analyzer()",ESP_LOG_INFO);
     // esp_log_level_set("analyzer()",ESP_LOG_INFO);
     // esp_log_level_set("pushInBuffer()",ESP_LOG_INFO);
 

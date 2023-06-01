@@ -35,11 +35,12 @@ void my_setup(void){
     initMQTT();
 
 	initPins();
+    ssd1306_clearScreen();
 
 	displayCountPreTime(0,0);
 
 	//start sending from nvs task
-	xTaskCreate(sendFromNVS, "send nvs to mqtt", 8000, NULL, PRIO_SEND_NVS, &xSendToMQTT);
+	xTaskCreate(sendFromNVS, "send nvs to mqtt", 2000, NULL, PRIO_SEND_NVS, &xSendToMQTT);
 	// xTaskCreate(updateOTA, "update OTA", 4000, NULL, PRIO_OTA_TASK, &xOTA);
 
 }
@@ -119,24 +120,24 @@ void initDisplay(void){
 	ssd1306_printFixedN(0,0,"BOOT",STYLE_BOLD,2);
 }
 
+
 void displayCountPreTime(uint8_t prediction, uint8_t curCount){
 	char count_str[BUFF_STRING_COUNT];
 	char prediction_str[BUFF_STRING_COUNT];
-	char time_str[20];
+	char time_str[10];
 	time_t now;
 	struct tm *now_tm;
-	sprintf(count_str,"%d",curCount);
-	sprintf(prediction_str,"%d",prediction);
+	sprintf(count_str,"%02d",curCount);
+	sprintf(prediction_str,"%02d",prediction);
 
 	time(&now);
 	now_tm = localtime(&now);
-	sprintf(time_str,"Group 8      %02d:%02d",now_tm->tm_hour,now_tm->tm_min);
+	sprintf(time_str,"%02d:%02d",now_tm->tm_hour,now_tm->tm_min);
 
-	ssd1306_clearScreen();
-	ssd1306_printFixed(0,0,time_str,STYLE_NORMAL);
-	ssd1306_printFixed(0,16,"cur count | predict",STYLE_NORMAL);
+	ssd1306_printFixedN(0,0,"G8",STYLE_NORMAL,1);
+	ssd1306_printFixedN(64,0,time_str,STYLE_NORMAL,1);
 	ssd1306_printFixedN(0,Y_POS_COUNT,count_str,STYLE_BOLD,2);
-	ssd1306_printFixedN(64,Y_POS_COUNT,prediction_str,STYLE_BOLD,1);
+	ssd1306_printFixedN(96,Y_POS_COUNT,prediction_str,STYLE_BOLD,1);
 }
 
 

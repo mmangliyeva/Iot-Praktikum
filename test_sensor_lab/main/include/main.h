@@ -14,7 +14,7 @@
 
 // delay the sending of current count of people
 #define PUT_IN_NVS_DELAY 1 //Seconds, write to nvs count
-#define SEND_DELAY_FROM_NVS 120
+#define SEND_DELAY_FROM_NVS 300
 #define UPDATE_OTA 5 //seconds
 
 #endif

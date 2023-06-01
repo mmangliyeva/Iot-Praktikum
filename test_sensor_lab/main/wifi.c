@@ -4,6 +4,8 @@
 #include "esp_event.h"
 #include "esp_log.h"
 
+#include "nvs.h"
+#include "timeMgmt.h"
 #include "esp_sntp.h"
 
 
@@ -117,9 +119,11 @@ void initWifi(void)
     } else if (bits & WIFI_FAIL_BIT) {
         ESP_LOGI("PROGRESS", "Failed to connect to SSID:%s, password:%s -> restart.",
                  WIFI_SSID, WIFI_PASS);
+        writeToNVM("system_report","unable to connect to wifi", 1, -1, get_timestamp());
         esp_restart();
     } else {
         ESP_LOGE("PROGRESS", "UNEXPECTED EVENT");
+        writeToNVM("system_report","unable to connect to wifi", 1, -1, get_timestamp());
         esp_restart();
     }
 

@@ -67,6 +67,8 @@
 // we reset between 5:00 - 5:10 the counter
 #define RESET_COUNT_HOUR 5 // at what hour we reset the count
 #define RESET_COUNT_MIN 10 // at what hour we reset the count
+#define NEEDED_SPACE_NVS 300
+
 
 void my_setup(void);
 
