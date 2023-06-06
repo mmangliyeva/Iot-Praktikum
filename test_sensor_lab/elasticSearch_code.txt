@@ -1,3 +1,27 @@
 .es(index=34_82_231,timefield=timestamp,metric=max:value.countPeople).label(people_count).yaxis(min=-5,max=30).color(blue),
 .es(index=34_82_229,timefield=timestamp).label(indoor_barrier).points().color(green),
 .es(index=34_82_230,timefield=timestamp).label(indoor_barrier).points().color(orange)
+
+
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/python_env/idf4.4_py3.8_env/bin/python /Users/larsleimbach/esp/esp-idf/tools/idf.py menuconfig
+
+
+http://caps-platform.live:3000/api/users/34/ota/download/firmware/<firmware_name>
+http://caps-platform.live:3000/api/users/34/ota/download/firmware/mqtt_receiver.bin
+
+
+
+
+rest_client_init("http://caps-platform.live:3000/api/users/34/config/device/fetch");
+char *output = malloc(sizeof(char) * 100);
+
+esp_err_t err;
+err = rest_client_set_token(JWT_TOKEN); // this funciton fails
+
+err = rest_client_perform(NULL);
+
+rest_client_fetch_key("test", cJSON_String, false, output);
+
+printf("%s\n", output); // this is the result: �����?
+
+free(output);

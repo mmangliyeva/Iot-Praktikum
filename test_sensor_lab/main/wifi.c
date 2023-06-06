@@ -116,6 +116,8 @@ void initWifi(void)
     if (bits & WIFI_CONNECTED_BIT) {
         ESP_LOGI("PROGRESS", "connected to ap SSID:%s password:%s",
                  WIFI_SSID, WIFI_PASS);
+        // writeToNVM("system_report","restart, wifi sucessfull", 1, -1, get_timestamp());
+
     } else if (bits & WIFI_FAIL_BIT) {
         ESP_LOGI("PROGRESS", "Failed to connect to SSID:%s, password:%s -> restart.",
                  WIFI_SSID, WIFI_PASS);
