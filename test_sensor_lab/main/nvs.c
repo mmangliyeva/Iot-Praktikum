@@ -19,14 +19,11 @@ char key[12];                        // this constains "sensors_key"+(string)nvs
 const char *sensors_key = "sensors"; // this is the major key for the jasonfile
 const char *values_key = "values";
 const char *name_key = "name";
-const char *count_backup_key = "count_backup";
-const char *system_report_key = "system_report";
 const uint16_t sizeBuffer = 3500; // for moving data from or to the nvs
 
 char *getKeyForNVS(void);
-void addEventToStorage(char *json_str, const char *sysReport, const char *sensorName,
+void addEventToStorage(char *json_str, const char *sensorName,
                        uint8_t peopleCount, int8_t state, time_t time);
-cJSON *restoreSystemReport(uint8_t bool_openHandle);
 
 void initMY_nvs(void)
 {
@@ -40,71 +37,6 @@ void initMY_nvs(void)
     }
     ESP_ERROR_CHECK(ret);
     initNVS_json(NO_OPEN_NVS);
-}
-/**
- * resets the count if we having between 5-6am
- * I assume no one is at that time in the room...
- */
-void resetCount(uint8_t bool_openHandle)
-{
-    time_t now = time(NULL);
-    struct tm *now_tm = localtime(&now);
-    if ((now_tm->tm_hour == RESET_COUNT_HOUR || now_tm->tm_hour == RESET_COUNT_HOUR2) && now_tm->tm_min < RESET_COUNT_MIN)
-    {
-        esp_err_t err = ESP_OK;
-        if (bool_openHandle != OPEN_NVS)
-        {
-            err = nvs_open(NVS_STORAGE_NAME, NVS_READWRITE, &my_nvs_handle);
-        }
-        if (err != ESP_OK)
-        {
-            ESP_LOGI("NVS", "Error resetCount (%s) opening NVS handle!\n", esp_err_to_name(err));
-        }
-        // here reset of count
-        err = nvs_set_u8(my_nvs_handle, count_backup_key, 0);
-        if (err != ESP_OK)
-        {
-            ESP_LOGI("NVS", "Error resetCount(%s) could not reset count.\n", esp_err_to_name(err));
-        }
-        else
-        {
-            ESP_LOGI("NVS", "RESET COUNT -> restart!\n");
-        }
-        nvs_commit(my_nvs_handle);
-
-        if (bool_openHandle != OPEN_NVS)
-        {
-            nvs_close(my_nvs_handle);
-        }
-        esp_restart();
-    }
-}
-/**
- * save as backup the poeple count in nvs, in the case that the esp restarts
- */
-uint8_t restoreCount(uint8_t bool_openHandle)
-{
-    esp_err_t err = ESP_OK;
-    if (bool_openHandle != OPEN_NVS)
-    {
-        err = nvs_open(NVS_STORAGE_NAME, NVS_READWRITE, &my_nvs_handle);
-    }
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("NVS", "Error restoreCount (%s) opening NVS handle!\n", esp_err_to_name(err));
-    }
-    uint8_t count = 0;
-    err = nvs_get_u8(my_nvs_handle, count_backup_key, &count);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("NVS", "Error restoreCount (%s) could not restore uint8!\n", esp_err_to_name(err));
-    }
-
-    if (bool_openHandle != OPEN_NVS)
-    {
-        nvs_close(my_nvs_handle);
-    }
-    return count;
 }
 
 /**
@@ -130,31 +62,23 @@ void initNVS_json(uint8_t bool_openHandle)
     // set sensor 'counter'
 
     // create the three sensors
-    const char *sensorNames[4] = {"counter", "indoor_barrier", "outdoor_barrier", system_report_key};
+    uint8_t lengthArray;
 
-    for (int i = 0; i < 4; i++)
+#ifdef SEND_EVERY_EVENT
+    lengthArray = 3;
+    const char *sensorNames[3] = {"counter", "indoor_barrier", "outdoor_barrier"};
+#else
+    lengthArray = 1;
+    const char *sensorNames[1] = {"counter"};
+#endif
+    for (int i = 0; i < lengthArray; i++)
     {
         cJSON *sensor = cJSON_CreateObject();
 
         cJSON_AddStringToObject(sensor, name_key, sensorNames[i]);
-        if (i == 3)
-        {
-            // restore old nvs-system_report messages:
-            cJSON *values_array = restoreSystemReport(OPEN_NVS);
-            // ets_printf(" values array %d\n",values_array);
-            if (values_array == NULL)
-            {
-                cJSON_AddArrayToObject(sensor, values_key);
-            }
-            else
-            {
-                cJSON_AddItemToObject(sensor, values_key, values_array);
-            }
-        }
-        else
-        {
-            cJSON_AddArrayToObject(sensor, values_key);
-        }
+
+        cJSON_AddArrayToObject(sensor, values_key);
+
         cJSON_AddItemToArray(sensors_array, sensor);
     }
 
@@ -175,51 +99,6 @@ void initNVS_json(uint8_t bool_openHandle)
     {
         nvs_close(my_nvs_handle);
     }
-}
-
-/**
- * this function recover the system report, because otherwise the
- * initJOSON would overwrite the system report
- */
-cJSON *restoreSystemReport(uint8_t bool_openHandle)
-{
-    esp_err_t err = ESP_OK;
-    if (bool_openHandle != OPEN_NVS)
-    {
-        err = nvs_open(NVS_STORAGE_NAME, NVS_READWRITE, &my_nvs_handle);
-    }
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("NVS", "Error restoreSystemReport (%s) opening NVS handle!\n", esp_err_to_name(err));
-    }
-    size_t size = 0;
-    err = nvs_get_str(my_nvs_handle, getKeyForNVS(), NULL, &size);
-    char *json_str = malloc(size);
-    err = nvs_get_str(my_nvs_handle, getKeyForNVS(), json_str, &size);
-
-    cJSON *root = cJSON_Parse(json_str);
-    cJSON *sensor_array = cJSON_GetObjectItem(root, sensors_key);
-    // get correct sensor:
-    cJSON *sensor = NULL;
-    cJSON *current_element = NULL;
-    cJSON_ArrayForEach(current_element, sensor_array)
-    {
-        char *curName = cJSON_GetObjectItem(current_element, name_key)->valuestring;
-        if (strcmp(system_report_key, curName) == 0)
-        {
-            // strings are equal
-            sensor = current_element;
-            break;
-        }
-    }
-    cJSON *values_array = cJSON_GetObjectItem(sensor, values_key);
-
-    free(json_str);
-    if (bool_openHandle != OPEN_NVS)
-    {
-        nvs_close(my_nvs_handle);
-    }
-    return values_array;
 }
 
 void sendDataFromJSON_toDB(void *args)
@@ -275,7 +154,7 @@ void sendDataFromJSON_toDB(void *args)
  * this function writes an event to the NVM
  * state might be -1 which means, no state...
  */
-void writeToNVM(const char *sensorName, const char *sysReport, uint8_t peopleCount, int8_t state, time_t time)
+void writeToNVM(const char *sensorName, uint8_t peopleCount, int8_t state, time_t time)
 {
 
     esp_err_t err = nvs_open(NVS_STORAGE_NAME, NVS_READWRITE, &my_nvs_handle);
@@ -314,7 +193,7 @@ void writeToNVM(const char *sensorName, const char *sysReport, uint8_t peopleCou
         {
             ESP_LOGI("NVS", "Error writeToNVM(%s) get str!\n", esp_err_to_name(err));
         }
-        addEventToStorage(json_str, sysReport, sensorName, peopleCount, state, time);
+        addEventToStorage(json_str, sensorName, peopleCount, state, time);
 
         free(json_str);
     }
@@ -327,7 +206,7 @@ void writeToNVM(const char *sensorName, const char *sysReport, uint8_t peopleCou
 /**
  * create JSON event and saves it to NVS
  */
-void addEventToStorage(char *json_str, const char *sysReport, const char *sensorName,
+void addEventToStorage(char *json_str, const char *sensorName,
                        uint8_t peopleCount, int8_t state, time_t time)
 {
     // get sensor
@@ -356,27 +235,13 @@ void addEventToStorage(char *json_str, const char *sysReport, const char *sensor
 
     cJSON *newEvent = cJSON_Parse(newEvent_str);
     // if it's NOT a system report
-    if (strcmp(sysReport, "") == 0)
-    {
-        // state can be optional
-        if (state == 0 || state == 1)
-        {
-            cJSON_AddNumberToObject(newEvent, "state", state);
-        }
-        cJSON_AddNumberToObject(newEvent, "countPeople", peopleCount);
 
-        // backup count in nvs:
-        err = nvs_set_u8(my_nvs_handle, count_backup_key, peopleCount);
-        if (err != ESP_OK)
-        {
-            ESP_LOGI("NVS", "Error addEventToStorage(%s) could not backup count.\n", esp_err_to_name(err));
-        }
-    }
-    else
+    // state can be optional
+    if (state == 0 || state == 1)
     {
-        // it is a system_report!
-        cJSON_AddStringToObject(newEvent, "report_msg", sysReport);
+        cJSON_AddNumberToObject(newEvent, "state", state);
     }
+    cJSON_AddNumberToObject(newEvent, "countPeople", peopleCount);
 
     cJSON_AddItemToArray(values_array, newEvent);
 

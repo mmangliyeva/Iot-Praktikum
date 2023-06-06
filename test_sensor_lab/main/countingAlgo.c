@@ -7,6 +7,7 @@
 #include "driver/gpio.h"
 #include "nvs.h"
 #include "timeMgmt.h"
+#include "webFunctions.h"
 
 // -------------------------------------------------------------------------
 // --------------------capsel this data-------------------------------------
@@ -73,7 +74,7 @@ void checkTimes(Barrier_data firstEvent,
 void start_counting_algo(void)
 {
 	// restore count from nvs:
-	count = restoreCount(NO_OPEN_NVS);
+	count = getCount_backup();
 	displayCountPreTime(prediction, count);
 	ESP_LOGI("PROGRESS", "Restore count: %d", count);
 	// set up semaphore for accessing the shared variable count...
@@ -168,10 +169,8 @@ void analyzer(void *args)
 
 				// check now wheter there the time stamps
 				// changes maybe delteItemsCount...
-				ets_printf("start check times");
-				ESP_LOGI("PROGRESS", "before check time");
 				checkTimes(firstEvent, secondEvent, thirdEvent, fourthEvent, &delteItemsCount);
-				ets_printf("delteItemsCount: %d", delteItemsCount);
+
 				if (delteItemsCount == 0)
 				{
 					// ESP_LOGI("analyzer()", "head: %d, size: %d",head,fillSize);
@@ -194,7 +193,7 @@ void analyzer(void *args)
 								{
 									ESP_LOGI("analyzer()", "detected going-in-event.");
 									count++;
-									writeToNVM("counter", "", count, -1, get_timestamp());
+									writeToNVM("counter", count, -1, get_timestamp());
 								}
 								xSemaphoreGive(xAccessCount);
 								ESP_LOGI("analyzer()", "released semaphore");
@@ -215,7 +214,7 @@ void analyzer(void *args)
 								{
 									ESP_LOGI("analyzer()", "detected going-out-event.");
 									count--;
-									writeToNVM("counter", "", count, -1, get_timestamp());
+									writeToNVM("counter", count, -1, get_timestamp());
 								}
 								xSemaphoreGive(xAccessCount);
 								ESP_LOGI("analyzer()", "released semaphore");
@@ -298,12 +297,12 @@ void sendToDatabase(uint8_t delteItemsCount)
 		if (buffer[i].id == 1)
 		{
 			const char *barrierName = "outdoor_barrier";
-			writeToNVM(barrierName, "", count, buffer[i].state, buffer[i].time);
+			writeToNVM(barrierName, count, buffer[i].state, buffer[i].time);
 		}
 		else
 		{
 			const char *barrierName = "indoor_barrier";
-			writeToNVM(barrierName, "", count, buffer[i].state, buffer[i].time);
+			writeToNVM(barrierName, count, buffer[i].state, buffer[i].time);
 		}
 	}
 }
@@ -330,16 +329,25 @@ void showRoomState(void *args)
  */
 void sendFromNVS(void *args)
 {
+	time_t now;
+	struct tm *now_tm;
 	while (1)
 	{
 		vTaskDelay((1000 * SEND_DELAY_FROM_NVS) / portTICK_PERIOD_MS);
 		if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
 		{
-			writeToNVM("counter", "", count, -1, get_timestamp());
+			setCount_backup(count);
+			writeToNVM("counter", count, -1, get_timestamp());
 			xSemaphoreGive(xAccessCount);
 		}
 		// check if we are having the reset hours -> reset counter
-		resetCount(NO_OPEN_NVS);
+		now = time(NULL);
+		now_tm = localtime(&now);
+		if ((now_tm->tm_hour == RESET_COUNT_HOUR || now_tm->tm_hour == RESET_COUNT_HOUR2) && now_tm->tm_min < RESET_COUNT_MIN)
+		{
+			setCount_backup(0);
+			esp_restart();
+		}
 
 		sendDataFromJSON_toDB(NULL);
 	}
@@ -386,7 +394,7 @@ void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 			vTaskSuspend(xProgShowCount);
 			vTaskSuspend(xProgInBuffer);
 			vTaskSuspend(xSendToMQTT);
-			// vTaskSuspend(xOTA);
+			vTaskSuspend(xOTA);
 			gpio_isr_handler_remove(PIN_DETECT_1);
 			gpio_isr_handler_remove(PIN_DETECT_2);
 			// taskDISABLE_INTERRUPTS();
@@ -397,7 +405,7 @@ void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 			vTaskResume(xProgShowCount);
 			vTaskResume(xProgInBuffer);
 			vTaskResume(xSendToMQTT);
-			// vTaskResume(xOTA);
+			vTaskResume(xOTA);
 			gpio_isr_handler_add(PIN_DETECT_1, isr_barrier1, NULL);
 			gpio_isr_handler_add(PIN_DETECT_2, isr_barrier2, NULL);
 			ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1));

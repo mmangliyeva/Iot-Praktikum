@@ -6,16 +6,12 @@
 #include "main.h"
 #include "nvs.h"
 
-
 static const char *TAG = "time management";
-
 
 void time_sync_notification_cb(struct timeval *tv)
 {
     ESP_LOGI(TAG, "Notification of a time synchronization event");
 }
-
-
 
 void initSNTP(void)
 {
@@ -28,33 +24,33 @@ void initSNTP(void)
 #endif
 
     sntp_init();
-	
-	time_t now = 0;
-    struct tm timeinfo = { 0 };
+
+    time_t now = 0;
+    struct tm timeinfo = {0};
     int retry = 0;
     const int retry_count = 10;
-    while (sntp_get_sync_status() == SNTP_SYNC_STATUS_RESET && ++retry < retry_count) {
+    while (sntp_get_sync_status() == SNTP_SYNC_STATUS_RESET && ++retry < retry_count)
+    {
         ESP_LOGI(TAG, "Waiting for system time to be set... (%d/%d)", retry, retry_count);
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
-	if (retry==retry_count){
-		ESP_LOGE(TAG,"Could not retrieve time.!\n");
-        writeToNVM("system_report","unable to set up sntp", 1, -1, get_timestamp());
-
-		esp_restart();
-	}
+    if (retry == retry_count)
+    {
+        ESP_LOGE(TAG, "Could not retrieve time.!\n");
+        esp_restart();
+    }
     time(&now);
-	char strftime_buf[64];
-	
-	setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
+    char strftime_buf[64];
+
+    setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
     tzset();
     localtime_r(&now, &timeinfo);
     strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
     ESP_LOGI("PROGRESS", "The current date/time in Germany is: %s", strftime_buf);
-	
 }
 
-time_t get_timestamp(void) {
+time_t get_timestamp(void)
+{
     // time_t now = times(NULL);
     return time(NULL);
 }

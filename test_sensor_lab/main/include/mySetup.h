@@ -66,7 +66,7 @@
 #define RESET_COUNT_MIN 15   // at what hour we reset the count
 #define NEEDED_SPACE_NVS 400
 
-#define TIME_TO_NEXT_EVENT 1000000 // in mu_sec how close a sequence of events should be
+#define TIME_TO_NEXT_EVENT 500000 // in mu_sec how close a sequence of events should be
 
 void my_setup(void);
 

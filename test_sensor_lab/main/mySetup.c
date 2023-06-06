@@ -28,15 +28,18 @@ void my_setup(void)
 	initDisplay();
 #endif
 	initMY_nvs(); // must before wifi
+
 	initWifi();
-	// initSNTP();
+	initSNTP();
 	initMQTT();
 
 	initPins();
+
+#ifdef WITH_DISPLAY
 	ssd1306_clearScreen();
 
 	displayCountPreTime(0, 0);
-
+#endif
 	init_web_functions();
 }
 

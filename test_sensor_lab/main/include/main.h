@@ -13,6 +13,6 @@
 
 // delay the sending of current count of people
 #define SEND_DELAY_FROM_NVS 300 // seconds
-#define UPDATE_OTA 60           // seconds
+#define UPDATE_OTA 150          // seconds
 
 #endif

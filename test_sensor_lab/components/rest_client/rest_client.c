@@ -7,6 +7,7 @@
 #define MAX_HTTP_RESPONSE_BUFFER 2048
 
 static const char *TAG = "rest_client";
+const uint8_t length_of_base_url = 70;
 
 char *token_client = NULL;
 // static const char* token_client = "";
@@ -81,7 +82,32 @@ esp_err_t http_event_handler(esp_http_client_event_t *http_client_event)
   return ESP_OK;
 }
 
-esp_err_t rest_client_fetch_set_key(const char *name, const char *value)
+esp_err_t rest_client_fetch(const char *name)
+{
+  size_t len_query = strlen(name) + 2;
+  char *query = malloc(sizeof(char) * len_query);
+  sprintf(query, "keys=%s", name);
+
+  if (query_keys == NULL)
+  {
+    query_keys = query;
+    query_length = len_query;
+  }
+  else
+  {
+    size_t size = len_query + query_length + 2;
+    char *extended = malloc(sizeof(char) * size);
+    sprintf(extended, "%s,%s", query_keys, name);
+    query_length += size;
+
+    free(query_keys);
+    query_keys = extended;
+  }
+
+  return ESP_OK;
+}
+
+esp_err_t rest_client_set_key(const char *name, const char *value)
 {
   size_t len_query = strlen(name) + strlen(value) + 2;
   char *query = malloc(sizeof(char) * len_query);
@@ -116,6 +142,10 @@ esp_err_t rest_client_set_token(const char *token)
     return ESP_FAIL;
   }
   // token_client = malloc(sizeof(char) * 800);
+  if (token_client != NULL)
+  {
+    free(token_client);
+  }
   int bytes = asprintf(&token_client, "Bearer %s", token);
   if (bytes <= 0)
   {
@@ -129,6 +159,7 @@ esp_err_t rest_client_set_token(const char *token)
 esp_err_t rest_client_perform(cJSON *http_op_data)
 {
   esp_err_t ret = ESP_OK;
+
   char *tmp_url = NULL;
 
   if (token_client == NULL)
@@ -136,14 +167,18 @@ esp_err_t rest_client_perform(cJSON *http_op_data)
     ESP_LOGE(TAG, "Please provide a valid token string");
     return ESP_FAIL;
   }
+  // printf("test quey length: %d\n", query_length);
+  // printf("test str length: %d\n", strlen(host_url));
+  // size_t length = strlen(host_url) + query_length + 2;
 
-  size_t length = strlen(host_url) + query_length + 2;
+  // HARDCODED because strlen() crashes for me...
+  // 70 stands for the length of this url: "http://caps-platform.live:3000/api/users/34/config/device/fetch"
+  size_t length = length_of_base_url + query_length + 2;
 
   if (query_keys && length < esp_get_free_heap_size())
   {
-    tmp_url = (char *)malloc(length);
 
-    sprintf(tmp_url, "%s?%s", host_url, query_keys);
+    asprintf(&tmp_url, "%s&%s", host_url, query_keys);
 
     http_client_cfg.url = tmp_url;
   }
@@ -151,6 +186,8 @@ esp_err_t rest_client_perform(cJSON *http_op_data)
   {
     http_client_cfg.url = host_url;
   }
+
+  // printf("url: %s\n", http_client_cfg.url);
 
   http_client = esp_http_client_init(&http_client_cfg);
   ret = esp_http_client_set_method(http_client, http_method);
@@ -179,7 +216,9 @@ esp_err_t rest_client_perform(cJSON *http_op_data)
   else if (http_method != HTTP_METHOD_GET && http_op_data)
   {
     char *data = cJSON_PrintUnformatted(http_op_data);
+    printf("unter cJSON_PrintUnformatted\n%s\n\n", data);
     esp_http_client_set_post_field(http_client, data, strlen(data));
+
     free(data);
   }
 
@@ -209,7 +248,7 @@ esp_err_t rest_client_perform(cJSON *http_op_data)
   return ret;
 }
 
-void *rest_client_fetch_key(const char *key, cjson_types_t value_type, bool is_json, esp_err_t *ret)
+void *rest_client_get_fetched_value(const char *key, cjson_types_t value_type, bool is_json, esp_err_t *ret)
 {
   if (!response_buffer)
   {
@@ -273,13 +312,25 @@ esp_err_t rest_client_set_header(const char *header, const char *value)
   return esp_http_client_set_header(http_client, header, value);
 }
 
-void rest_client_init(const char *url)
+/**
+ * type is either: "type=global" OR "type=device&deviceId=<here you deviceID>"
+ * url should be of the form: "http://caps-platform.live:3000/api/users/<groupID>/config/device/<fetch OR update>"
+ */
+void rest_client_init(const char *url, const char *type)
 {
 
   esp_log_level_set(TAG, ESP_LOG_NONE);
+  if (host_url != NULL)
+  {
+    free(host_url);
+    host_url = NULL;
+  }
+  char *tmp_host_url = malloc(sizeof(char) * (strlen(type) + strlen(url) + 2));
+  sprintf(tmp_host_url, "%s?%s", url, type);
 
-  host_url = strdup(url);
+  host_url = strdup(tmp_host_url);
 
+  free(tmp_host_url);
   if (response_buffer)
   {
     free(response_buffer);
