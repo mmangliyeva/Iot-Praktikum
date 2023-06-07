@@ -72,6 +72,10 @@ void my_setup(void);
 
 void displayCountPreTime(uint8_t prediction, uint8_t curCount);
 void initTimer(void);
+void error_message(const char *TAG, char *msg, const char *details);
+
+extern uint8_t flag_internet_active;
+extern char *tmp_message; // used for system report, imedetyl free it!
 // test mode flag and task that should stop if testModeActive == 1
 extern uint8_t testModeActive;
 extern TaskHandle_t xProgAnalizer;

@@ -6,23 +6,23 @@
 
 #define MAX_HTTP_RESPONSE_BUFFER 2048
 
-static const char *TAG = "rest_client";
+// const char *"REST_CLIENT" = "REST_CLIENT";
 const uint8_t length_of_base_url = 70;
 
 char *token_client = NULL;
 // static const char* token_client = "";
-static esp_http_client_config_t http_client_cfg;
-static esp_http_client_handle_t http_client;
-static esp_http_client_method_t http_method = HTTP_METHOD_GET;
+esp_http_client_config_t http_client_cfg;
+esp_http_client_handle_t http_client;
+esp_http_client_method_t http_method = HTTP_METHOD_GET;
 
-static cJSON *cjson_response = NULL;
+cJSON *cjson_response = NULL;
 
 char *response_buffer;
 size_t response_len = 0;
-static char *host_url = NULL;
+char *host_url = NULL;
 
-char *query_keys;
-static size_t query_length = 0;
+char *query_keys = NULL;
+size_t query_length = 0;
 
 esp_err_t http_event_handler(esp_http_client_event_t *http_client_event)
 {
@@ -32,19 +32,19 @@ esp_err_t http_event_handler(esp_http_client_event_t *http_client_event)
   switch (http_client_event->event_id)
   {
   case HTTP_EVENT_ERROR:
-    ESP_LOGE(TAG, "HTTP Error...");
+    ESP_LOGE("REST_CLIENT", "HTTP Error...");
     break;
   case HTTP_EVENT_ON_CONNECTED:
-    ESP_LOGD(TAG, "HTTP_EVENT_ON_CONNECTED");
+    ESP_LOGD("REST_CLIENT", "HTTP_EVENT_ON_CONNECTED");
     break;
   case HTTP_EVENT_HEADER_SENT:
-    ESP_LOGI(TAG, "HTTP_EVENT_HEADER_SENT");
+    ESP_LOGI("REST_CLIENT", "HTTP_EVENT_HEADER_SENT");
     break;
   case HTTP_EVENT_ON_HEADER:
-    ESP_LOGD(TAG, "HTTP_EVENT_ON_HEADER, key=%s, value=%s", http_client_event->header_key, http_client_event->header_value);
+    ESP_LOGD("REST_CLIENT", "HTTP_EVENT_ON_HEADER, key=%s, value=%s", http_client_event->header_key, http_client_event->header_value);
     break;
   case HTTP_EVENT_ON_DATA:
-    ESP_LOGD(TAG, "HTTP_EVENT_ON_DATA, len=%d", http_client_event->data_len);
+    ESP_LOGD("REST_CLIENT", "HTTP_EVENT_ON_DATA, len=%d", http_client_event->data_len);
     if (!esp_http_client_is_chunked_response(http_client_event->client))
     {
       if (!response_buffer)
@@ -54,7 +54,7 @@ esp_err_t http_event_handler(esp_http_client_event_t *http_client_event)
         response_len = 0;
         if (!response_buffer)
         {
-          ESP_LOGE(TAG, "Response buffer could not be allocated...");
+          ESP_LOGE("REST_CLIENT", "Response buffer could not be allocated...");
           return ESP_FAIL;
         }
       }
@@ -64,19 +64,19 @@ esp_err_t http_event_handler(esp_http_client_event_t *http_client_event)
     }
     break;
   case HTTP_EVENT_ON_FINISH:
-    ESP_LOGI(TAG, "HTTP_EVENT_ON_FINISH");
+    ESP_LOGI("REST_CLIENT", "HTTP_EVENT_ON_FINISH");
     if (response_buffer != NULL)
     {
       // Response is accumulated in output_buffer. Uncomment the below line to print the accumulated response
       response_buffer[response_len - 1] = '\0';
-      ESP_LOGD(TAG, "The buffer has the message %s", response_buffer);
+      ESP_LOGD("REST_CLIENT", "The buffer has the message %s", response_buffer);
     }
     break;
   case HTTP_EVENT_DISCONNECTED:
-    ESP_LOGI(TAG, "HTTP_EVENT_DISCONNECTED");
+    ESP_LOGI("REST_CLIENT", "HTTP_EVENT_DISCONNECTED");
     break;
   default:
-    ESP_LOGW(TAG, "Event %d cannot be recognized...", http_client_event->event_id);
+    ESP_LOGW("REST_CLIENT", "Event %d cannot be recognized...", http_client_event->event_id);
     break;
   }
   return ESP_OK;
@@ -85,8 +85,8 @@ esp_err_t http_event_handler(esp_http_client_event_t *http_client_event)
 esp_err_t rest_client_fetch(const char *name)
 {
   size_t len_query = strlen(name) + 2;
-  char *query = malloc(sizeof(char) * len_query);
-  sprintf(query, "keys=%s", name);
+  char *query;
+  asprintf(&query, "keys=%s", name);
 
   if (query_keys == NULL)
   {
@@ -96,11 +96,12 @@ esp_err_t rest_client_fetch(const char *name)
   else
   {
     size_t size = len_query + query_length + 2;
-    char *extended = malloc(sizeof(char) * size);
-    sprintf(extended, "%s,%s", query_keys, name);
+    char *extended;
+    asprintf(&extended, "%s,%s", query_keys, name);
     query_length += size;
 
     free(query_keys);
+    free(query);
     query_keys = extended;
   }
 
@@ -110,8 +111,8 @@ esp_err_t rest_client_fetch(const char *name)
 esp_err_t rest_client_set_key(const char *name, const char *value)
 {
   size_t len_query = strlen(name) + strlen(value) + 2;
-  char *query = malloc(sizeof(char) * len_query);
-  sprintf(query, "%s=%s", name, value);
+  char *query;
+  asprintf(&query, "%s=%s", name, value);
 
   if (query_keys == NULL)
   {
@@ -121,11 +122,12 @@ esp_err_t rest_client_set_key(const char *name, const char *value)
   else
   {
     size_t size = len_query + query_length + 2;
-    char *extended = malloc(sizeof(char) * size);
-    sprintf(extended, "%s&%s", query_keys, query);
+    char *extended;
+    asprintf(&extended, "%s&%s", query_keys, query);
     query_length += size;
 
     free(query_keys);
+    free(query);
     query_keys = extended;
   }
 
@@ -138,7 +140,7 @@ esp_err_t rest_client_set_token(const char *token)
   if (token == NULL)
   {
     printf("token == null, token: %s!\n", token);
-    ESP_LOGE(TAG, "Please provide a valid token string");
+    ESP_LOGE("REST_CLIENT", "Please provide a valid token string");
     return ESP_FAIL;
   }
   // token_client = malloc(sizeof(char) * 800);
@@ -164,7 +166,7 @@ esp_err_t rest_client_perform(cJSON *http_op_data)
 
   if (token_client == NULL)
   {
-    ESP_LOGE(TAG, "Please provide a valid token string");
+    ESP_LOGE("REST_CLIENT", "Please provide a valid token string");
     return ESP_FAIL;
   }
   // printf("test quey length: %d\n", query_length);
@@ -210,7 +212,7 @@ esp_err_t rest_client_perform(cJSON *http_op_data)
 
   if (http_method != HTTP_METHOD_GET && !http_op_data)
   {
-    ESP_LOGE(TAG, "This HTTP Method requires data to be passed on");
+    ESP_LOGE("REST_CLIENT", "This HTTP Method requires data to be passed on");
     return ESP_FAIL;
   }
   else if (http_method != HTTP_METHOD_GET && http_op_data)
@@ -225,16 +227,17 @@ esp_err_t rest_client_perform(cJSON *http_op_data)
   ret = esp_http_client_perform(http_client);
   if (ret)
   {
-    ESP_LOGE(TAG, "HTTP Request failed: %s", esp_err_to_name(ret));
+    ESP_LOGE("REST_CLIENT", "HTTP Request failed: %s", esp_err_to_name(ret));
     return ret;
   }
 
-  ESP_LOGI(TAG, "HTTP Request finished successfully with status %d", esp_http_client_get_status_code(http_client));
+  ESP_LOGI("REST_CLIENT", "HTTP Request finished successfully with status %d", esp_http_client_get_status_code(http_client));
   ret = esp_http_client_cleanup(http_client);
   if (ret)
   {
     return ret;
   }
+  // free heap
   free(host_url);
   host_url = NULL;
   free(query_keys);
@@ -293,7 +296,7 @@ void *rest_client_get_fetched_value(const char *key, cjson_types_t value_type, b
     *ret = ESP_OK;
     return (void *)cJSON_GetObjectItem(cjson_response, key);
   default:
-    ESP_LOGE(TAG, "This data type is not supported");
+    ESP_LOGE("REST_CLIENT", "This data type is not supported");
     *ret = ESP_FAIL;
     return NULL;
   }
@@ -319,14 +322,20 @@ esp_err_t rest_client_set_header(const char *header, const char *value)
 void rest_client_init(const char *url, const char *type)
 {
 
-  esp_log_level_set(TAG, ESP_LOG_NONE);
+  esp_log_level_set("REST_CLIENT", ESP_LOG_NONE);
+
+  if (query_keys != NULL)
+  {
+    free(query_keys);
+    query_length = 0;
+  }
   if (host_url != NULL)
   {
     free(host_url);
     host_url = NULL;
   }
-  char *tmp_host_url = malloc(sizeof(char) * (strlen(type) + strlen(url) + 2));
-  sprintf(tmp_host_url, "%s?%s", url, type);
+  char *tmp_host_url;
+  asprintf(&tmp_host_url, "%s?%s", url, type);
 
   host_url = strdup(tmp_host_url);
 

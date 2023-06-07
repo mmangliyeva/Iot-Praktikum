@@ -16,10 +16,13 @@ void init_web_functions(void)
     // printf("set count to 69\n");
     // setCount_backup(69);
     // printf("updated count: %d\n", getCount_backup());
-    // systemReport("hello");
+    // systemReport(msg);
+
     xTaskCreate(updateOTA, "update OTA", 4000, NULL, PRIO_OTA_TASK, &xOTA);
 }
-
+/**
+ * TASK
+ */
 void updateOTA(void *args)
 {
     while (1)
@@ -35,6 +38,7 @@ void updateOTA(void *args)
         {
             ESP_LOGI("BUG", "NO ESP UPDATE");
         }
+        ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", esp_get_free_heap_size());
     }
 }
 
@@ -61,15 +65,14 @@ void systemReport(const char *msg)
     }
 
     char *raw_data_str = (char *)rest_client_get_fetched_value("", INT, false, &err);
-    printf("raw string: %s\n", raw_data_str);
+    // printf("raw string: %s\n", raw_data_str);
     cJSON *sys_report = cJSON_Parse(raw_data_str);
     // we save the array as a string
     cJSON *array = cJSON_Parse(cJSON_GetObjectItem(sys_report, sys_rep_key)->valuestring);
     cJSON_AddItemToArray(array, cJSON_CreateString(msg));
 
     char *arrayAsStr = cJSON_PrintUnformatted(array);
-    printf("raw system report: %s\n", arrayAsStr);
-    free(raw_data_str);
+    // printf("raw system report: %s\n", arrayAsStr);
 
     // send array back to system report
     rest_client_init(update_url, "type=global");
@@ -85,6 +88,11 @@ void systemReport(const char *msg)
     {
         ESP_LOGI("BUG", "Error setCount_backup(%s) could not backup count.\n", esp_err_to_name(err));
     }
+    free(raw_data_str);
+    free(arrayAsStr);
+
+    cJSON_Delete(sys_report);
+    cJSON_Delete(array);
 }
 
 uint8_t getCount_backup(void)

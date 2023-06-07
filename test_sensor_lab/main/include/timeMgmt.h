@@ -3,5 +3,5 @@
 
 void initSNTP(void);
 time_t get_timestamp(void);
-
+char *getDate(void);
 #endif

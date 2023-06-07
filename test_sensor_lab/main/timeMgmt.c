@@ -7,6 +7,7 @@
 #include "nvs.h"
 
 static const char *TAG = "time management";
+char strftime_buf[64];
 
 void time_sync_notification_cb(struct timeval *tv)
 {
@@ -40,7 +41,7 @@ void initSNTP(void)
         esp_restart();
     }
     time(&now);
-    char strftime_buf[64];
+    // char strftime_buf[64];
 
     setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
     tzset();
@@ -53,4 +54,16 @@ time_t get_timestamp(void)
 {
     // time_t now = times(NULL);
     return time(NULL);
+}
+char *getDate(void)
+{
+    time_t now = time(&now);
+    // char *strftime_buf = calloc(64, sizeof(char));
+    struct tm timeinfo = {0};
+
+    setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
+    tzset();
+    localtime_r(&now, &timeinfo);
+    strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
+    return strftime_buf;
 }

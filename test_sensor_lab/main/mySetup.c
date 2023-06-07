@@ -13,6 +13,7 @@
 void initDisplay(void);
 #endif
 void initPins(void);
+void replacedSpaces(char *str);
 
 uint8_t testModeActive = 0;
 TaskHandle_t xProgAnalizer = NULL;
@@ -21,6 +22,9 @@ TaskHandle_t xProgSendToDB = NULL;
 TaskHandle_t xProgInBuffer = NULL;
 TaskHandle_t xSendToMQTT = NULL;
 TaskHandle_t xOTA = NULL;
+uint8_t flag_internet_active = 0;
+char *tmp_message = NULL;
+
 void my_setup(void)
 {
 
@@ -70,6 +74,32 @@ void initPins(void)
 	// internal red LED
 	ESP_ERROR_CHECK(gpio_set_direction(RED_INTERNAL_LED, GPIO_MODE_OUTPUT));
 	ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1));
+}
+
+/**
+ * frees automatacially the msg
+ */
+void error_message(const char *TAG, char *msg, const char *details)
+{
+	char *date = getDate();
+	asprintf(&tmp_message, "%s_%s_%s", date, msg, details);
+	ESP_LOGI(TAG, "%s", tmp_message);
+	replacedSpaces(tmp_message);
+	// printf("send message: %s", tmp_message);
+	if (flag_internet_active)
+		systemReport(tmp_message);
+	free(tmp_message);
+	// free(date);
+}
+void replacedSpaces(char *str)
+{
+	int i = 0;
+	while (str[i])
+	{
+		if (isspace(str[i]))
+			str[i] = '_';
+		i++;
+	}
 }
 
 #ifdef WITH_DISPLAY

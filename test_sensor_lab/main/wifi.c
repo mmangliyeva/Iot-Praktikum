@@ -121,6 +121,7 @@ void initWifi(void)
     {
         ESP_LOGI("PROGRESS", "connected to ap SSID:%s password:%s",
                  WIFI_SSID, WIFI_PASS);
+        flag_internet_active = 1;
     }
     else if (bits & WIFI_FAIL_BIT)
     {
