@@ -35,8 +35,8 @@
 
 // defines for the counting algorithm:
 #define BUFF_STRING_COUNT 4 // size of the buffer to display the number
-#define PIN_DETECT_1 2      // pin for outdoor barrier
-#define PIN_DETECT_2 5      // pin for indoor barrier
+#define OUTDOOR_BARRIER 2   // pin for outdoor barrier
+#define INDOOR_BARRIER 5    // pin for indoor barrier
 #define PIN_TEST_MODE 19    // pin entering test mode
 #define RED_INTERNAL_LED 16 // internal red led pin
 
@@ -66,7 +66,8 @@
 #define RESET_COUNT_MIN 15   // at what hour we reset the count
 #define NEEDED_SPACE_NVS 400
 
-#define TIME_TO_NEXT_EVENT 500000 // in mu_sec how close a sequence of events should be
+// we assume that no one stands TIME_TO_NEXT_EVENT seconds in the door
+#define TIME_TO_NEXT_EVENT 20 // in sec how close a sequence of events should be
 
 void my_setup(void);
 

@@ -190,7 +190,7 @@ void writeToNVM(const char *sensorName, uint8_t peopleCount, int8_t state, time_
         {
             ESP_LOGE("NVS", "Error writeToNVM could not get size %s!\n", esp_err_to_name(err));
         }
-        ESP_LOGI("NVS", "current size %d of storage key: %s", size, keyWords[nvs_index]);
+        // ESP_LOGI("NVS", "current size %d of storage key: %s", size, keyWords[nvs_index]);
 
         // check if at least 100 bytes free space, otherwise use next key..
         if (size + NEEDED_SPACE_NVS > sizeBuffer)

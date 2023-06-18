@@ -1,6 +1,7 @@
 #include "mySetup.h"
 #include "webFunctions.h"
 #include "caps_ota.h"
+#include "nvs.h"
 #include "rest_client.h"
 #include "cJSON.h"
 #include <stdlib.h>
@@ -39,10 +40,18 @@ void updateOTA(void *args)
         {
             ESP_LOGI("BUG", "NO ESP UPDATE");
         }
-        ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", esp_get_free_heap_size());
+        uint32_t heapSize = esp_get_free_heap_size();
+        ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", heapSize);
+        if (heapSize < 8000)
+        {
+            error_message("PROGRESS", "You have a memory leak :(", "");
+            sendDataFromJSON_toDB(NO_OPEN_NVS);
+            esp_restart();
+        }
         if (fetchNumber("restart_flag") == 1)
         {
-            ESP_LOGI("PROGRESS", "RESTART because flag in IoT-platform is 1.");
+            // ESP_LOGI("PROGRESS", "RESTART because flag in IoT-platform is 1.");
+            error_message("PROGRESS", "RESTART because flag in IoT-platform is 1.", "");
             esp_restart();
         }
     }

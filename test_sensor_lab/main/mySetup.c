@@ -55,16 +55,16 @@ void initPins(void)
 	gpio_install_isr_service(0);
 
 	// init light barrier 1
-	gpio_pad_select_gpio(PIN_DETECT_1);
-	ESP_ERROR_CHECK(gpio_set_direction(PIN_DETECT_1, GPIO_MODE_INPUT));
-	ESP_ERROR_CHECK(gpio_pulldown_en(PIN_DETECT_1));
-	gpio_set_intr_type(PIN_DETECT_1, GPIO_INTR_ANYEDGE);
+	gpio_pad_select_gpio(OUTDOOR_BARRIER);
+	ESP_ERROR_CHECK(gpio_set_direction(OUTDOOR_BARRIER, GPIO_MODE_INPUT));
+	ESP_ERROR_CHECK(gpio_pulldown_en(OUTDOOR_BARRIER));
+	gpio_set_intr_type(OUTDOOR_BARRIER, GPIO_INTR_ANYEDGE);
 
 	// init light barrier 2
-	gpio_pad_select_gpio(PIN_DETECT_2);
-	ESP_ERROR_CHECK(gpio_set_direction(PIN_DETECT_2, GPIO_MODE_INPUT));
-	ESP_ERROR_CHECK(gpio_pulldown_en(PIN_DETECT_2));
-	gpio_set_intr_type(PIN_DETECT_2, GPIO_INTR_ANYEDGE);
+	gpio_pad_select_gpio(INDOOR_BARRIER);
+	ESP_ERROR_CHECK(gpio_set_direction(INDOOR_BARRIER, GPIO_MODE_INPUT));
+	ESP_ERROR_CHECK(gpio_pulldown_en(INDOOR_BARRIER));
+	gpio_set_intr_type(INDOOR_BARRIER, GPIO_INTR_ANYEDGE);
 
 	// int pin for entering test mode
 	gpio_pad_select_gpio(PIN_TEST_MODE);

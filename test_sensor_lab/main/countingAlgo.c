@@ -31,6 +31,9 @@ typedef struct Barrier_data
 volatile uint8_t count = 0;
 uint8_t prediction = 0;
 
+// the current state of the machine
+int8_t state_counter = 0;
+int16_t buffer_count_valid_elements = 0;
 // buffer the events form the queue
 Barrier_data buffer[SIZE_BUFFER];
 // points to the last element in the buffer and shows how full the buffer is
@@ -53,8 +56,8 @@ void testMode(void *args);
 void sendFromNVS(void *args);
 
 // all interrupt routines:
-void IRAM_ATTR isr_barrier1(void *args);
-void IRAM_ATTR isr_barrier2(void *args);
+void IRAM_ATTR isr_outter_barrier(void *args);
+void IRAM_ATTR isr_inner_barrier(void *args);
 void IRAM_ATTR isr_test_mode(void *args);
 
 // helper functions
@@ -62,11 +65,8 @@ void IRAM_ATTR isr_test_mode(void *args);
 void sendToDatabase(uint8_t delteItemsCount);
 #endif
 void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime);
-void checkTimes(Barrier_data firstEvent,
-				Barrier_data secondEvent,
-				Barrier_data thirdEvent,
-				Barrier_data fourthEvent,
-				uint8_t *delteItemsCount);
+// function that empties the buffer if events are too far away frome each other
+uint8_t checkBuffer(void);
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
@@ -93,9 +93,9 @@ void start_counting_algo(void)
 	}
 
 	// init isr
-	//(void*)PIN_DETECT_1
-	gpio_isr_handler_add(PIN_DETECT_1, isr_barrier1, NULL);
-	gpio_isr_handler_add(PIN_DETECT_2, isr_barrier2, NULL);
+	//(void*)OUTDOOR_BARRIER
+	gpio_isr_handler_add(OUTDOOR_BARRIER, isr_outter_barrier, NULL);
+	gpio_isr_handler_add(INDOOR_BARRIER, isr_inner_barrier, NULL);
 
 	// start task, for analyzing the
 	xTaskCreate(analyzer, "analizer", 4000, NULL, PRIO_ANALIZER, &xProgAnalizer);
@@ -144,101 +144,107 @@ void analyzer(void *args)
 	while (1)
 	{
 		/* Logic for analyzer:
-			search for the two pattern of going in and out.
-			going in: (id:1,state:1), (id:2,state:1), (id:1,state:0), (id:2,state:0)
-			going out: (id:2,state:1), (id:1,state:1), (id:2,state:0), (id:1,state:0)
-
-			if time, id or state is not correct -> delte first element in buffer
-			and start search again
+			Use a statemachine:
+			if state_counter == 4 -> count++
+			if state_counter == -4 -> count--
 		*/
 		// /*
 		if (xSemaphoreTake(xAccessBuffer, portMAX_DELAY) == pdTRUE)
 		{
 
-			if (fillSize >= THRESHOLD_ANALIZER)
+			// if (fillSize >= THRESHOLD_ANALIZER)
+			// if (checkBuffer())
+			if (fillSize)
 			{
 				Barrier_data firstEvent = buffer[head];
 				Barrier_data secondEvent = buffer[(head + 1) % SIZE_BUFFER];
 				Barrier_data thirdEvent = buffer[(head + 2) % SIZE_BUFFER];
 				Barrier_data fourthEvent = buffer[(head + 3) % SIZE_BUFFER];
 				ESP_LOGI("analyzer()", "in buffer:\n(%d,%d), (%d,%d), (%d,%d), (%d,%d)", firstEvent.id, firstEvent.state, secondEvent.id, secondEvent.state, thirdEvent.id, thirdEvent.state, fourthEvent.id, fourthEvent.state);
-				int8_t eventType = NO_EVENT;
-				// check order and if events lay near together...
-				// incorrecness can be to events are really far away than the rest
-				uint8_t delteItemsCount = 0;
 
-				// check now wheter there the time stamps
-				// changes maybe delteItemsCount...
-				checkTimes(firstEvent, secondEvent, thirdEvent, fourthEvent, &delteItemsCount);
-
-				if (delteItemsCount == 0)
+				// ESP_LOGI("analyzer()", "state BEFORE: %d", state_counter);
+				Barrier_data event = buffer[head];
+				if (state_counter % 2 == 0)
 				{
-					// ESP_LOGI("analyzer()", "head: %d, size: %d",head,fillSize);
-					ESP_LOGI("analyzer()", "time is correct.");
-					if ((firstEvent.state == 1 && secondEvent.state == 1 && thirdEvent.state == 0 && fourthEvent.state == 0))
+					if (event.id == OUTDOOR_BARRIER)
 					{
-						ESP_LOGI("analyzer()", "states are correct.");
-						// check for going-in event
-						if ((firstEvent.id == 1 && secondEvent.id == 2 && thirdEvent.id == 1 && fourthEvent.id == 2))
-						{
-							eventType = GOING_IN_EVENT;
-							ESP_LOGI("analyzer()", "wait for semaphore");
-							if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
-							{
-								if (count > 250)
-								{
-									ESP_LOGI("analyzer()", "Count is toooo high (>250)! Do not update count...");
-								}
-								else
-								{
-									ESP_LOGI("analyzer()", "detected going-in-event.");
-									count++;
-									writeToNVM("counter", count, -1, get_timestamp());
-								}
-								xSemaphoreGive(xAccessCount);
-								ESP_LOGI("analyzer()", "released semaphore");
-							}
-						}
-						// check for going-out event
-						else if (firstEvent.id == 2 && secondEvent.id == 1 && thirdEvent.id == 2 && fourthEvent.id == 1)
-						{
-							eventType = GOING_OUT_EVENT;
-							ESP_LOGI("analyzer()", "wait for semaphore");
-							if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
-							{
-								if (count <= 0)
-								{
-									ESP_LOGI("analyzer()", "Count is toooo low (< 0)! Do not update count...");
-								}
-								else
-								{
-									ESP_LOGI("analyzer()", "detected going-out-event.");
-									count--;
-									writeToNVM("counter", count, -1, get_timestamp());
-								}
-								xSemaphoreGive(xAccessCount);
-								ESP_LOGI("analyzer()", "released semaphore");
-							}
-						}
+						state_counter++;
+					}
+					else if (event.id == INDOOR_BARRIER)
+					{
+						state_counter--;
+					}
+					else
+					{
+						ESP_LOGE("analyzer()", "event ID unkown");
+					}
+				}
+				else
+				{
+					if (event.id == OUTDOOR_BARRIER)
+					{
+						state_counter--;
+					}
+					else if (event.id == INDOOR_BARRIER)
+					{
+						state_counter++;
+					}
+					else
+					{
+						ESP_LOGE("analyzer()", "event ID unkown");
 					}
 				}
 
-				// send here stuff to mqtt with for-loop
-				if (eventType == GOING_IN_EVENT || eventType == GOING_OUT_EVENT)
-				{
-					delteItemsCount = 4;
-					// ESP_LOGI("analyzer()", " delete all elments in buffer");
-					// head = (head+fillSize)%SIZE_BUFFER;
-					// fillSize = 0;
+				// ESP_LOGI("analyzer()", "state AFTER: %d", state_counter);
+				// check if outgoing event:
+				if (state_counter == 4)
+				{ // IN-GOING event
+					if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
+					{
+						if (count > 250)
+						{
+							ESP_LOGI("analyzer()", "Count is toooo high (>250)! Do not update count...");
+						}
+						else
+						{
+							ESP_LOGI("analyzer()", "detected going-in-event.");
+							count++;
+							writeToNVM("counter", count, -1, get_timestamp());
+							setCount_backup(count);
+						}
+						xSemaphoreGive(xAccessCount);
+					}
+					state_counter = 0;
 				}
-				else if (delteItemsCount == 0)
-				{
-					delteItemsCount = 1;
+				else if (state_counter == -4)
+				{ // OUT-GOING event
+					if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
+					{
+						if (count <= 0)
+						{
+							ESP_LOGI("analyzer()", "Count is toooo low (< 0)! Do not update count...");
+						}
+						else
+						{
+							ESP_LOGI("analyzer()", "detected going-out-event.");
+							count--;
+							writeToNVM("counter", count, -1, get_timestamp());
+							setCount_backup(count);
+						}
+						xSemaphoreGive(xAccessCount);
+					}
+					state_counter = 0;
 				}
+				else if (state_counter > 4 || state_counter < -4)
+				{
+					ESP_LOGE("analyzer()", "Invalid state!! state: %d -> reset state", state_counter);
+				}
+
+				// delte items form the buffer
+				const uint8_t delteItemsCount = 1; // always delte one item
 #ifdef SEND_EVERY_EVENT
 				sendToDatabase(delteItemsCount);
 #endif
-				// delte events form buffer:
 				head = (head + delteItemsCount) % SIZE_BUFFER;
 				fillSize -= delteItemsCount;
 			}
@@ -249,44 +255,49 @@ void analyzer(void *args)
 		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 }
-
 /**
- * helper function
- * of course the events should be all in one line after each other
- * but also not too far away from each other
+ * This funciton reset the buffer if the last event is TIME_TO_NEXT_EVENT
  *
- * returns which index of the four elements in the window should be deleted
  */
-void checkTimes(Barrier_data firstEvent,
-				Barrier_data secondEvent,
-				Barrier_data thirdEvent,
-				Barrier_data fourthEvent,
-				uint8_t *delteItemsCount)
+uint8_t checkBuffer(void)
 {
-	// detect  with for loop when we should delte
-
-	Barrier_data array_data[4] = {firstEvent, secondEvent, thirdEvent, fourthEvent};
-	for (uint8_t i = 1; i < 4; i++)
+	if (buffer_count_valid_elements == 0)
 	{
-		// sanity check
-		if (array_data[i - 1].time <= array_data[i].time)
+		if (fillSize >= THRESHOLD_ANALIZER)
 		{
-			// time is in mu-sec
-			if ((array_data[i].time - array_data[i - 1].time) > TIME_TO_NEXT_EVENT)
+			// check if all
+			// for (uint8_t i = head; i < (head + 4) % SIZE_BUFFER; i = (i + 1) % SIZE_BUFFER)
+			// {
+			// }
+			// check if buffer contains a sequence
+			uint8_t index_last_event = (head + fillSize - 1) % SIZE_BUFFER;
+			Barrier_data lastEvent = buffer[index_last_event];
+			Barrier_data firstEvent = buffer[head];
+			ESP_LOGI("analyzer()", "distance: %d\nindex last: %d, index head: %d", (int)(lastEvent.time - firstEvent.time), index_last_event, head);
+			if (lastEvent.time - firstEvent.time > TIME_TO_NEXT_EVENT)
 			{
-				ESP_LOGI("analyzer()", "event too far away: %ld and i: %d", (long)(array_data[i].time - array_data[i - 1].time), i);
-
-				// if the time between two events is too big delte until this event the events
-				*delteItemsCount = i;
+				head = index_last_event;
+				fillSize = 0;
+				state_counter = 0;
+				ESP_LOGI("analyzer()", "rest state and buffer");
+				return 0;
 			}
-		}
-		else
-		{
-			ESP_LOGI("analyzer()", "Sanity check faild i: %d", i);
-			*delteItemsCount = i;
+			else
+			{
+				// analyze the whole sequence!
+				buffer_count_valid_elements = 4;
+			}
+			// buffer_count_valid_elements--;
+
+			return buffer_count_valid_elements;
 		}
 	}
-	// the max we delte are 3 events, which seems ok...
+	else
+	{
+		buffer_count_valid_elements--;
+		return buffer_count_valid_elements;
+	}
+	return 0;
 }
 
 #ifdef SEND_EVERY_EVENT
@@ -319,7 +330,7 @@ void showRoomState(void *args)
 	{
 		// update every second the display
 		displayCountPreTime(prediction, count);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
+		vTaskDelay(100 / portTICK_PERIOD_MS);
 	}
 }
 /**
@@ -399,8 +410,8 @@ void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 			vTaskSuspend(xProgInBuffer);
 			vTaskSuspend(xSendToMQTT);
 			vTaskSuspend(xOTA);
-			gpio_isr_handler_remove(PIN_DETECT_1);
-			gpio_isr_handler_remove(PIN_DETECT_2);
+			gpio_isr_handler_remove(OUTDOOR_BARRIER);
+			gpio_isr_handler_remove(INDOOR_BARRIER);
 			// taskDISABLE_INTERRUPTS();
 		}
 		else
@@ -410,8 +421,8 @@ void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 			vTaskResume(xProgInBuffer);
 			vTaskResume(xSendToMQTT);
 			vTaskResume(xOTA);
-			gpio_isr_handler_add(PIN_DETECT_1, isr_barrier1, NULL);
-			gpio_isr_handler_add(PIN_DETECT_2, isr_barrier2, NULL);
+			gpio_isr_handler_add(OUTDOOR_BARRIER, isr_outter_barrier, NULL);
+			gpio_isr_handler_add(INDOOR_BARRIER, isr_inner_barrier, NULL);
 			ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1));
 			ssd1306_clearScreen();
 			displayCountPreTime(prediction, count);
@@ -424,12 +435,11 @@ void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 //-----------------------------ISR routines-------------------------------------
 //------------------------------------------------------------------------------
 
-// for detector PIN_DETECT_1
-void IRAM_ATTR isr_barrier1(void *args)
+// for detector OUTDOOR_BARRIER and INDOOR_BARRIER
+void IRAM_ATTR isr_inner_barrier(void *args)
 {
-	// ets_printf("isr_barrier1\n ");
-
-	uint8_t curState = gpio_get_level(PIN_DETECT_1);
+	// ets_printf("from isr  pin %d\n", pin);
+	uint8_t curState = gpio_get_level(INDOOR_BARRIER);
 	// //debounce code
 	if (lastState1 != curState)
 	{
@@ -440,7 +450,7 @@ void IRAM_ATTR isr_barrier1(void *args)
 		{
 			//  ets_printf("registered 1\n");
 			// AND last statechange long ago
-			Barrier_data data = {1, curState, get_timestamp()};
+			Barrier_data data = {INDOOR_BARRIER, curState, get_timestamp()};
 			// ets_printf("ISR1 pushed\n");
 			xQueueSendFromISR(queue, &data, (TickType_t)0);
 			lastState1 = curState;
@@ -448,12 +458,11 @@ void IRAM_ATTR isr_barrier1(void *args)
 		}
 	}
 }
-// just toggle state...
-void IRAM_ATTR isr_barrier2(void *args)
+void IRAM_ATTR isr_outter_barrier(void *args)
 {
 	// ets_printf("isr_barrier2\n ");
 
-	uint8_t curState = gpio_get_level(PIN_DETECT_2);
+	uint8_t curState = gpio_get_level(OUTDOOR_BARRIER);
 	// debounce code
 	if (lastState2 != curState)
 	{
@@ -464,7 +473,7 @@ void IRAM_ATTR isr_barrier2(void *args)
 		{
 			//  ets_printf("registered 2\n");
 			// AND last statechange long ago
-			Barrier_data data = {2, curState, get_timestamp()};
+			Barrier_data data = {OUTDOOR_BARRIER, curState, get_timestamp()};
 			// ets_printf("ISR2 pushed\n");
 			xQueueSendFromISR(queue, &data, (TickType_t)0);
 			lastState2 = curState;
