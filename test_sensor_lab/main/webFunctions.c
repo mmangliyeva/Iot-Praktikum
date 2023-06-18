@@ -5,6 +5,7 @@
 #include "cJSON.h"
 #include <stdlib.h>
 
+uint8_t fetchNumber(const char *key);
 void updateOTA(void *args);
 const char *fetch_url = "http://caps-platform.live:3000/api/users/34/config/device/fetch";
 const char *update_url = "http://caps-platform.live:3000/api/users/34/config/device/update";
@@ -39,6 +40,11 @@ void updateOTA(void *args)
             ESP_LOGI("BUG", "NO ESP UPDATE");
         }
         ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", esp_get_free_heap_size());
+        if (fetchNumber("restart_flag") == 1)
+        {
+            ESP_LOGI("PROGRESS", "RESTART because flag in IoT-platform is 1.");
+            esp_restart();
+        }
     }
 }
 
@@ -97,26 +103,31 @@ void systemReport(const char *msg)
 
 uint8_t getCount_backup(void)
 {
+    return fetchNumber("count");
+}
+
+uint8_t fetchNumber(const char *key)
+{
     rest_client_init(fetch_url, "type=global");
 
     esp_err_t err = rest_client_set_token(token);
     if (err != ESP_OK)
     {
-        ESP_LOGI("BUG", "Error getCount_backup(%s) could not set token.\n", esp_err_to_name(err));
+        ESP_LOGI("BUG", "Error fetchNumber(%s) could not set token.\n", esp_err_to_name(err));
     }
     // adds count to fetch request:
-    rest_client_fetch("count");
+    rest_client_fetch(key);
 
     err = rest_client_perform(NULL);
     if (err != ESP_OK)
     {
-        ESP_LOGI("BUG", "Error getCount_backup(%s) could not perform.\n", esp_err_to_name(err));
+        ESP_LOGI("BUG", "Error fetchNumber(%s) could not perform.\n", esp_err_to_name(err));
     }
 
     // char *raw_data_str = (char *)rest_client_get_fetched_value("", INT, false, &err);
     // printf("raw string: %s\n", raw_data_str);
 
-    char *raw_data = (char *)rest_client_get_fetched_value("count", STRING, true, &err);
+    char *raw_data = (char *)rest_client_get_fetched_value(key, STRING, true, &err);
     // printf("raw fetched data: %d\n", raw_data);
 
     // convert str to int with atoi

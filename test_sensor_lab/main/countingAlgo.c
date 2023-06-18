@@ -348,8 +348,12 @@ void sendFromNVS(void *args)
 			setCount_backup(0);
 			esp_restart();
 		}
-
-		sendDataFromJSON_toDB(NULL);
+		if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
+		{
+			// here semaphore too, to avoid simultanous acces to NVS
+			sendDataFromJSON_toDB(NO_OPEN_NVS);
+			xSemaphoreGive(xAccessCount);
+		}
 	}
 }
 

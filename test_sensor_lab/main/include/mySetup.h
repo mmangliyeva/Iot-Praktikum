@@ -40,7 +40,7 @@
 #define PIN_TEST_MODE 19    // pin entering test mode
 #define RED_INTERNAL_LED 16 // internal red led pin
 
-#define THRESHOLD_DEBOUCE 1000             // 15000 // for isr in mu_seconds
+#define THRESHOLD_DEBOUCE 15000            // home: 15000 // institue: 1000 // for isr in mu_seconds
 #define THRESHOLD_DEBOUCE_TEST_MODE 200000 // for isr in mu_seconds
 #define THRESHOLD_ANALIZER 4               // when process starts analizing
 
