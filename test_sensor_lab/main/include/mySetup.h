@@ -16,10 +16,14 @@
 #define WIFI_SSID "CAPS-Seminar-Room"
 #define WIFI_PASS "caps-schulz-seminar-room-wifi"
 #define SNTP_SERVER "ntp1.in.tum.de"
+#define THRESHOLD_DEBOUCE 1000 // home: 15000 // institue: 1000 // for isr in mu_seconds
+
 #else
 #define WIFI_SSID "olchinet"
 #define WIFI_PASS "hahaihropfer"
 #define SNTP_SERVER "pool.ntp.org"
+#define THRESHOLD_DEBOUCE 15000 // home: 15000 // institue: 1000 // for isr in mu_seconds
+
 #endif
 
 // IoT Platform information
@@ -40,7 +44,6 @@
 #define PIN_TEST_MODE 19    // pin entering test mode
 #define RED_INTERNAL_LED 16 // internal red led pin
 
-#define THRESHOLD_DEBOUCE 15000            // home: 15000 // institue: 1000 // for isr in mu_seconds
 #define THRESHOLD_DEBOUCE_TEST_MODE 200000 // for isr in mu_seconds
 #define THRESHOLD_ANALIZER 4               // when process starts analizing
 
@@ -51,8 +54,8 @@
 #define PRIO_SEND_NVS 3   // process prio
 #define PRIO_OTA_TASK 1   // process prio
 
-#define SIZE_QUEUE 15      // xTaskQueue size
-#define SIZE_BUFFER 10     // buffer size in analizer task
+#define SIZE_QUEUE 16      // xTaskQueue size
+#define SIZE_BUFFER 16     // buffer size in analizer task
 #define GOING_IN_EVENT 69  // flag if detected go-in-event
 #define GOING_OUT_EVENT 42 // flag if detected go-out-event
 #define NO_EVENT -1        // flag if detected no event
@@ -67,7 +70,7 @@
 #define NEEDED_SPACE_NVS 400
 
 // we assume that no one stands TIME_TO_NEXT_EVENT seconds in the door
-#define TIME_TO_NEXT_EVENT 20 // in sec how close a sequence of events should be
+#define TIME_TO_NEXT_EVENT 5 // in sec how close a sequence of events should be
 
 void my_setup(void);
 

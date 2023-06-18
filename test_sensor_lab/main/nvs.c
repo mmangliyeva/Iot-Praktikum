@@ -122,7 +122,7 @@ void sendDataFromJSON_toDB(uint8_t bool_openHandle)
         ESP_LOGE("NVS", "Error initNVS_json opening NVS handle %s!\n", esp_err_to_name(err));
     }
     // iterate through all keys
-    for (uint8_t i = 1; i <= nvs_index; i++)
+    for (uint8_t i = 0; i <= nvs_index; i++)
     {
         if (err != ESP_OK)
         {

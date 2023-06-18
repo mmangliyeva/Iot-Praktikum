@@ -66,13 +66,14 @@ void sendToDatabase(uint8_t delteItemsCount);
 #endif
 void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime);
 // function that empties the buffer if events are too far away frome each other
-uint8_t checkBuffer(void);
+int16_t checkBuffer(void);
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
 
 void start_counting_algo(void)
 {
+	buffer_count_valid_elements = 0;
 	// restore count from nvs:
 	count = getCount_backup();
 	displayCountPreTime(prediction, count);
@@ -154,15 +155,17 @@ void analyzer(void *args)
 
 			// if (fillSize >= THRESHOLD_ANALIZER)
 			// if (checkBuffer())
+			// we do not use the buffer....
 			if (fillSize)
 			{
-				Barrier_data firstEvent = buffer[head];
-				Barrier_data secondEvent = buffer[(head + 1) % SIZE_BUFFER];
-				Barrier_data thirdEvent = buffer[(head + 2) % SIZE_BUFFER];
-				Barrier_data fourthEvent = buffer[(head + 3) % SIZE_BUFFER];
-				ESP_LOGI("analyzer()", "in buffer:\n(%d,%d), (%d,%d), (%d,%d), (%d,%d)", firstEvent.id, firstEvent.state, secondEvent.id, secondEvent.state, thirdEvent.id, thirdEvent.state, fourthEvent.id, fourthEvent.state);
 
+				// Barrier_data firstEvent = buffer[head];
+				// Barrier_data secondEvent = buffer[(head + 1) % SIZE_BUFFER];
+				// Barrier_data thirdEvent = buffer[(head + 2) % SIZE_BUFFER];
+				// Barrier_data fourthEvent = buffer[(head + 3) % SIZE_BUFFER];
+				// ESP_LOGI("analyzer()", "in buffer:\n(%d,%d), (%d,%d), (%d,%d), (%d,%d)", firstEvent.id, firstEvent.state, secondEvent.id, secondEvent.state, thirdEvent.id, thirdEvent.state, fourthEvent.id, fourthEvent.state);
 				// ESP_LOGI("analyzer()", "state BEFORE: %d", state_counter);
+
 				Barrier_data event = buffer[head];
 				if (state_counter % 2 == 0)
 				{
@@ -259,38 +262,27 @@ void analyzer(void *args)
  * This funciton reset the buffer if the last event is TIME_TO_NEXT_EVENT
  *
  */
-uint8_t checkBuffer(void)
+int16_t checkBuffer(void)
 {
 	if (buffer_count_valid_elements == 0)
 	{
 		if (fillSize >= THRESHOLD_ANALIZER)
 		{
-			// check if all
-			// for (uint8_t i = head; i < (head + 4) % SIZE_BUFFER; i = (i + 1) % SIZE_BUFFER)
-			// {
-			// }
-			// check if buffer contains a sequence
-			uint8_t index_last_event = (head + fillSize - 1) % SIZE_BUFFER;
-			Barrier_data lastEvent = buffer[index_last_event];
-			Barrier_data firstEvent = buffer[head];
-			ESP_LOGI("analyzer()", "distance: %d\nindex last: %d, index head: %d", (int)(lastEvent.time - firstEvent.time), index_last_event, head);
-			if (lastEvent.time - firstEvent.time > TIME_TO_NEXT_EVENT)
-			{
-				head = index_last_event;
-				fillSize = 0;
-				state_counter = 0;
-				ESP_LOGI("analyzer()", "rest state and buffer");
-				return 0;
-			}
-			else
-			{
-				// analyze the whole sequence!
-				buffer_count_valid_elements = 4;
-			}
-			// buffer_count_valid_elements--;
+
+			buffer_count_valid_elements = 4;
 
 			return buffer_count_valid_elements;
 		}
+		else if (fillSize > 0)
+		{
+			Barrier_data lastEvent = buffer[((head + fillSize - 1) % SIZE_BUFFER)];
+			if (get_timestamp() - lastEvent.time > TIME_TO_NEXT_EVENT)
+			{
+				// after TIME_TO_NEXT_EVENT sec empty the buffer...
+				return fillSize;
+			}
+		}
+		// return fillSize;
 	}
 	else
 	{
@@ -330,7 +322,7 @@ void showRoomState(void *args)
 	{
 		// update every second the display
 		displayCountPreTime(prediction, count);
-		vTaskDelay(100 / portTICK_PERIOD_MS);
+		vTaskDelay(1000 / portTICK_PERIOD_MS);
 	}
 }
 /**
@@ -345,10 +337,13 @@ void sendFromNVS(void *args)
 	while (1)
 	{
 		vTaskDelay((1000 * SEND_DELAY_FROM_NVS) / portTICK_PERIOD_MS);
+
 		if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
 		{
 			setCount_backup(count);
 			writeToNVM("counter", count, -1, get_timestamp());
+			sendDataFromJSON_toDB(NO_OPEN_NVS);
+
 			xSemaphoreGive(xAccessCount);
 		}
 		// check if we are having the reset hours -> reset counter
@@ -358,12 +353,6 @@ void sendFromNVS(void *args)
 		{
 			setCount_backup(0);
 			esp_restart();
-		}
-		if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
-		{
-			// here semaphore too, to avoid simultanous acces to NVS
-			sendDataFromJSON_toDB(NO_OPEN_NVS);
-			xSemaphoreGive(xAccessCount);
 		}
 	}
 }

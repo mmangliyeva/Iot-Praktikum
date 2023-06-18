@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 // use this header to tune often parameters
-// #define INSTITUTE
+#define INSTITUTE
 #define WITH_DISPLAY
 // here it is possible to activate or deactivate that
 //  the esp32 sends every event to the elastic search database
