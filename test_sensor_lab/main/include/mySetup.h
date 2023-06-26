@@ -69,9 +69,6 @@
 #define RESET_COUNT_MIN 15   // at what hour we reset the count
 #define NEEDED_SPACE_NVS 400
 
-// we assume that no one stands TIME_TO_NEXT_EVENT seconds in the door
-#define TIME_TO_NEXT_EVENT 5 // in sec how close a sequence of events should be
-
 void my_setup(void);
 
 void displayCountPreTime(uint8_t prediction, uint8_t curCount);

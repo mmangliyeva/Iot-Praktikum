@@ -31,6 +31,7 @@ typedef struct Barrier_data
 volatile uint8_t count = 0;
 uint8_t prediction = 0;
 
+uint8_t reseted_buffer = 0;
 // the current state of the machine
 int8_t state_counter = 0;
 int16_t buffer_count_valid_elements = 0;
@@ -76,6 +77,7 @@ void start_counting_algo(void)
 	buffer_count_valid_elements = 0;
 	// restore count from nvs:
 	count = getCount_backup();
+	prediction = getPrediction();
 	displayCountPreTime(prediction, count);
 	ESP_LOGI("PROGRESS", "Restore count: %d", count);
 	// set up semaphore for accessing the shared variable count...
@@ -99,15 +101,15 @@ void start_counting_algo(void)
 	gpio_isr_handler_add(INDOOR_BARRIER, isr_inner_barrier, NULL);
 
 	// start task, for analyzing the
-	xTaskCreate(analyzer, "analizer", 4000, NULL, PRIO_ANALIZER, &xProgAnalizer);
-	xTaskCreate(showRoomState, "show count", 2048, NULL, PRIO_SHOW_COUNT, &xProgShowCount);
+	xTaskCreate(analyzer, "analizer", 6000, NULL, PRIO_ANALIZER, &xProgAnalizer);
+	xTaskCreate(showRoomState, "show count", 3048, NULL, PRIO_SHOW_COUNT, &xProgShowCount);
 	xTaskCreate(pushInBuffer, "push in Buffer", 2048, NULL, PRIO_IN_BUFFER, &xProgInBuffer);
 	xTaskCreate(sendFromNVS, "send nvs to mqtt", 4000, NULL, PRIO_SEND_NVS, &xSendToMQTT);
 
 	// test mode code:
 	xPressedButton = xSemaphoreCreateBinary();
 	gpio_isr_handler_add(PIN_TEST_MODE, isr_test_mode, NULL);
-	xTaskCreate(testMode, "test mode", 2048, NULL, PRIO_TEST_MODE, NULL);
+	xTaskCreate(testMode, "test mode", 4048, NULL, PRIO_TEST_MODE, NULL);
 }
 /**
  * TASK
@@ -154,9 +156,9 @@ void analyzer(void *args)
 		{
 
 			// if (fillSize >= THRESHOLD_ANALIZER)
-			// if (checkBuffer())
 			// we do not use the buffer....
-			if (fillSize)
+			// if (fillSize)
+			if (checkBuffer())
 			{
 
 				// Barrier_data firstEvent = buffer[head];
@@ -164,8 +166,8 @@ void analyzer(void *args)
 				// Barrier_data thirdEvent = buffer[(head + 2) % SIZE_BUFFER];
 				// Barrier_data fourthEvent = buffer[(head + 3) % SIZE_BUFFER];
 				// ESP_LOGI("analyzer()", "in buffer:\n(%d,%d), (%d,%d), (%d,%d), (%d,%d)", firstEvent.id, firstEvent.state, secondEvent.id, secondEvent.state, thirdEvent.id, thirdEvent.state, fourthEvent.id, fourthEvent.state);
-				// ESP_LOGI("analyzer()", "state BEFORE: %d", state_counter);
 
+				ESP_LOGI("analyzer()", "state BEFORE: %d", state_counter);
 				Barrier_data event = buffer[head];
 				if (state_counter % 2 == 0)
 				{
@@ -198,7 +200,7 @@ void analyzer(void *args)
 					}
 				}
 
-				// ESP_LOGI("analyzer()", "state AFTER: %d", state_counter);
+				ESP_LOGI("analyzer()", "state AFTER: %d", state_counter);
 				// check if outgoing event:
 				if (state_counter == 4)
 				{ // IN-GOING event
@@ -259,16 +261,17 @@ void analyzer(void *args)
 	}
 }
 /**
- * This funciton reset the buffer if the last event is TIME_TO_NEXT_EVENT
+ * This funciton reset the buffer if the last event is TIME_TO_EMPTY_BUFFER
  *
  */
 int16_t checkBuffer(void)
 {
+	// ESP_LOGI("analyzer()", "checkbuffer: fillsize: %d, buffer_cou... %d", fillSize, buffer_count_valid_elements);
 	if (buffer_count_valid_elements == 0)
 	{
 		if (fillSize >= THRESHOLD_ANALIZER)
 		{
-
+			// analize the next 4 emelemnt
 			buffer_count_valid_elements = 4;
 
 			return buffer_count_valid_elements;
@@ -276,13 +279,23 @@ int16_t checkBuffer(void)
 		else if (fillSize > 0)
 		{
 			Barrier_data lastEvent = buffer[((head + fillSize - 1) % SIZE_BUFFER)];
-			if (get_timestamp() - lastEvent.time > TIME_TO_NEXT_EVENT)
+			if (get_timestamp() - lastEvent.time > TIME_TO_EMPTY_BUFFER)
 			{
-				// after TIME_TO_NEXT_EVENT sec empty the buffer...
+				// after TIME_TO_EMPTY_BUFFER sec empty the buffer...
+				ESP_LOGI("analyzer()", "fillsize %d", fillSize);
+
+				reseted_buffer = 1;
 				return fillSize;
 			}
 		}
-		// return fillSize;
+		else if (reseted_buffer)
+		{
+			// buffer is empty and there was no new event this TIME_TO_EMPTY_BUFFER sec
+			//  -> reset state_machine
+			reseted_buffer = 0;
+			state_counter = 0;
+			ESP_LOGI("analyzer()", "reset state fillsize %d", fillSize);
+		}
 	}
 	else
 	{
@@ -322,7 +335,7 @@ void showRoomState(void *args)
 	{
 		// update every second the display
 		displayCountPreTime(prediction, count);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
+		vTaskDelay(100 / portTICK_PERIOD_MS);
 	}
 }
 /**
@@ -340,9 +353,29 @@ void sendFromNVS(void *args)
 
 		if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
 		{
+			// uint32_t heapSize_begin = esp_get_free_heap_size();
+
 			setCount_backup(count);
+			// uint32_t heapSize_end = esp_get_free_heap_size();
+			// if (heapSize_begin - heapSize_end != 0)
+			// {
+			// 	ESP_LOGE("PROGRESS", "Memory leaks  %lu  in backup count.", (long)(heapSize_begin - heapSize_end));
+			// }
+			// heapSize_begin = esp_get_free_heap_size();
 			writeToNVM("counter", count, -1, get_timestamp());
+			// heapSize_end = esp_get_free_heap_size();
+			// if (heapSize_begin - heapSize_end != 0)
+			// {
+			// 	ESP_LOGE("PROGRESS", "Memory leaks  %lu  in writeToNVM.", (long)(heapSize_begin - heapSize_end));
+			// }
+
+			// heapSize_begin = esp_get_free_heap_size();
 			sendDataFromJSON_toDB(NO_OPEN_NVS);
+			// heapSize_end = esp_get_free_heap_size();
+			// if (heapSize_begin - heapSize_end != 0)
+			// {
+			// 	ESP_LOGE("PROGRESS", "Memory leaks  %lu  in sendDataFromJSON_toDB.", (long)(heapSize_begin - heapSize_end));
+			// }
 
 			xSemaphoreGive(xAccessCount);
 		}
@@ -353,6 +386,11 @@ void sendFromNVS(void *args)
 		{
 			setCount_backup(0);
 			esp_restart();
+		}
+		// update every 15 min the prediction
+		if (now_tm->tm_min == 0 || now_tm->tm_min == 15 || now_tm->tm_min == 30 || now_tm->tm_min == 45)
+		{
+			prediction = getPrediction();
 		}
 	}
 }

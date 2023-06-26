@@ -15,8 +15,9 @@ void app_main(void)
     esp_log_level_set("PROGRESS", ESP_LOG_INFO);
     esp_log_level_set("NVS", ESP_LOG_INFO);
     // esp_log_level_set("pushInBuffer()", ESP_LOG_INFO);
-    esp_log_level_set("analyzer()", ESP_LOG_INFO);
-    esp_log_level_set("REST_CLIENT", ESP_LOG_INFO);
+    // esp_log_level_set("analyzer()", ESP_LOG_INFO);
+    // esp_log_level_set("platform_api", ESP_LOG_INFO);
+    // esp_log_level_set("REST_CLIENT", ESP_LOG_INFO);
 
     my_setup();
     // counting algo contains a pause-mode

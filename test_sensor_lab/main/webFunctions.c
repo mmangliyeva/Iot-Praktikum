@@ -2,7 +2,7 @@
 #include "webFunctions.h"
 #include "caps_ota.h"
 #include "nvs.h"
-#include "rest_client.h"
+#include "platform_api.h"
 #include "cJSON.h"
 #include <stdlib.h>
 
@@ -20,7 +20,7 @@ void init_web_functions(void)
     // printf("updated count: %d\n", getCount_backup());
     // systemReport(msg);
 
-    xTaskCreate(updateOTA, "update OTA", 4000, NULL, PRIO_OTA_TASK, &xOTA);
+    xTaskCreate(updateOTA, "update OTA", 6000, NULL, PRIO_OTA_TASK, &xOTA);
 }
 /**
  * TASK
@@ -40,6 +40,7 @@ void updateOTA(void *args)
         {
             ESP_LOGI("BUG", "NO ESP UPDATE");
         }
+
         uint32_t heapSize = esp_get_free_heap_size();
         ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", heapSize);
         if (heapSize < 8000)
@@ -48,11 +49,19 @@ void updateOTA(void *args)
             sendDataFromJSON_toDB(NO_OPEN_NVS);
             esp_restart();
         }
+
+        uint32_t heapSize_begin = esp_get_free_heap_size();
+
         if (fetchNumber("restart_flag") == 1)
         {
             // ESP_LOGI("PROGRESS", "RESTART because flag in IoT-platform is 1.");
             error_message("PROGRESS", "RESTART because flag in IoT-platform is 1.", "");
             esp_restart();
+        }
+        uint32_t heapSize_end = esp_get_free_heap_size();
+        if (heapSize_begin - heapSize_end != 0)
+        {
+            ESP_LOGE("PROGRESS", "Memory leaks %lu in fetch restart flag.", (long)(heapSize_begin - heapSize_end));
         }
     }
 }
@@ -64,49 +73,42 @@ void systemReport(const char *msg)
 {
     const char *sys_rep_key = "sys_report";
 
-    // get current report:
-    rest_client_init(fetch_url, "type=global");
-    esp_err_t err = rest_client_set_token(token);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("BUG", "Error getCount_backup(%s) could not set token.\n", esp_err_to_name(err));
-    }
-    rest_client_fetch(sys_rep_key);
-
-    err = rest_client_perform(NULL);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("BUG", "Error getCount_backup(%s) could not perform.\n", esp_err_to_name(err));
-    }
-
-    char *raw_data_str = (char *)rest_client_get_fetched_value("", INT, false, &err);
+    platform_api_init(fetch_url);
+    platform_api_set_token(token);
+    platform_api_set_query_string("type", "global");
+    platform_api_set_query_string("keys", sys_rep_key);
+    platform_api_perform_request();
+    char *raw_data_str;
+    platform_api_retrieve_val(sys_rep_key, STRING, true, NULL, (void **)&raw_data_str);
     // printf("raw string: %s\n", raw_data_str);
-    cJSON *sys_report = cJSON_Parse(raw_data_str);
+    platform_api_cleanup();
+
+    // cJSON *sys_report = cJSON_Parse(raw_data_str);
+    // printf("sys_report: %s\n", cJSON_Print(sys_report));
     // we save the array as a string
-    cJSON *array = cJSON_Parse(cJSON_GetObjectItem(sys_report, sys_rep_key)->valuestring);
+    // cJSON *array = cJSON_Parse(cJSON_GetObjectItem(sys_report, sys_rep_key)->valuestring);
+
+    cJSON *array = cJSON_Parse(raw_data_str);
     cJSON_AddItemToArray(array, cJSON_CreateString(msg));
 
-    char *arrayAsStr = cJSON_PrintUnformatted(array);
+    cJSON *tmp = cJSON_Parse(cJSON_PrintUnformatted(array));
+    char *arrayAsStr = cJSON_PrintUnformatted(tmp);
     // printf("raw system report: %s\n", arrayAsStr);
 
     // send array back to system report
-    rest_client_init(update_url, "type=global");
-    err = rest_client_set_token(token);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("BUG", "Error getCount_backup(%s) could not set token.\n", esp_err_to_name(err));
-    }
 
-    rest_client_set_key(sys_rep_key, arrayAsStr);
-    err = rest_client_perform(NULL);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("BUG", "Error setCount_backup(%s) could not backup count.\n", esp_err_to_name(err));
-    }
+    platform_api_init(update_url);
+    platform_api_set_token(token);
+    platform_api_set_query_string("type", "global");
+
+    platform_api_set_query_string(sys_rep_key, arrayAsStr);
+    platform_api_perform_request();
+    platform_api_cleanup();
+
     free(raw_data_str);
     free(arrayAsStr);
 
-    cJSON_Delete(sys_report);
+    cJSON_Delete(tmp);
     cJSON_Delete(array);
 }
 
@@ -115,54 +117,48 @@ uint8_t getCount_backup(void)
     return fetchNumber("count");
 }
 
+uint8_t getPrediction(void)
+{
+    return fetchNumber("prediction");
+}
+
 uint8_t fetchNumber(const char *key)
 {
-    rest_client_init(fetch_url, "type=global");
-
-    esp_err_t err = rest_client_set_token(token);
+    platform_api_init(fetch_url);
+    platform_api_set_token(token);
+    platform_api_set_query_string("type", "global");
+    platform_api_set_query_string("keys", key);
+    platform_api_perform_request();
+    char *raw_data;
+    esp_err_t err = platform_api_retrieve_val(key, STRING, true, NULL, (void **)&raw_data);
     if (err != ESP_OK)
     {
-        ESP_LOGI("BUG", "Error fetchNumber(%s) could not set token.\n", esp_err_to_name(err));
+        error_message("platform_api", "errors while fetching ", key);
     }
-    // adds count to fetch request:
-    rest_client_fetch(key);
-
-    err = rest_client_perform(NULL);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("BUG", "Error fetchNumber(%s) could not perform.\n", esp_err_to_name(err));
-    }
-
-    // char *raw_data_str = (char *)rest_client_get_fetched_value("", INT, false, &err);
-    // printf("raw string: %s\n", raw_data_str);
-
-    char *raw_data = (char *)rest_client_get_fetched_value(key, STRING, true, &err);
-    // printf("raw fetched data: %d\n", raw_data);
-
-    // convert str to int with atoi
+    // error_message("platform_api", "no errors...", key);
     uint8_t count = atoi(raw_data);
-    free(raw_data);
+    platform_api_cleanup();
+    if (err == ESP_OK)
+    {
+        free(raw_data);
+    }
+    // ESP_LOGI("PROGRESS", "Received (%d) for key: %s.\n", count, key);
 
     return count;
 }
 
 void setCount_backup(uint8_t count)
 {
-    rest_client_init(update_url, "type=global");
-    esp_err_t err = rest_client_set_token(token);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("BUG", "Error getCount_backup(%s) could not set token.\n", esp_err_to_name(err));
-    }
+    platform_api_init(update_url);
+    platform_api_set_token(token);
+    platform_api_set_query_string("type", "global");
 
-    char *tmp = malloc(sizeof(char) * 5);
-    sprintf(tmp, "%d", count);
+    char *count_str = malloc(sizeof(char) * 5);
+    sprintf(count_str, "%d", count);
 
-    rest_client_set_key("count", tmp);
-    err = rest_client_perform(NULL);
-    free(tmp);
-    if (err != ESP_OK)
-    {
-        ESP_LOGI("BUG", "Error setCount_backup(%s) could not backup count.\n", esp_err_to_name(err));
-    }
+    platform_api_set_query_string("count", count_str);
+    platform_api_perform_request();
+    platform_api_cleanup();
+
+    free(count_str);
 }

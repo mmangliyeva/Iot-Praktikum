@@ -12,7 +12,9 @@
 #define SEND_DATA
 
 // delay the sending of current count of people
-#define SEND_DELAY_FROM_NVS 300 // seconds
-#define UPDATE_OTA 120          // seconds
+#define SEND_DELAY_FROM_NVS 300 // seconds 300
+#define UPDATE_OTA 150          // seconds 150
+// after  TIME_TO_EMPTY_BUFFER sec empty the buffer...
+#define TIME_TO_EMPTY_BUFFER 300
 
 #endif

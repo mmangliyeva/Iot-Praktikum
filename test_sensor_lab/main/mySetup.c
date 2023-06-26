@@ -83,7 +83,7 @@ void error_message(const char *TAG, char *msg, const char *details)
 {
 	char *date = getDate();
 	asprintf(&tmp_message, "%s_%s_%s", date, msg, details);
-	ESP_LOGI(TAG, "%s", tmp_message);
+	ESP_LOGE(TAG, "%s", tmp_message);
 	replacedSpaces(tmp_message);
 	// printf("send message: %s", tmp_message);
 	if (flag_internet_active)
@@ -118,7 +118,6 @@ void displayCountPreTime(uint8_t prediction, uint8_t curCount)
 	char count_str[BUFF_STRING_COUNT];
 	char prediction_str[BUFF_STRING_COUNT];
 	char time_str[10];
-	char *tmp_g8 = "G8";
 	time_t now;
 	struct tm *now_tm;
 	sprintf(count_str, "%02d", curCount);
@@ -128,13 +127,12 @@ void displayCountPreTime(uint8_t prediction, uint8_t curCount)
 	now_tm = localtime(&now);
 	sprintf(time_str, "%02d:%02d", now_tm->tm_hour, now_tm->tm_min);
 
-	ssd1306_printFixedN(0, 0, tmp_g8, STYLE_NORMAL, 1);
+	ssd1306_printFixedN(0, 0, "G8", STYLE_NORMAL, 1);
 	ssd1306_printFixedN(64, 0, time_str, STYLE_NORMAL, 1);
 	ssd1306_printFixedN(0, Y_POS_COUNT, count_str, STYLE_BOLD, 2);
 	ssd1306_printFixedN(96, Y_POS_COUNT, prediction_str, STYLE_BOLD, 1);
-	// free(count_str);
-	// free(prediction_str);
-	// free(prediction_str);
+
+	// free(now_tm);
 }
 
 #endif
