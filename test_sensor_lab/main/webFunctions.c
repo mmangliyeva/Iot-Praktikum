@@ -6,30 +6,30 @@
 #include "cJSON.h"
 #include <stdlib.h>
 
-uint8_t fetchNumber(const char *key);
+uint8_t fetchNumber(const char *key); // more general way to fetch something from IoT-platform
 void updateOTA(void *args);
+
 const char *fetch_url = "http://caps-platform.live:3000/api/users/34/config/device/fetch";
 const char *update_url = "http://caps-platform.live:3000/api/users/34/config/device/update";
+// I know no safe implementation...
 const char *token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQ1MTc5MjMsImlzcyI6ImlvdHBsYXRmb3JtIiwic3ViIjoiMzQvODIifQ.Sx1yIYFaF8hRFcRXFooq4jB3VG4dePK_KcGoRm5lAtUgSEHyH8TSWRGNhzInor7qY63ZF0eum7d_eFrLbuRCftyQ8Y6OSij7C0Ck8ZfZKwR-AnxKVXtbAscDIEjucP22CxFa1UQyqpoOIh21EqfqM-K_HtMG_rZvTguZO6cG5BmuDdC1IPrV8LDFnhA_HGN98HDLZw3Ss6A4oFbSFY7zjDhr5DSUEht-izLUNv3lEEJhk9XkyJsVs4XzHyMsDovG623PZTzJZTwrnk2A0eUGAG-QcgSTkeaB8URpiCWszHaq_stixaUZwHZNSKpkNOoKEQcqVJtuiJ-q5hLdy2SwxzC69N6HK2hWnKCpB5y9STh4Qb4rQTZwgIxszyW-JJ0TNKZgbOdMSVMbAHlHhd17S8U-u05voYArYh08hv5kk1VVnn6_kmAqNRqxrkH4oEX_IUhv-YyXopovZQvN2j0OIjIGXGtTVoH2YK43R81k7otupf-F9SnQnJEni4SAA8Ewm0Q-eXNH7OwZijhfJtXveDubt-RdgSvihC7MqDnj3PO026b2_r07YsSHIC2r3Pfupjp16aGzfxIK8oCpcYkifWu7BebfrNWAYZo79b6I70r5wzYRiTMnZbYt_-_vN_rPsFH8hLrg7y0MTRQ9S1KOIfjlWQrzW-NPz_6vmdaZ8ok";
 
 void init_web_functions(void)
 {
-    // printf("count: %d\n", getCount_backup());
-    // printf("set count to 69\n");
-    // setCount_backup(69);
-    // printf("updated count: %d\n", getCount_backup());
-    // systemReport(msg);
-
     xTaskCreate(updateOTA, "update OTA", 6000, NULL, PRIO_OTA_TASK, &xOTA);
 }
 /**
  * TASK
+ * can update via OTA
+ * checks for memory leaks
+ * can resart device with restart_flag from the IoT-platform
  */
 void updateOTA(void *args)
 {
     while (1)
     {
         vTaskDelay((UPDATE_OTA * 1000) / portTICK_PERIOD_MS);
+        // updates via OTA
         if (ota_update() == ESP_OK)
         {
             ESP_LOGI("PROGRESS", "UPDATES ESP");
@@ -40,7 +40,7 @@ void updateOTA(void *args)
         {
             ESP_LOGI("BUG", "NO ESP UPDATE");
         }
-
+        // check for memory leaks
         uint32_t heapSize = esp_get_free_heap_size();
         ESP_LOGI("PROGRESS", "[APP] Free memory: %d bytes", heapSize);
         if (heapSize < 8000)
@@ -51,7 +51,7 @@ void updateOTA(void *args)
         }
 
         uint32_t heapSize_begin = esp_get_free_heap_size();
-
+        // restart the device over the air
         if (fetchNumber("restart_flag") == 1)
         {
             // ESP_LOGI("PROGRESS", "RESTART because flag in IoT-platform is 1.");
@@ -68,6 +68,8 @@ void updateOTA(void *args)
 
 /**
  * the key "sys_report" contains an array as string with system reports
+ * in the IoT-platform.
+ * The array itself is a string, so we do quite messy parsing
  */
 void systemReport(const char *msg)
 {
@@ -82,21 +84,14 @@ void systemReport(const char *msg)
     platform_api_retrieve_val(sys_rep_key, STRING, true, NULL, (void **)&raw_data_str);
     // printf("raw string: %s\n", raw_data_str);
     platform_api_cleanup();
-
-    // cJSON *sys_report = cJSON_Parse(raw_data_str);
-    // printf("sys_report: %s\n", cJSON_Print(sys_report));
-    // we save the array as a string
-    // cJSON *array = cJSON_Parse(cJSON_GetObjectItem(sys_report, sys_rep_key)->valuestring);
-
     cJSON *array = cJSON_Parse(raw_data_str);
     cJSON_AddItemToArray(array, cJSON_CreateString(msg));
-
+    // perfrom messy parsing because arrays are not supported thats why we safe a string
     cJSON *tmp = cJSON_Parse(cJSON_PrintUnformatted(array));
     char *arrayAsStr = cJSON_PrintUnformatted(tmp);
     // printf("raw system report: %s\n", arrayAsStr);
 
     // send array back to system report
-
     platform_api_init(update_url);
     platform_api_set_token(token);
     platform_api_set_query_string("type", "global");
@@ -136,13 +131,13 @@ uint8_t fetchNumber(const char *key)
         error_message("platform_api", "errors while fetching ", key);
     }
     // error_message("platform_api", "no errors...", key);
+    // somehow the key is a string -> convert to integer
     uint8_t count = atoi(raw_data);
     platform_api_cleanup();
     if (err == ESP_OK)
     {
         free(raw_data);
     }
-    // ESP_LOGI("PROGRESS", "Received (%d) for key: %s.\n", count, key);
 
     return count;
 }

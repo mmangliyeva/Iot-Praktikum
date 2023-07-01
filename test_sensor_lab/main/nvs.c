@@ -6,26 +6,29 @@
 #include "mqtt.h"
 
 // constants for nvs.c
-#define NUM_KEY_WORDS 7
+#define NUM_KEY_WORDS 7 // number of keys in the nvs
 
 nvs_handle_t my_nvs_handle;
 
 // every key can have only 4000 character == 4000 bytes. NO BULLSHIT sometimes just 1500
 // therefore put an 0 to the define NAME_SENSOR_ARRAY
 // and open a new key in the nvs
+const uint16_t sizeBuffer = 1500; // for moving data from or to the nvs
 uint8_t nvs_index;
 
-char key[15]; // this constains "sensors_key"+(string)nvs_index as string...
-const char *nvs_storage_name = "storage";
-const char *sensors_key = "sensors"; // this is the major key for the jasonfile
+// this constains "sensors_key"+(string)nvs_index as string...
+// so key contains the current active key in the nvs_storage
+char key[15];
 
 // one keyWords saves sizeBuffer many characters
 const char *keyWords[NUM_KEY_WORDS] = {"s0", "s1", "s2", "s3", "s4", "s5", "s6"};
 
+// keys for the json
+const char *nvs_storage_name = "storage";
+const char *sensors_key = "sensors"; // this is the major key for the jasonfile
 const char *values_key = "values";
 const char *name_key = "name";
-const uint16_t sizeBuffer = 1500; // for moving data from or to the nvs
-
+// helper function for writeToNVS()
 void addEventToStorage(char *json_str, const char *sensorName,
                        uint8_t peopleCount, int8_t state, time_t time);
 
@@ -67,7 +70,7 @@ void initNVS_json(uint8_t bool_openHandle)
     cJSON *sensors_array = cJSON_AddArrayToObject(root, sensors_key);
     // set sensor 'counter'
 
-    // create the three sensors
+    // create the three or one sensor/s
     uint8_t lengthArray;
 
 #ifdef SEND_EVERY_EVENT
@@ -90,7 +93,6 @@ void initNVS_json(uint8_t bool_openHandle)
 
     // parse to string
     char *my_json_string = cJSON_Print(root);
-    // here combine storage name with the index due to restriciton
     // ESP_LOGI("APP","initialized string: %s",my_json_string);
     // ESP_LOGI("APP","test getkeyForNVS: %s",keyWords[nvs_index]);
 
@@ -100,7 +102,6 @@ void initNVS_json(uint8_t bool_openHandle)
     {
         ESP_LOGE("NVS", "Error initNVS_json saving NVS handle %s!\n", esp_err_to_name(err));
     }
-    // cJSON_Delete(root);
     nvs_commit(my_nvs_handle);
     free(my_json_string);
     cJSON_Delete(root);
@@ -109,7 +110,12 @@ void initNVS_json(uint8_t bool_openHandle)
         nvs_close(my_nvs_handle);
     }
 }
-
+/**
+ * This function empties all keys in the nvs and send the data
+ * to elastic search
+ *
+ * it deltes the content of the keys in the nvs
+ */
 void sendDataFromJSON_toDB(uint8_t bool_openHandle)
 {
 
@@ -132,6 +138,7 @@ void sendDataFromJSON_toDB(uint8_t bool_openHandle)
         }
 
         size_t size = 0;
+        // get size
         err = nvs_get_str(my_nvs_handle, keyWords[i], NULL, &size);
         char *json_str = malloc(size);
 
@@ -139,6 +146,7 @@ void sendDataFromJSON_toDB(uint8_t bool_openHandle)
         err = nvs_get_str(my_nvs_handle, keyWords[i], json_str, &size);
         if (err == ESP_OK)
         {
+            // send with MQTT to the elastic search database
             sendToMQTT(json_str, QOS_SAFE);
             // ESP_LOGI("NVS", "sent data to MQTT\n");
             err = nvs_erase_key(my_nvs_handle, keyWords[i]);
@@ -167,12 +175,11 @@ void sendDataFromJSON_toDB(uint8_t bool_openHandle)
     {
         nvs_close(my_nvs_handle);
     }
-    // empty nvs totally
 }
 
 /**
  * this function writes an event to the NVM
- * state might be -1 which means, no state...
+ * state might be -1 which means, only save the count
  */
 void writeToNVM(const char *sensorName, uint8_t peopleCount, int8_t state, time_t time)
 {
@@ -185,7 +192,6 @@ void writeToNVM(const char *sensorName, uint8_t peopleCount, int8_t state, time_
     else
     {
         // get string value out of NVS
-        // char json_str[sizeBuffer];
         size_t size = 0;
         err = nvs_get_str(my_nvs_handle, keyWords[nvs_index], NULL, &size);
         if (err != ESP_OK)
@@ -229,8 +235,6 @@ void writeToNVM(const char *sensorName, uint8_t peopleCount, int8_t state, time_
     }
 
     nvs_close(my_nvs_handle);
-
-    // test_access();
 }
 
 /**
@@ -261,12 +265,13 @@ void addEventToStorage(char *json_str, const char *sensorName,
     }
     cJSON *values_array = cJSON_GetObjectItem(sensor, values_key);
 
+    // create new json-object
+
     // we dont have 64 bit so do some shitty trick...
     char *newEvent_str = malloc(NEEDED_SPACE_NVS);
     sprintf(newEvent_str, "{\"timestamp\":%lld000}", (long long)time);
 
     cJSON *newEvent = cJSON_Parse(newEvent_str);
-    // if it's NOT a system report
 
     // state can be optional
     if (state == 0 || state == 1)
@@ -290,7 +295,9 @@ void addEventToStorage(char *json_str, const char *sensorName,
 
     nvs_commit(my_nvs_handle);
 }
-
+/**
+ * for testing pupusses
+ */
 void test_access(void)
 {
     esp_err_t err = nvs_open(nvs_storage_name, NVS_READWRITE, &my_nvs_handle);
@@ -298,8 +305,6 @@ void test_access(void)
     {
         ESP_LOGI("NVS", "Error test_access(%s) opening NVS handle!\n", esp_err_to_name(err));
     }
-    // char outpu_str[sizeBuffer];
-    // size_t size=sizeof(outpu_str);
     nvs_stats_t nvs_stats;
     err = nvs_get_stats(NULL, &nvs_stats);
     ESP_LOGI("NVS", "Count: UsedEntries = (%d), FreeEntries = (%d), AllEntries = (%d)\n", nvs_stats.used_entries, nvs_stats.free_entries, nvs_stats.total_entries);

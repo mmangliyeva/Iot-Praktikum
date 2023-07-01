@@ -16,12 +16,14 @@
 #define WIFI_SSID "CAPS-Seminar-Room"
 #define WIFI_PASS "caps-schulz-seminar-room-wifi"
 #define SNTP_SERVER "ntp1.in.tum.de"
+// debounce for barrier
 #define THRESHOLD_DEBOUCE 1000 // home: 15000 // institue: 1000 // for isr in mu_seconds
 
 #else
 #define WIFI_SSID "olchinet"
 #define WIFI_PASS "hahaihropfer"
 #define SNTP_SERVER "pool.ntp.org"
+// debounce for barrier
 #define THRESHOLD_DEBOUCE 15000 // home: 15000 // institue: 1000 // for isr in mu_seconds
 
 #endif
@@ -38,13 +40,14 @@
 #define QOS_FAST 0                            // sets the safty level of sending a mqtt message
 
 // defines for the counting algorithm:
-#define BUFF_STRING_COUNT 4 // size of the buffer to display the number
-#define OUTDOOR_BARRIER 2   // pin for outdoor barrier
-#define INDOOR_BARRIER 5    // pin for indoor barrier
-#define PIN_TEST_MODE 19    // pin entering test mode
-#define RED_INTERNAL_LED 16 // internal red led pin
+#define BUFF_STRING_COUNT 4    // size of the buffer to display the number
+#define OUTDOOR_BARRIER 2      // pin for outdoor barrier
+#define INDOOR_BARRIER 5       // pin for indoor barrier
+#define PIN_TEST_MODE 19       // pin entering test mode
+#define RED_INTERNAL_LED 16    // internal red led pin
+#define REFRESH_RATE_DISPLAY 1 // update every REFRESH_RATE_DISPLAY sec the display
 
-#define THRESHOLD_DEBOUCE_TEST_MODE 200000 // for isr in mu_seconds
+#define THRESHOLD_DEBOUCE_TEST_MODE 200000 // for isr in mu_seconds for test-button
 #define THRESHOLD_ANALIZER 4               // when process starts analizing
 
 #define PRIO_ANALIZER 11  // process prio
@@ -61,24 +64,27 @@
 #define NO_EVENT -1        // flag if detected no event
 #define Y_POS_COUNT 32     // the y position where to display, count on lcd
 
-#define NO_OPEN_NVS -1
-#define OPEN_NVS 1
+#define NO_OPEN_NVS -1 // if functioncall doesnt need to open a new nvs_handle
+#define OPEN_NVS 1     // functioncall need to open an nvs_handle
+
 // we reset between 5:00 - 5:15 and 23:00 - 23:15 the counter
 #define RESET_COUNT_HOUR 5   // at what hour we reset the count
 #define RESET_COUNT_HOUR2 23 // at what hour we reset the count
 #define RESET_COUNT_MIN 15   // at what hour we reset the count
-#define NEEDED_SPACE_NVS 400
+#define NEEDED_SPACE_NVS 400 // NEEDED_SPACE_NVS characters in NVS
 
 void my_setup(void);
-
+// display on the hardware display count and prediction
 void displayCountPreTime(uint8_t prediction, uint8_t curCount);
-void initTimer(void);
+// send to IoT-platform in the settings an error message
 void error_message(const char *TAG, char *msg, const char *details);
 
-extern uint8_t flag_internet_active;
-extern char *tmp_message; // used for system report, imedetyl free it!
+extern uint8_t flag_internet_active; // ==1 if wifi-connection was sessecfull
+extern char *tmp_message;            // used for system report, imedetyl free it!
+
 // test mode flag and task that should stop if testModeActive == 1
 extern uint8_t testModeActive;
+// all processes globally because for test-mode
 extern TaskHandle_t xProgAnalizer;
 extern TaskHandle_t xProgShowCount;
 extern TaskHandle_t xProgInBuffer;

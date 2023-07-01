@@ -13,7 +13,7 @@
 void initDisplay(void);
 #endif
 void initPins(void);
-void replacedSpaces(char *str);
+void replacedSpaces(char *str); // replaces space with '_'
 
 uint8_t testModeActive = 0;
 TaskHandle_t xProgAnalizer = NULL;
@@ -23,19 +23,19 @@ TaskHandle_t xProgInBuffer = NULL;
 TaskHandle_t xSendToMQTT = NULL;
 TaskHandle_t xOTA = NULL;
 uint8_t flag_internet_active = 0;
-char *tmp_message = NULL;
+char *tmp_message = NULL; // meassage for function: error_meassage()
 
 void my_setup(void)
 {
 
 #ifdef WITH_DISPLAY
-	initDisplay();
+	initDisplay(); // int external display
 #endif
-	initMY_nvs(); // must before wifi
+	initMY_nvs();
 
 	initWifi();
-	initSNTP();
-	initMQTT();
+	initSNTP(); // init correct time
+	initMQTT(); // init service to send data to elastic search
 
 	initPins();
 
@@ -44,6 +44,7 @@ void my_setup(void)
 
 	displayCountPreTime(0, 0);
 #endif
+	// init service to send/fetch data to the IoT platform (HTTP requests)
 	init_web_functions();
 }
 
@@ -77,7 +78,7 @@ void initPins(void)
 }
 
 /**
- * frees automatacially the msg
+ * Sends an error message to the IoT-platfrom with HTTP
  */
 void error_message(const char *TAG, char *msg, const char *details)
 {
@@ -91,6 +92,10 @@ void error_message(const char *TAG, char *msg, const char *details)
 	free(tmp_message);
 	// free(date);
 }
+/**
+ * Replaces whitespaces with '_'
+ * Needed because there should be spaces in http-request
+ */
 void replacedSpaces(char *str)
 {
 	int i = 0;
@@ -103,6 +108,9 @@ void replacedSpaces(char *str)
 }
 
 #ifdef WITH_DISPLAY
+/**
+ * init the external hardware display
+ */
 void initDisplay(void)
 {
 	ESP_LOGI("PROGRESS", "Initializing display");
@@ -112,7 +120,9 @@ void initDisplay(void)
 	ssd1306_clearScreen();
 	ssd1306_printFixedN(0, 0, "BOOT", STYLE_BOLD, 2);
 }
-
+/**
+ * updates the count or prediction on the external hardware display
+ */
 void displayCountPreTime(uint8_t prediction, uint8_t curCount)
 {
 	char count_str[BUFF_STRING_COUNT];

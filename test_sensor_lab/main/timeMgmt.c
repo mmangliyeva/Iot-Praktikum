@@ -49,12 +49,17 @@ void initSNTP(void)
     strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
     ESP_LOGI("PROGRESS", "The current date/time in Germany is: %s", strftime_buf);
 }
-
+/**
+ * returns the timestamp in seconds
+ */
 time_t get_timestamp(void)
 {
-    // time_t now = times(NULL);
     return time(NULL);
 }
+/**
+ * returns the time as string
+ * used in error_message()
+ */
 char *getDate(void)
 {
     time_t now = time(&now);

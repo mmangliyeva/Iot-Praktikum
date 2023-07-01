@@ -27,26 +27,30 @@ typedef struct Barrier_data
 	uint8_t state; // 0 NO obsical, 1 there is an obsical
 	time_t time;
 } Barrier_data;
-// poeple count variable
+// poeple count, prediction variable
 volatile uint8_t count = 0;
 uint8_t prediction = 0;
 
-uint8_t reseted_buffer = 0;
-// the current state of the machine
-int8_t state_counter = 0;
+// ---- buffer_check() code -----
+uint8_t reseted_buffer = 0; // flag if buffer was reseted
+int8_t state_counter = 0;	// the current state of the machine
+// defines how many elements should be anlaized in a row
 int16_t buffer_count_valid_elements = 0;
+
+// ---- buffer code -----
 // buffer the events form the queue
 Barrier_data buffer[SIZE_BUFFER];
 // points to the last element in the buffer and shows how full the buffer is
 volatile uint8_t head = 0;
 volatile uint8_t fillSize = 0;
 
+// ---- isr debounce code -----
 // for debounce detector:
 int64_t lastTime1 = 0;
 int64_t lastTime2 = 0;
 uint8_t lastState1 = 0;
 uint8_t lastState2 = 0;
-// button
+// test-button
 int64_t lastTimeISR = 0;
 
 // all tasks:
@@ -75,7 +79,7 @@ int16_t checkBuffer(void);
 void start_counting_algo(void)
 {
 	buffer_count_valid_elements = 0;
-	// restore count from nvs:
+	// restore count from IoT-plattform:
 	count = getCount_backup();
 	prediction = getPrediction();
 	displayCountPreTime(prediction, count);
@@ -86,7 +90,6 @@ void start_counting_algo(void)
 
 	xSemaphoreGive(xAccessCount);
 	xSemaphoreGive(xAccessBuffer);
-	// xAccessHead = xSemaphoreCreateBinary();
 
 	// queue for interprocess communication:
 	queue = xQueueCreate(SIZE_QUEUE, sizeof(Barrier_data));
@@ -138,12 +141,11 @@ void pushInBuffer(void *args)
 
 /**
  * TASK
- * this task analyzes the queue for inconsitency and correctness
+ * this task analizes the buffer and increases count or state of state_machine
  *  -> de-/increases count
  */
 void analyzer(void *args)
 {
-	// an array of funciton pointers
 	while (1)
 	{
 		/* Logic for analyzer:
@@ -151,16 +153,13 @@ void analyzer(void *args)
 			if state_counter == 4 -> count++
 			if state_counter == -4 -> count--
 		*/
-		// /*
 		if (xSemaphoreTake(xAccessBuffer, portMAX_DELAY) == pdTRUE)
 		{
-
-			// if (fillSize >= THRESHOLD_ANALIZER)
-			// we do not use the buffer....
-			// if (fillSize)
+			// uncomment if you dont want to  use the buffer
+			//  if (fillSize)
 			if (checkBuffer())
 			{
-
+				// bugfixing code:
 				// Barrier_data firstEvent = buffer[head];
 				// Barrier_data secondEvent = buffer[(head + 1) % SIZE_BUFFER];
 				// Barrier_data thirdEvent = buffer[(head + 2) % SIZE_BUFFER];
@@ -242,7 +241,7 @@ void analyzer(void *args)
 				}
 				else if (state_counter > 4 || state_counter < -4)
 				{
-					ESP_LOGE("analyzer()", "Invalid state!! state: %d -> reset state", state_counter);
+					error_message("analyzer()", "Invalid state not in range [-4,4] ", "");
 				}
 
 				// delte items form the buffer
@@ -256,13 +255,11 @@ void analyzer(void *args)
 			xSemaphoreGive(xAccessBuffer);
 		}
 
-		// */
 		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 }
 /**
- * This funciton reset the buffer if the last event is TIME_TO_EMPTY_BUFFER
- *
+ * This funciton reset the buffer if the last event is TIME_TO_EMPTY_BUFFER sec away
  */
 int16_t checkBuffer(void)
 {
@@ -278,6 +275,7 @@ int16_t checkBuffer(void)
 		}
 		else if (fillSize > 0)
 		{
+
 			Barrier_data lastEvent = buffer[((head + fillSize - 1) % SIZE_BUFFER)];
 			if (get_timestamp() - lastEvent.time > TIME_TO_EMPTY_BUFFER)
 			{
@@ -290,7 +288,7 @@ int16_t checkBuffer(void)
 		}
 		else if (reseted_buffer)
 		{
-			// buffer is empty and there was no new event this TIME_TO_EMPTY_BUFFER sec
+			// buffer is empty and there was no new event since TIME_TO_EMPTY_BUFFER sec
 			//  -> reset state_machine
 			reseted_buffer = 0;
 			state_counter = 0;
@@ -299,6 +297,7 @@ int16_t checkBuffer(void)
 	}
 	else
 	{
+		// there are still enough element to analyze
 		buffer_count_valid_elements--;
 		return buffer_count_valid_elements;
 	}
@@ -306,6 +305,10 @@ int16_t checkBuffer(void)
 }
 
 #ifdef SEND_EVERY_EVENT
+/* DO NOT USE THIS! NVS might explode -> restart of device
+ * empty the buffer and sends eeeevery event the state, time, and ID
+ *
+ */
 void sendToDatabase(uint8_t delteItemsCount)
 {
 	for (uint8_t i = head; i < (head + delteItemsCount) % SIZE_BUFFER; i = ((i + 1) % SIZE_BUFFER))
@@ -335,24 +338,28 @@ void showRoomState(void *args)
 	{
 		// update every second the display
 		displayCountPreTime(prediction, count);
-		vTaskDelay(100 / portTICK_PERIOD_MS);
+		vTaskDelay((1000 * REFRESH_RATE_DISPLAY) / portTICK_PERIOD_MS);
 	}
 }
 /**
  * TASK
- * this task sends the current count of people
- * to our NVS and then to elastic
+ * this task backup the current count of people
+ * to the IoT-platform
  */
 void sendFromNVS(void *args)
 {
-	time_t now;
-	struct tm *now_tm;
+	time_t now = get_timestamp();
+	struct tm *now_tm = localtime(&now);
+	time_t previousTime_min = now_tm->tm_min; // used for fetching the predition
+
 	while (1)
 	{
-		vTaskDelay((1000 * SEND_DELAY_FROM_NVS) / portTICK_PERIOD_MS);
+		vTaskDelay((1000 * SEND_COUNT_DELAY) / portTICK_PERIOD_MS);
 
 		if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
 		{
+			// joa sadly memory leaks somewhere here :'(
+
 			// uint32_t heapSize_begin = esp_get_free_heap_size();
 
 			setCount_backup(count);
@@ -388,9 +395,10 @@ void sendFromNVS(void *args)
 			esp_restart();
 		}
 		// update every 15 min the prediction
-		if (now_tm->tm_min == 0 || now_tm->tm_min == 15 || now_tm->tm_min == 30 || now_tm->tm_min == 45)
+		if (now_tm->tm_min - previousTime_min >= 15)
 		{
 			prediction = getPrediction();
+			previousTime_min = now_tm->tm_min;
 		}
 	}
 }
@@ -402,14 +410,12 @@ void sendFromNVS(void *args)
  */
 void testMode(void *args)
 {
-	// time_t now = 0;
-	// time(&now);
-	// todo maybe implement that automatically switches back to normal-mode
 	while (1)
 	{
 		pauseOtherTasks(&testModeActive, portMAX_DELAY);
 		while (testModeActive)
 		{
+			// make display blink with "TEST"
 			ssd1306_clearScreen();
 			ssd1306_printFixedN(8, 16, "TEST", STYLE_BOLD, 2);
 			ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1));
@@ -423,13 +429,14 @@ void testMode(void *args)
 		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 }
-// helper function
+/**
+ * helper function for testMode()
+ */
 void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 {
 	if (xSemaphoreTake(xPressedButton, blocktime) == pdTRUE)
 	{
 		*testModeActive = !(*testModeActive);
-		// ets_printf("test mode %d", *testModeActive);
 		if (*testModeActive == 1)
 		{
 			vTaskSuspend(xProgAnalizer);
@@ -439,7 +446,6 @@ void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 			vTaskSuspend(xOTA);
 			gpio_isr_handler_remove(OUTDOOR_BARRIER);
 			gpio_isr_handler_remove(INDOOR_BARRIER);
-			// taskDISABLE_INTERRUPTS();
 		}
 		else
 		{
@@ -453,7 +459,6 @@ void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 			ESP_ERROR_CHECK(gpio_set_level(RED_INTERNAL_LED, 1));
 			ssd1306_clearScreen();
 			displayCountPreTime(prediction, count);
-			// taskENABLE_INTERRUPTS();
 		}
 	}
 }
@@ -462,23 +467,19 @@ void pauseOtherTasks(uint8_t *testModeActive, TickType_t blocktime)
 //-----------------------------ISR routines-------------------------------------
 //------------------------------------------------------------------------------
 
-// for detector OUTDOOR_BARRIER and INDOOR_BARRIER
 void IRAM_ATTR isr_inner_barrier(void *args)
 {
 	// ets_printf("from isr  pin %d\n", pin);
 	uint8_t curState = gpio_get_level(INDOOR_BARRIER);
-	// //debounce code
+	// debounce code
 	if (lastState1 != curState)
 	{
 		int64_t curTime = esp_timer_get_time();
-
 		// ets_printf("curTime1: %ld, lastTime1 %ld, difference: %ld state %d\n",(long)curTime, (long)lastTime1, (long)(curTime - lastTime1), curState);
 		if (curTime - lastTime1 > THRESHOLD_DEBOUCE)
 		{
 			//  ets_printf("registered 1\n");
-			// AND last statechange long ago
 			Barrier_data data = {INDOOR_BARRIER, curState, get_timestamp()};
-			// ets_printf("ISR1 pushed\n");
 			xQueueSendFromISR(queue, &data, (TickType_t)0);
 			lastState1 = curState;
 			lastTime1 = curTime;
@@ -488,18 +489,15 @@ void IRAM_ATTR isr_inner_barrier(void *args)
 void IRAM_ATTR isr_outter_barrier(void *args)
 {
 	// ets_printf("isr_barrier2\n ");
-
 	uint8_t curState = gpio_get_level(OUTDOOR_BARRIER);
 	// debounce code
 	if (lastState2 != curState)
 	{
-
 		int64_t curTime = esp_timer_get_time();
 		// ets_printf("curTime2: %ld, lastTime2 %ld, difference: %ld state %d\n",(long)curTime, (long)lastTime2, (long)(curTime - lastTime2), curState);
 		if (curTime - lastTime2 > THRESHOLD_DEBOUCE)
 		{
 			//  ets_printf("registered 2\n");
-			// AND last statechange long ago
 			Barrier_data data = {OUTDOOR_BARRIER, curState, get_timestamp()};
 			// ets_printf("ISR2 pushed\n");
 			xQueueSendFromISR(queue, &data, (TickType_t)0);
@@ -508,11 +506,12 @@ void IRAM_ATTR isr_outter_barrier(void *args)
 		}
 	}
 }
-// interrupt for test mode button
+/**
+ *  Interrupt for test mode button
+ */
 void IRAM_ATTR isr_test_mode(void *args)
 {
 	// //debounce code
-	// ets_printf("isr_test_mode\n ");
 	int64_t curTime = esp_timer_get_time();
 	if (curTime - lastTimeISR > THRESHOLD_DEBOUCE_TEST_MODE)
 	{
