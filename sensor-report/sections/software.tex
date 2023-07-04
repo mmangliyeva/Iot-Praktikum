@@ -1,0 +1,116 @@
+\section{Architecture}
+
+
+\begin{figure}%[H]
+    \centering
+    \resizebox{0.8\textwidth}{!}{
+        \input{figures/architecuturePic.tex}
+    }
+    \caption[Software overview]{An overview of the software architecture for the counting algorithm on the ESP32.}
+    \label{fig_architectureOverview}
+\end{figure}
+
+\subsection{main.c/.h}
+The \verb!main.h! file contains important, global definitions.
+For example, if we want to send data to elastic search or not with \verb!SEND_DATA!. It is possible with
+the \verb!SEND_EVERY_EVENT! definition, to send every event to the database. However, this idea is
+discarded (for further details see section \ref{diff_and_ideas}).\\
+The \verb!main.c! only calls \verb!start_counting_algo()! after \verb!my_setup()!, as the reader can see in
+figure \ref{fig_architectureOverview}.
+
+\subsection{mySetup.c}
+\verb!my_setup()! is defined in the \verb!mySetup.h!. This header file contains all definitions relevant for the
+whole program. For example, \verb!SIZE_BUFFER! which is the size of the buffer, that buffers
+events registered by the barriers. In addition, it imports \verb!main.h! such that every file has access to relevant
+information. The programmer preferred a central file of definitions instead of distribution over all header files.\\
+As an example, one interesting global function is \verb!error_message()!.
+This function sends adds a string to an error-array in the IoT-platform.\\
+\verb!mySetup.c! contains the implementation for this definition. A remark,
+this implementation needed a function that replaces spaces with underscores because of the HTTP GET message.
+Further, \verb!mySetup.c!  initializes following:
+the TaskHandles, that are needed in the test mode; the LCD display; NVS storage; SNTP; MQTT; and the GPIO pins.
+The programmer placed the update function for the external display
+\verb!displayCountPreTime()! in \verb!mySetup.c!
+to make it possible to update the external display everywhere in the project.
+
+\subsection{nvs.c}
+The NVS is used to realize sending the count every 5 minutes to the elastic search database.
+Every key in the NVS \underline{can} cover 4000 Byte (= 4000 characters). However, for storing
+strings it can occur the ESP is not able to copy the string to the next pages to a git issue
+\cite{gitPagesNVS}, which causes a \verb!ESP_ERR_NVS_NOT_ENOUGH_SPACE!. That is why, the programmer
+choose \verb!sizeBuffer = 1500! Bytes for each of the \verb!NUM_KEY_WORDS 7! many keys. Tests showed
+that no page errors occur with this size. Additional tests showed that about
+25 count-events can be stored in the NVS.
+Before going into details, the author points out that the NVS might be a reason for the bad performance of
+the first counting algorithm (for further details see section \ref{diff_and_ideas}).\\
+In detail, the programmer used the cJSON library. This is used in \verb!initNVS_json()!, which creates
+a new json file with the required schema for the current key \verb!keyWords[nvs_index]!.
+Here, \verb!keyWords[]! contains all
+7 keys and \verb!nvs_index! is the current, selected key with free space. It will be increased if the current key
+is full.
+Because this function is called with an open
+or closed NVS handle, there is the option to open the NVS handle.\\
+This option occurs in \verb!sendDataFromJSON_toDB()! too, which is periodically called every 5 minutes.
+This function deletes every key in the NVS until \verb!nvs_index!,
+after sending its content with MQTT to the database. In the end, it creates a json file with
+\verb!initNVS_json()! at \verb!nvs_index = 0!.\\
+The most important function \verb!writeToNVM(sensorName,peopleCount,state,time)! appends to
+the array \verb!sensorName!, a json dictionary with \verb!peopleCount! at time \verb!time!.
+\verb!State! was used in a discarded idea. Before \verb!addEventToStorage()!
+stores the event to the NVS, there are checks whether we can store data.
+For example if we expand the limit of \verb!NUM_KEY_WORDS 7!,
+the ESP sends the data to MQTT. Otherwise, it creates a new index with \verb!initNVS_json()!.\\
+All these functions use heap allocation.
+
+
+\subsection{webFunctions.c}
+One can see in figure \ref{fig_architectureOverview} that this files spawns one of 5 processes.
+\verb!updateOTA()!'s function is self describing. In addition, it contains a memory leak detection
+which is necessary, but it never got activated. And there is the option to restart the device
+over the IoT-platform. This feature was never used due to a discarded idea (sending the log
+via the network with \cite{gitSendLog}).\\
+More over, this file contains the API for the IoT-platform with a function: to fetch number with a
+given key, to fetch the count's backup, and to send a system report. The programmer saves an array
+as a string (with contains the system reports)
+such that there are converting operation with the cJSON library while adding a new
+string to that array.
+
+
+\subsection{countingAlgo.c}
+The heart of the program is the counting algorithm which is started in the \verb!main.c!.
+We start with the local variables, that are only accessible in \verb!countingAlgo.c!. A \verb!QueueHandle! is
+used to get sequentially the sensor's events in the right temporal order.
+\verb!SemaphoreHandles! ensure read and write operations for multiple tasks for the count variable,
+the buffer, and whether the test mode button was pressed. The buffer has many flags and variables, the author mentions
+later. Next to these are the \verb!Barrier_data!
+that is a struct containing the data for one sensor/barrier event. Of course, \verb!count!,
+\verb!prediction!, and \verb!state_counter! (state of the state machine) are local variables too.
+The ISRs have debouncing so that there are timestamps for each ISR.
+The task \verb!pushInBuffer()! waits for an event in the \verb!QueueHandle!, and it pushes it in the buffer.
+For this action we need the Semaphore to block the buffer to avoid inconsistencies and
+to increase \verb!fillsize!.
+This task and the task \verb!anlyzer()! share the same high priority.
+Before executing the state machine, \verb!checkBuffer()!
+The \verb!anlayzer()! uses a state
+machine (see figure \ref{fig_stateMachine}). A previous counting approach can be found in section \ref{diff_and_ideas}.
+The programmer found out that if the state is even an OUT event increases and an IN event decreases the current
+state. Visa vies for an odd state. This reduced the code
+
+\begin{figure}%[H]
+    \centering
+    \resizebox{1\textwidth}{!}{
+        \input{figures/statemachine.tex}
+    }
+    \caption[The used state machine]{The state machine. The numbers in the circles represent the current state
+        of the state machine. The colored number is the operation for the state, the bold text is the operation
+        for the count of people. ``IN'' stands for an event for the indoor sensor and ``OUT'' for an event
+        of the outdoor barrier.}
+    \label{fig_stateMachine}
+\end{figure}
+
+
+
+
+\section{Difficulties and Discarded Ideas}\label{diff_and_ideas}
+
+timer, extern c-diffculties, backup->nvs->mqtt now directly to IoT-platform

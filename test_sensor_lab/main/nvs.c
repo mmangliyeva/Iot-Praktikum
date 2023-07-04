@@ -16,10 +16,6 @@ nvs_handle_t my_nvs_handle;
 const uint16_t sizeBuffer = 1500; // for moving data from or to the nvs
 uint8_t nvs_index;
 
-// this constains "sensors_key"+(string)nvs_index as string...
-// so key contains the current active key in the nvs_storage
-char key[15];
-
 // one keyWords saves sizeBuffer many characters
 const char *keyWords[NUM_KEY_WORDS] = {"s0", "s1", "s2", "s3", "s4", "s5", "s6"};
 
@@ -118,7 +114,6 @@ void initNVS_json(uint8_t bool_openHandle)
  */
 void sendDataFromJSON_toDB(uint8_t bool_openHandle)
 {
-
     // check all keys and send if data is non-zero
     esp_err_t err = ESP_OK;
     if (bool_openHandle != OPEN_NVS)

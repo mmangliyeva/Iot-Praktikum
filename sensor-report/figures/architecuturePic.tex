@@ -1,0 +1,45 @@
+\begin{tikzpicture}
+    % look up: https://perso.ensta-paris.fr/~kielbasi/tikzuml/var/files/html/web-tikz-uml-userguidech2.html
+
+    \umlsimpleclass[x=-3,y=2,alias=mainH]{main$.$h}
+    \umlsimpleclass[x=-3,y=-2,alias=mySetupH]{mySetup$.$h}
+
+    \umlsimpleclass[alias=main]{main$.$c}
+    \umlsimpleclass[alias=mySetup,y=-3]{mySetup$.$c}
+    \umlsimpleclass[alias=nvs,x=4,y=-3]{nvs$.$c}
+    \umlclass[alias=countAlgo,y=4]{countingAlgo$.$c}{
+        Tasks: \\
+        analizers(),\\
+        showRoomState(),\\
+        pushInBuffer(),\\
+        sendFromNVS(),\\
+        testMode(),\\
+        ISRs
+    }{}
+    \umlclass[alias=webFunc,x=4,y=2.5]{webFunctions$.$c}{
+        Task: \\
+        updateOTA()
+    }{}
+
+    \begin{umlpackage}[x=-7,y=-6, alias=proCom]{Provided components}
+        \umlsimpleclass[alias=wifi]{wifi}
+        \umlsimpleclass[alias=mqtt,x=2]{mqtt}
+        \umlclass[alias=timeMgmt,x=4.5]{timeMgmt}{init\_sntp();}{}
+    \end{umlpackage}
+
+    \umluniassoc[geometry=--]{mySetupH}{mainH}
+    \umluniassoc[geometry=-|,anchors=west and 40]{main}{mySetupH}
+    \umluniassoc[geometry=--, arg1=mySetup, align=right]{main}{mySetup}
+    \umluniassoc[geometry=--, arg1=startCountAlgo, align=right]{main}{countAlgo}
+    \umluniassoc[geometry=-|, anchors=west and 40, arg1=init]{mySetup}{proCom}
+    \umluniassoc[geometry=--, anchors=east and west, arg1=init]{mySetup}{nvs}
+    \umluniassoc[geometry=|-, anchors=south and east, arg1=sendCount]{nvs}{mqtt}
+
+    \umluniassoc[geometry=-|, anchors=east and north, arg2=backupCount]{countAlgo}{webFunc}
+    \umluniassoc[geometry=|-|, anchors=-60 and north, arg2=saveCounts]{countAlgo}{nvs}
+
+    \umlnote[x=-6,y=2]{mainH}{Often used defines}
+    \umlnote[x=-7,y=-2]{mySetupH}{Included by all files}
+    \umlnote[x=4,y=5.5,anchors=-40 and 40]{webFunc}{Contains API for IoT-platform}
+
+\end{tikzpicture}

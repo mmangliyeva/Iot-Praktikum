@@ -1,0 +1,37 @@
+\begin{tikzpicture} [node distance = 2.5cm, on grid]
+
+    % States
+    \node (zero) [state] {$0$};
+    \node (one) [state, right = of zero] {$1$};
+
+    \node (two) [state, right = of one] {$2$};
+    \node (three) [state, right = of two] {$3$};
+
+    \node (mOne) [state, left = of zero] {$-1$};
+    \node (mTwo) [state, left = of mOne] {$-2$};
+    \node (mThree) [state, left = of mTwo] {$-3$};
+
+    \path [-stealth, thick]
+    (zero) edge [bend left] node [above] {OUT \textcolor{green}{+1}}   (one)
+    (zero) edge [bend right] node [above] {IN \textcolor{red}{-1}}   (mOne)
+    (one) edge [bend left] node [above] {IN \textcolor{green}{+1}}   (two)
+    (mOne) edge [bend right] node [above] {OUT \textcolor{red}{-1}}   (mTwo)
+    (two) edge [bend left] node [above] {OUT \textcolor{green}{+1}}   (three)
+    (mTwo) edge [bend right] node [above] {IN \textcolor{red}{-1}}   (mThree)
+
+    (mThree) edge [bend right] node [above] {OUT \textcolor{green}{+1}}   (mTwo)
+    (three) edge [bend left] node [above] {IN \textcolor{red}{-1}}   (two)
+    (mTwo) edge [bend right] node [above] {IN \textcolor{green}{+1}}   (mOne)
+    (two) edge [bend left] node [above] {OUT \textcolor{red}{-1}}   (one)
+    (mOne) edge [bend right] node [above] {OUT \textcolor{green}{+1}}   (zero)
+    (one) edge [bend left] node [above] {IN \textcolor{red}{-1}}   (zero)
+
+
+
+    (three) edge [bend left] node [below] {OUT \textbf{count++;}}   (zero)
+    (mThree) edge [bend right] node [below] {IN \textbf{count--;}}   (zero)
+
+
+    ;
+
+\end{tikzpicture}
