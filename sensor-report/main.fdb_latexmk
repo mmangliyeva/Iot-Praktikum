@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1688550257 -1
-  "main.bcf" 1688550257 107019 c8d8f7d315913f7aa6e5b19206b894c2 "pdflatex"
+["biber main"] 0 "main.bcf" "main.bbl" "main" 1688550631 -1
+  "main.bcf" 1688550631 107019 c8d8f7d315913f7aa6e5b19206b894c2 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1688550252 "main.tex" "main.pdf" "main" 1688550257 0
+["pdflatex"] 1688550626 "main.tex" "main.pdf" "main" 1688550631 0
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1678549815 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1678549815 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/map/fontname/texfonts.map" 1678549815 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -381,16 +381,16 @@
   "logos/faculty.png" 1688197348 18171 f7cc651b6bd63fdbbd573648790bbc23 ""
   "logos/tum.pdf" 1688197348 230879 eb1c3a1a80bd3179fe0bcb97210ec484 ""
   "main.acr" 0 -1 0 ""
-  "main.aux" 1688550257 7774 cd0513ea74f96e402a330fb9ecd26c4b "pdflatex"
+  "main.aux" 1688550631 7774 cd0513ea74f96e402a330fb9ecd26c4b "pdflatex"
   "main.bbl" 1688460887 1345 a8088efaaf86eed7b8c6e7208aefc30d "biber main"
   "main.gls" 0 -1 0 ""
-  "main.out" 1688550255 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.run.xml" 1688550257 2368 571a03cfb4df0a66d4603062ea2bb0dc "pdflatex"
+  "main.out" 1688550629 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.run.xml" 1688550631 2368 571a03cfb4df0a66d4603062ea2bb0dc "pdflatex"
   "main.tex" 1688549055 1581 960169a83fc4da3275e607e39f8bd5c2 ""
-  "main.toc" 1688550257 919 e4a5f862d5b338ed5ece3cf2ad39e2a2 "pdflatex"
+  "main.toc" 1688550631 919 e4a5f862d5b338ed5ece3cf2ad39e2a2 "pdflatex"
   "pages/glossary.tex" 1688197348 1118 28b57f62bd79603ba10c8b87d49f94d6 ""
   "pages/title.tex" 1688500536 716 b0bdf982630066a7cbaef7574e0eafdc ""
-  "sections/compareAlgo.tex" 1688550246 2563 88bd51501423d1e623178318311e0d81 ""
+  "sections/compareAlgo.tex" 1688550627 2575 fa4e2e074945fdaace60ed08fd373c96 ""
   "sections/software.tex" 1688500183 10336 a8f9238e31570a3ca311186633df9987 ""
   "settings.tex" 1688549554 6044 025e0baecb8a8bbbffea7806080f4a80 ""
   "tikz-uml.sty" 1688221414 302703 ed2f9b5dd419a64f254ecbf6a6653c7f ""

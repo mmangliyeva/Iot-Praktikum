@@ -1,6 +1,6 @@
 INFO:  latexindent.pl version 3.22.1, 2023-07-02, a script to indent .tex files
        latexindent.pl lives here: /usr/local/Cellar/latexindent/3.22.1/libexec/bin/
-       Wed Jul  5 11:44:06 2023
+       Wed Jul  5 11:50:27 2023
        Filename: /Users/larsleimbach/Documents/Iot-Praktikum/sensor-report/sections/__latexindent_temp_compareAlgo.tex
 INFO:  Processing switches:
        -y|--yaml: YAML settings specified via command line
