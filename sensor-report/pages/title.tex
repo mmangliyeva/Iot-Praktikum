@@ -14,24 +14,24 @@
   {\large\MakeUppercase{\getUniversity{}}}\\
 
   \vspace{20mm}
-  {\Large \getDoctype{}}
+  {\Large \getAuthor{}}
 
   \makeatletter
   \vspace{15mm}
   \ifthenelse{\pdf@strcmp{\languagename}{english}=0}
   {
-  {\huge\bfseries \getTitle{}}
+    {\huge\bfseries \getTitle{}}
 
   }
   {
-  {\huge\bfseries \getTitleGer{}}
+    {\huge\bfseries \getTitleGer{}}
 
-  \vspace{10mm}
-  {\huge\bfseries \foreignlanguage{english}{\getTitle{}}}
+    \vspace{10mm}
+    {\huge\bfseries \foreignlanguage{english}{\getTitle{}}}
   }
   \makeatother
 
-  \vspace{15mm}
+  \vspace{90mm}
 
 
   \includegraphics[height=20mm]{logos/faculty.png}

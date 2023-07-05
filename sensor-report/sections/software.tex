@@ -33,7 +33,7 @@ The programmer placed the update function for the external display
 \verb!displayCountPreTime()! in \verb!mySetup.c!
 to make it possible to update the external display everywhere in the project.
 
-\subsection{nvs.c}
+\subsection{nvs.c}\label{nvs}
 The NVS is used to realize sending the count every 5 minutes to the elastic search database.
 Every key in the NVS \underline{can} cover 4000 Byte (= 4000 characters). However, for storing
 strings it can occur the ESP is not able to copy the string to the next pages to a git issue
@@ -90,11 +90,32 @@ The task \verb!pushInBuffer()! waits for an event in the \verb!QueueHandle!, and
 For this action we need the Semaphore to block the buffer to avoid inconsistencies and
 to increase \verb!fillsize!.
 This task and the task \verb!anlyzer()! share the same high priority.
-Before executing the state machine, \verb!checkBuffer()!
-The \verb!anlayzer()! uses a state
+Before executing the state machine, \verb!checkBuffer()! tells the counting algorithm with
+\verb!buffer_count_valid_elements! how many elements should be analyzed in a row. This variable
+is set to 4 if the buffer contains more than 4 events. However, \verb!checkBuffer()! will empty the buffer and
+reset the state of the state machine, if there
+are no new events after \verb!TIME_TO_EMPTY_BUFFER! seconds. This function is not needed with artificial events
+but might work well in a real life environment. Then,
+the \verb!anlayzer()! uses a state
 machine (see figure \ref{fig_stateMachine}). A previous counting approach can be found in section \ref{diff_and_ideas}.
 The programmer found out that if the state is even an OUT event increases and an IN event decreases the current
-state. Visa vies for an odd state. This reduced the code
+state. Visa vies for an odd state. This reduces the code. After reaching state $-4$ or $4$, there are sanity checks
+whether the count is negative or greater than $250$. Then, the count is written with \verb!writeToNVM()! to the
+NVS, and we make a backup to the IoT-platform. Every time, we delete the \verb!head! of the buffer and there is
+the discarded option to send the analyzed event to the NVS.\\
+
+The next task \verb!showRoomState()! updates every \verb!REFRESH_RATE_DISPLAY! seconds the external display.\\
+Task \verb!testMode()! activates a blinking text ``TEST'' on the display and blinking red LED. In addition,
+it pauses all tasks except \verb!testMode! and removes the ISRs of the sensors. This action is done or redone
+only if the ISR of the test button gives a semaphore.\\
+The last task \verb!sendFromNVS()! calls every \verb!SEND_COUNT_DELAY! seconds (which are normally 5 min)
+the function to back up the count to the NVS and IoT-platform. After this, it calls \verb!sendDataFromJSON_toDB()!.
+Further, this task checks whether it is time to reset the count or fetch the prediction from the IoT-platform.
+It gets the current time with \verb!localtime(time(NULL))!.
+The last three mentioned tasks do not have a high priority because the ESP should focus on the counting
+operations, which are tasks \verb!analyzer()! and \verb!pushInBuffer()!.
+
+
 
 \begin{figure}%[H]
     \centering
@@ -113,4 +134,22 @@ state. Visa vies for an odd state. This reduced the code
 
 \section{Difficulties and Discarded Ideas}\label{diff_and_ideas}
 
-timer, extern c-diffculties, backup->nvs->mqtt now directly to IoT-platform
+In the beginning, the programmer had problems defining global variable because of forgetting
+c specific syntax like \verb!extern!. So, circular imports of header files were a problem too.
+Timers were used too; however, it was too complicated to expand the needed stack size, such that
+the programmer used tasks to periodically do things. \\
+One thought was to send every sensor event to the elastic search platform to train a model that
+might detect even incorrect sequence of events as an in-going event. The motivation for that
+was to avoid counts over $70$ or higher. There were huge NVS bugs, such that the
+NVS was not able to process this high amount of data. In addition, the count and all events were only
+stored in the NVS such that after a crash everything was deleted. There were tries to implement
+recovery routines, but they were too complex. So using the web client and fixing the
+NVS as described in section \ref{nvs} was the better approach.\\
+Another approach for the counting algorithm was to search in the buffer for the sequence of IN (state 1),
+OUT (state 1), IN (state 0), OUT (state 0) for an out-going event and visa vie for an in-going event.
+There was a sanity check whether the events are in the correct temporal order; however, this (and the state of the
+sensor) is not needed due
+to the queue. On balance, this algorithm did not perform as good as a state machine with artificial data.
+That is why, the programmer implemented a state machine, thus, there were situations were this search-algorithm
+performed better as one group's state machine.
+
