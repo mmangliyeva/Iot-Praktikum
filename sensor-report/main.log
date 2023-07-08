@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Homebrew) (preloaded format=pdflatex 2023.6.22)  5 JUL 2023 11:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Homebrew) (preloaded format=pdflatex 2023.6.22)  8 JUL 2023 21:39
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1753,47 +1753,47 @@ chapter 2.
 <figures/ref-group15.jpeg, id=128, 462.528pt x 346.896pt>
 File: figures/ref-group15.jpeg Graphic file (type jpg)
 <use figures/ref-group15.jpeg>
-Package pdftex.def Info: figures/ref-group15.jpeg  used on input line 12.
+Package pdftex.def Info: figures/ref-group15.jpeg  used on input line 14.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 <figures/ref-group4.jpeg, id=129, 462.528pt x 346.896pt>
 File: figures/ref-group4.jpeg Graphic file (type jpg)
 <use figures/ref-group4.jpeg>
-Package pdftex.def Info: figures/ref-group4.jpeg  used on input line 16.
+Package pdftex.def Info: figures/ref-group4.jpeg  used on input line 18.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 <figures/ref-group8.jpeg, id=130, 462.528pt x 346.896pt>
 File: figures/ref-group8.jpeg Graphic file (type jpg)
 <use figures/ref-group8.jpeg>
-Package pdftex.def Info: figures/ref-group8.jpeg  used on input line 21.
+Package pdftex.def Info: figures/ref-group8.jpeg  used on input line 23.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 <figures/ref-group13.jpeg, id=131, 462.528pt x 346.896pt>
 File: figures/ref-group13.jpeg Graphic file (type jpg)
 <use figures/ref-group13.jpeg>
-Package pdftex.def Info: figures/ref-group13.jpeg  used on input line 25.
+Package pdftex.def Info: figures/ref-group13.jpeg  used on input line 27.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 <figures/ref-group2.jpeg, id=132, 462.528pt x 346.896pt>
 File: figures/ref-group2.jpeg Graphic file (type jpg)
 <use figures/ref-group2.jpeg>
-Package pdftex.def Info: figures/ref-group2.jpeg  used on input line 30.
+Package pdftex.def Info: figures/ref-group2.jpeg  used on input line 32.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 <figures/ref-group9.jpeg, id=133, 462.528pt x 346.896pt>
 File: figures/ref-group9.jpeg Graphic file (type jpg)
 <use figures/ref-group9.jpeg>
-Package pdftex.def Info: figures/ref-group9.jpeg  used on input line 34.
+Package pdftex.def Info: figures/ref-group9.jpeg  used on input line 36.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 <figures/ref-group11.jpeg, id=134, 462.528pt x 346.896pt>
 File: figures/ref-group11.jpeg Graphic file (type jpg)
 <use figures/ref-group11.jpeg>
-Package pdftex.def Info: figures/ref-group11.jpeg  used on input line 46.
+Package pdftex.def Info: figures/ref-group11.jpeg  used on input line 48.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 <figures/ref-group10.jpeg, id=135, 462.528pt x 346.896pt>
 File: figures/ref-group10.jpeg Graphic file (type jpg)
 <use figures/ref-group10.jpeg>
-Package pdftex.def Info: figures/ref-group10.jpeg  used on input line 50.
+Package pdftex.def Info: figures/ref-group10.jpeg  used on input line 52.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 <figures/ref-group1.jpeg, id=136, 462.528pt x 346.896pt>
 File: figures/ref-group1.jpeg Graphic file (type jpg)
 <use figures/ref-group1.jpeg>
-Package pdftex.def Info: figures/ref-group1.jpeg  used on input line 55.
+Package pdftex.def Info: figures/ref-group1.jpeg  used on input line 57.
 (pdftex.def)             Requested size: 201.65755pt x 151.24258pt.
 )
 No file main.gls.
@@ -1814,15 +1814,15 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 67061 strings out of 476025
- 1548504 string characters out of 5780533
+ 67071 strings out of 476025
+ 1548592 string characters out of 5780533
  2663697 words of memory out of 5000000
  86121 multiletter control sequences out of 15000+600000
- 565127 words of font info for 275 fonts, out of 8000000 for 9000
+ 565698 words of font info for 282 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
  115i,14n,109p,10599b,2459s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (11 pages, 656633 bytes).
+Output written on main.pdf (11 pages, 656812 bytes).
 PDF statistics:
  225 PDF objects out of 1000 (max. 8388607)
  158 compressed objects within 2 object streams

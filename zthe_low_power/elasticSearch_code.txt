@@ -1,0 +1,165 @@
+.es(index=34_82_231,timefield=timestamp,metric=max:value.countPeople).label(people_count).yaxis(min=-5,max=30).color(blue),
+.es(index=34_82_229,timefield=timestamp).label(indoor_barrier).points().color(green),
+.es(index=34_82_230,timefield=timestamp).label(indoor_barrier).points().color(orange)
+
+
+/Users/larsleimbach/Documents/Pra-IoT/ESP-IDF/tools/python_env/idf4.4_py3.8_env/bin/python /Users/larsleimbach/esp/esp-idf/tools/idf.py menuconfig
+
+
+http://caps-platform.live:3000/api/users/34/ota/download/firmware/<firmware_name>
+http://caps-platform.live:3000/api/users/34/ota/download/firmware/mqtt_receiver.bin
+
+
+
+
+rest_client_init("http://caps-platform.live:3000/api/users/34/config/device/fetch");
+char *output = malloc(sizeof(char) * 100);
+
+esp_err_t err;
+err = rest_client_set_token(JWT_TOKEN); // this funciton fails
+
+err = rest_client_perform(NULL);
+
+rest_client_fetch_key("test", cJSON_String, false, output);
+
+printf("%s\n", output); // this is the result: �����?
+
+free(output);
+
+
+
+
+
+// old analyzer:
+
+
+if (fillSize >= THRESHOLD_ANALIZER)
+{
+    Barrier_data firstEvent = buffer[head];
+    Barrier_data secondEvent = buffer[(head + 1) % SIZE_BUFFER];
+    Barrier_data thirdEvent = buffer[(head + 2) % SIZE_BUFFER];
+    Barrier_data fourthEvent = buffer[(head + 3) % SIZE_BUFFER];
+    ESP_LOGI("analyzer()", "in buffer:\n(%d,%d), (%d,%d), (%d,%d), (%d,%d)", firstEvent.id, firstEvent.state, secondEvent.id, secondEvent.state, thirdEvent.id, thirdEvent.state, fourthEvent.id, fourthEvent.state);
+    int8_t eventType = NO_EVENT;
+    // check order and if events lay near together...
+    // incorrecness can be to events are really far away than the rest
+    uint8_t delteItemsCount = 0;
+
+    // check now wheter there the time stamps
+    // changes maybe delteItemsCount...
+    checkTimes(firstEvent, secondEvent, thirdEvent, fourthEvent, &delteItemsCount);
+
+    if (delteItemsCount == 0)
+    {
+        // ESP_LOGI("analyzer()", "head: %d, size: %d",head,fillSize);
+        ESP_LOGI("analyzer()", "time is correct.");
+        if ((firstEvent.state == 1 && secondEvent.state == 1 && thirdEvent.state == 0 && fourthEvent.state == 0))
+        {
+            ESP_LOGI("analyzer()", "states are correct.");
+            // check for going-in event
+            if ((firstEvent.id == 1 && secondEvent.id == 2 && thirdEvent.id == 1 && fourthEvent.id == 2))
+            {
+                eventType = GOING_IN_EVENT;
+                ESP_LOGI("analyzer()", "wait for semaphore");
+                if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
+                {
+                    if (count > 250)
+                    {
+                        ESP_LOGI("analyzer()", "Count is toooo high (>250)! Do not update count...");
+                    }
+                    else
+                    {
+                        ESP_LOGI("analyzer()", "detected going-in-event.");
+                        count++;
+                        writeToNVM("counter", count, -1, get_timestamp());
+                        setCount_backup(count);
+                    }
+                    xSemaphoreGive(xAccessCount);
+                    ESP_LOGI("analyzer()", "released semaphore");
+                }
+            }
+            // check for going-out event
+            else if (firstEvent.id == 2 && secondEvent.id == 1 && thirdEvent.id == 2 && fourthEvent.id == 1)
+            {
+                eventType = GOING_OUT_EVENT;
+                ESP_LOGI("analyzer()", "wait for semaphore");
+                if (xSemaphoreTake(xAccessCount, portMAX_DELAY) == pdTRUE)
+                {
+                    if (count <= 0)
+                    {
+                        ESP_LOGI("analyzer()", "Count is toooo low (< 0)! Do not update count...");
+                    }
+                    else
+                    {
+                        ESP_LOGI("analyzer()", "detected going-out-event.");
+                        count--;
+                        writeToNVM("counter", count, -1, get_timestamp());
+                        setCount_backup(count);
+                    }
+                    xSemaphoreGive(xAccessCount);
+                    ESP_LOGI("analyzer()", "released semaphore");
+                }
+            }
+        }
+    }
+
+    // send here stuff to mqtt with for-loop
+    if (eventType == GOING_IN_EVENT || eventType == GOING_OUT_EVENT)
+    {
+        delteItemsCount = 4;
+        // ESP_LOGI("analyzer()", " delete all elments in buffer");
+        // head = (head+fillSize)%SIZE_BUFFER;
+        // fillSize = 0;
+    }
+    else if (delteItemsCount == 0)
+    {
+        delteItemsCount = 1;
+    }
+#ifdef SEND_EVERY_EVENT
+    sendToDatabase(delteItemsCount);
+#endif
+    // delte events form buffer:
+    head = (head + delteItemsCount) % SIZE_BUFFER;
+    fillSize -= delteItemsCount;
+}
+
+
+/**
+ * should be only used if we work with real data
+ * helper function
+ * of course the events should be all in one line after each other
+ * but also not too far away from each other
+ *
+ * returns which index of the four elements in the window should be deleted
+ */
+void checkTimes(Barrier_data firstEvent,
+				Barrier_data secondEvent,
+				Barrier_data thirdEvent,
+				Barrier_data fourthEvent,
+				uint8_t *delteItemsCount)
+{
+	// detect  with for loop when we should delte
+
+	Barrier_data array_data[4] = {firstEvent, secondEvent, thirdEvent, fourthEvent};
+	for (uint8_t i = 1; i < 4; i++)
+	{
+		// sanity check
+		if (array_data[i - 1].time <= array_data[i].time)
+		{
+			// time is in mu-sec
+			if ((array_data[i].time - array_data[i - 1].time) > TIME_TO_NEXT_EVENT)
+			{
+				ESP_LOGI("analyzer()", "event too far away: %ld and i: %d", (long)(array_data[i].time - array_data[i - 1].time), i);
+
+				// if the time between two events is too big delte until this event the events
+				*delteItemsCount = i;
+			}
+		}
+		else
+		{
+			ESP_LOGI("analyzer()", "Sanity check faild i: %d", i);
+			*delteItemsCount = i;
+		}
+	}
+	// the max we delte are 3 events, which seems ok...
+}

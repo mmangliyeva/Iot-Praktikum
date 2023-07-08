@@ -1,10 +1,12 @@
-First, the author used the reference count's timestamps as bins.
-If there are multiple count of a group in one bin, the author calculated the average.
-The reader can see in figure \ref{fig_comparison} and \ref{fig_comparison2} the group's count compared to the reference count.
-To compare the group's counting algorithm performance better, the author calculated the absolute
+First, we used the reference count's timestamps as bins. One bin covers a timespan of 5 minutes.
+If there are multiple count of a group in one bin, we calculated the average.
+Because there are about 1900 bins for these 4 days, an offset of 3 or 4, to the reference, results in a high absolute
+difference of about 10000.
+We can see in figure \ref{fig_comparison} and \ref{fig_comparison2} the group's count compared to the reference count.
+To compare the group's counting algorithm performance better, we calculated the absolute
 difference to the reference count. Null values were replaced by zero for this calculation.\\
-We can see that group 15 had the best performance and our counting algorithm (group 8) is on the
-third place.
+Resulting, group 15 had the best performance and our counting algorithm (group 8) is on the
+third place for the metric absolute distance.
 
 \begin{figure}
     \centering

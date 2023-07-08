@@ -108,7 +108,6 @@ void start_counting_algo(void)
 	xTaskCreate(showRoomState, "show count", 3048, NULL, PRIO_SHOW_COUNT, &xProgShowCount);
 	xTaskCreate(pushInBuffer, "push in Buffer", 2048, NULL, PRIO_IN_BUFFER, &xProgInBuffer);
 	xTaskCreate(sendFromNVS, "send nvs to mqtt", 4000, NULL, PRIO_SEND_NVS, &xSendToMQTT);
-
 	// test mode code:
 	xPressedButton = xSemaphoreCreateBinary();
 	gpio_isr_handler_add(PIN_TEST_MODE, isr_test_mode, NULL);
