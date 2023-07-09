@@ -148,6 +148,20 @@ CONFIG_OTA_TOKEN="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQ1MTc5MjMsI
 # end of OTA Configuration
 
 #
+# E-Paper display configuration
+#
+CONFIG_EPD_1_54_V2=y
+# CONFIG_EPD_2_13_D is not set
+# CONFIG_EPD_2_7 is not set
+CONFIG_MOSI_PIN=14
+CONFIG_CLK_PIN=13
+CONFIG_CS_PIN=15
+CONFIG_DC_PIN=27
+CONFIG_RST_PIN=26
+CONFIG_BUSY_PIN=25
+# end of E-Paper display configuration
+
+#
 # Compiler options
 #
 CONFIG_COMPILER_OPTIMIZATION_DEFAULT=y

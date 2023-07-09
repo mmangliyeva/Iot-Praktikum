@@ -120,11 +120,14 @@ void initDisplay(void)
 	ssd1306_clearScreen();
 	ssd1306_printFixedN(0, 0, "BOOT", STYLE_BOLD, 2);
 }
+
+#endif
 /**
  * updates the count or prediction on the external hardware display
  */
 void displayCountPreTime(uint8_t prediction, uint8_t curCount)
 {
+#ifdef WITH_DISPLAY
 	char count_str[BUFF_STRING_COUNT];
 	char prediction_str[BUFF_STRING_COUNT];
 	char time_str[10];
@@ -141,8 +144,6 @@ void displayCountPreTime(uint8_t prediction, uint8_t curCount)
 	ssd1306_printFixedN(64, 0, time_str, STYLE_NORMAL, 1);
 	ssd1306_printFixedN(0, Y_POS_COUNT, count_str, STYLE_BOLD, 2);
 	ssd1306_printFixedN(96, Y_POS_COUNT, prediction_str, STYLE_BOLD, 1);
-
+#endif
 	// free(now_tm);
 }
-
-#endif

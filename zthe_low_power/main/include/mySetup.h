@@ -37,20 +37,17 @@
 
 // defines for the counting algorithm:
 
-#define OUTDOOR_BARRIER 25    // pin for outdoor barrier
-#define INDOOR_BARRIER 26     // pin for indoor barrier
+#define OUTDOOR_BARRIER 25 // pin for outdoor barrier
+#define INDOOR_BARRIER 26  // pin for indoor barrier
+#define WAKE_UP_BUTTON 15
+
+#define WAKE_UP_BUTTON_RTC 13
 #define OUTDOOR_BARRIER_RTC 6 // pin for outdoor barrier
 #define INDOOR_BARRIER_RTC 7  // pin for indoor barrier
 
 #define DISPLAY_POWER 18
 
-#define PIN_TEST_MODE 19 // pin entering test mode
-
-#define PRIO_ANALIZER 11  // process prio
-#define PRIO_IN_BUFFER 10 // process prio
-
-#define SIZE_QUEUE 5   // xTaskQueue size
-#define SIZE_BUFFER 80 // buffer size in analizer task
+#define SIZE_BUFFER 200 // buffer size in analizer task
 
 // we reset between 5:00 - 5:15 and 23:00 - 23:15 the counter
 #define RESET_COUNT_HOUR2 23 // at what hour we reset the count
@@ -62,8 +59,25 @@ void my_setup(void);
 // display on the hardware display count and prediction
 void displayCountPreTime(uint8_t prediction, uint8_t curCount);
 
-// all processes globally because for test-mode
-extern TaskHandle_t xProgAnalizer;
-extern TaskHandle_t xProgInBuffer;
+// inits all variables correctly before going into deepsleep
+void deep_sleep_routine(void);
+
+// struct with data that is inside the buffer
+typedef struct Barrier_data
+{
+    uint8_t id; // is the pin
+    // uint8_t state; // 0 NO obsical, 1 there is an obsical
+    time_t time;
+} Barrier_data;
+
+extern RTC_NOINIT_ATTR Barrier_data buffer[SIZE_BUFFER];
+extern RTC_NOINIT_ATTR uint8_t head;
+extern RTC_NOINIT_ATTR uint8_t fillSize;
+// to have correct time in deepsleep
+extern RTC_NOINIT_ATTR time_t timeOffset;
+
+// generate test-data
+int testData_ingoing(int i);
+int testData_outgoing(int i);
 
 #endif
