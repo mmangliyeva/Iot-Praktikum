@@ -37,17 +37,17 @@ static void event_handler(void *arg, esp_event_base_t event_base,
     }
     else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED)
     {
-        if (s_retry_num < EXAMPLE_ESP_MAXIMUM_RETRY)
-        {
-            esp_wifi_connect();
-            s_retry_num++;
-            ESP_LOGI(TAG, "retry to connect to the AP");
-        }
-        else
-        {
-            xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
-        }
-        ESP_LOGI(TAG, "connect to the AP fail");
+        esp_wifi_connect();
+        // if (s_retry_num < NUMBER_OF_WIFI_RETRIES)
+        // {
+        //     s_retry_num++;
+        //     ESP_LOGI(TAG, "retry to connect to the AP");
+        // }
+        // else
+        // {
+        //     xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
+        // }
+        ESP_LOGI("PROGRESS", "connect to the AP fail. retry");
     }
     else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP)
     {
@@ -119,26 +119,24 @@ void initWifi(void)
     EventBits_t bits = xEventGroupWaitBits(s_wifi_event_group,
                                            WIFI_CONNECTED_BIT | WIFI_FAIL_BIT,
                                            pdFALSE,
-                                           pdFALSE,                     // origiaanl pdFALSE
-                                           60000 / portTICK_PERIOD_MS); // wait 10 sec
+                                           pdFALSE,        // origiaanl pdFALSE
+                                           portMAX_DELAY); // wait 10 sec: 60000 / portTICK_PERIOD_MS
 
     /* xEventGroupWaitBits() returns the bits before the call returned, hence we can test which event actually
      * happened. */
     if (bits & WIFI_CONNECTED_BIT)
     {
-        ESP_LOGI("PROGRESS", "connected to ap SSID:%s password:%s",
-                 WIFI_SSID, WIFI_PASS);
+        ESP_LOGI("PROGRESS", "connected to ap SSID:%s",
+                 WIFI_SSID);
     }
     else if (bits & WIFI_FAIL_BIT)
     {
-        ESP_LOGI("PROGRESS", "Failed to connect to SSID:%s, password:%s -> restart.",
-                 WIFI_SSID, WIFI_PASS);
-        esp_restart();
+        ESP_LOGI("PROGRESS", "Failed to connect to SSID:%s -> restart.",
+                 WIFI_SSID);
     }
     else
     {
         ESP_LOGE("PROGRESS", "UNEXPECTED EVENT");
-        esp_restart();
     }
 
     /* The event will not be processed after unregister */

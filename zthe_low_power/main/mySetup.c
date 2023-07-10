@@ -18,9 +18,8 @@ void initDisplay(void);
 #endif
 void initPins(void);
 
-TaskHandle_t xProgAnalizer = NULL;
-TaskHandle_t xProgInBuffer = NULL;
-
+QueueHandle_t queue = NULL;
+SemaphoreHandle_t xInternetActive = NULL;
 // ----- init buffer -----
 RTC_NOINIT_ATTR uint8_t head;
 RTC_NOINIT_ATTR uint8_t fillSize;
@@ -28,30 +27,51 @@ RTC_NOINIT_ATTR Barrier_data buffer[SIZE_BUFFER];
 // for time in deepsleep
 RTC_NOINIT_ATTR time_t timeOffset = 0;
 
+// TASKs
+void initInternet(void *args);
+void IRAM_ATTR isr_barrier(void *args);
+void pushInBuffer(void *args);
+
 void my_setup(void)
 {
 	esp_set_deep_sleep_wake_stub(&wakeup_routine);
 	initPins();
-
 #ifdef WITH_DISPLAY
 	initDisplay(); // int external display
 #endif
-
-	initWifi();
-	initSNTP(); // init correct time
-	initMQTT(); // init service to send data to elastic search
-
 	if (rtc_get_reset_reason(0) != DEEPSLEEP_RESET)
 	{
+		displayCountPreTime(0, 0);
 		// go to deepsleep IF we did not woke up from deepsleep
-		deep_sleep_routine();
+		deep_sleep_routine(WAKEUP_AFTER);
 	}
+	// continue here if ESP started from deepsleep
+	//  quite complex code, that init internet in a task AND
+	//  pushes simoultanoiusly events in the buffer
+	xInternetActive = xSemaphoreCreateBinary();
+	queue = xQueueCreate(SIZE_QUEUE, sizeof(Barrier_data));
+
+	xTaskCreate(initInternet, "initInternet", 6000, NULL, 15, NULL);
+	xTaskCreate(pushInBuffer, "push in Buffer", 2048, NULL, 3, NULL);
+}
+/**
+ * TASK
+ * that inits the internet
+ */
+void initInternet(void *args)
+{
+	initWifi();
+	initSNTP();
+	initMQTT();
+
+	xSemaphoreGive(xInternetActive);
+	vTaskSuspend(NULL); // suspend own task
 }
 
 /**
  * this function goes to deepsleep for WAKEUP_AFTER seconds
  */
-void deep_sleep_routine(void)
+void deep_sleep_routine(uint32_t seconds)
 {
 #ifdef WITH_DISPLAY
 	// epaperSleep();
@@ -62,7 +82,7 @@ void deep_sleep_routine(void)
 
 	ESP_LOGI("PROGRESS", "Enter deep sleep");
 	timeOffset = get_timestamp();
-	esp_deep_sleep(1000000 * WAKEUP_AFTER);
+	esp_deep_sleep(1000000 * seconds);
 }
 
 void initPins(void)
@@ -70,7 +90,7 @@ void initPins(void)
 	ESP_LOGI("PROGRESS", "Initializing pins");
 
 	// setup pins:
-	// gpio_install_isr_service(ESP_INTR_FLAG_IRAM);
+	gpio_install_isr_service(ESP_INTR_FLAG_IRAM);
 
 	// init light barrier 1
 	// gpio_pad_select_gpio(OUTDOOR_BARRIER);
@@ -101,7 +121,18 @@ void initPins(void)
 	// display power
 	ESP_ERROR_CHECK(gpio_set_direction(DISPLAY_POWER, GPIO_MODE_OUTPUT));
 	ESP_ERROR_CHECK(gpio_set_level(DISPLAY_POWER, 0));
+
+	// set isr to pin:
+	//(void*)OUTDOOR_BARRIER
+	gpio_isr_handler_add(OUTDOOR_BARRIER, isr_barrier, (void *)OUTDOOR_BARRIER);
+	gpio_set_intr_type(OUTDOOR_BARRIER, GPIO_INTR_ANYEDGE);
+	gpio_isr_handler_add(INDOOR_BARRIER, isr_barrier, (void *)INDOOR_BARRIER);
+	gpio_set_intr_type(INDOOR_BARRIER, GPIO_INTR_ANYEDGE);
 }
+
+// ------------------------------------------------------------
+// ----------------------Display operations--------------------
+// ------------------------------------------------------------
 
 #ifdef WITH_DISPLAY
 /**
@@ -119,7 +150,6 @@ void initDisplay(void)
 /**
  * updates the count or prediction on the external hardware display
  */
-
 #endif
 void displayCountPreTime(uint8_t prediction, uint8_t curCount)
 {
@@ -157,6 +187,48 @@ void displayCountPreTime(uint8_t prediction, uint8_t curCount)
 #endif
 }
 
+// ------------------------------------------------------------
+// ----------------------Buffer operations---------------------
+// ------------------------------------------------------------
+
+/**
+ * TASK
+ * puts form the xQueue the elements in the buffer
+ */
+void pushInBuffer(void *args)
+{
+	// runs this tasks as long as we wait for connecting to wifi
+	while (xSemaphoreTake(xInternetActive, 0) != pdTRUE)
+	{
+		if (fillSize < SIZE_BUFFER)
+		{
+			if (xQueueReceive(queue, buffer + ((head + fillSize) % SIZE_BUFFER), (TickType_t)5))
+			{
+				ESP_LOGI("pushInBuffer()", "id: %d time %ld", buffer[((head + fillSize) % SIZE_BUFFER)].id,
+						 (long)buffer[((head + fillSize) % SIZE_BUFFER)].time);
+				fillSize++;
+			}
+		}
+		else
+		{
+			ESP_LOGE("PROGRESS", "Buffer is full increase SIZE_BUFFER!");
+		}
+		vTaskDelay(1000 / portTICK_PERIOD_MS);
+	}
+	xSemaphoreGive(xInternetActive);
+
+	vTaskSuspend(NULL); // suspend own task
+}
+
+// ISR routine douring wakup time, while wifi inits...
+void IRAM_ATTR isr_barrier(void *args)
+{
+	Barrier_data data = {(int)args, get_timestamp()};
+	xQueueSendFromISR(queue, &data, (TickType_t)0);
+}
+
+// test code --------------------------------------------------------------
+// ------------------------------------------------------------------------
 int testData_ingoing(int i)
 {
 	buffer[i] = (Barrier_data){OUTDOOR_BARRIER, get_timestamp()};

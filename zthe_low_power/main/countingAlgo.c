@@ -34,12 +34,14 @@ cJSON *createJSON(void);
 
 void start_counting_algo(void)
 {
-
+	// ESP_LOGI("PROGRESS", "Wait for semaphore before analyzer()");
+	if (xSemaphoreTake(xInternetActive, portMAX_DELAY) == pdTRUE)
+	{
+		count = getCount_backup();
+		ESP_LOGI("PROGRESS", "Restore count: %d", count);
+		xSemaphoreGive(xInternetActive);
+	}
 	// restore count from IoT-plattform:
-	count = getCount_backup();
-	prediction = getPrediction();
-	ESP_LOGI("PROGRESS", "Restore count: %d, prediction: %d", count, prediction);
-
 	analyzer();
 }
 
@@ -175,7 +177,6 @@ void after_analizer(cJSON *root)
 	// sendFromNVS
 	time_t now = get_timestamp();
 	struct tm *now_tm = localtime(&now);
-
 	setCount_backup(count);
 
 	if (root != NULL)
@@ -184,7 +185,9 @@ void after_analizer(cJSON *root)
 		char *msg = cJSON_PrintUnformatted(root);
 
 		// ets_printf("\n sended message:\n%s\n", msg);
+
 		sendToMQTT(msg, QOS_SAFE);
+
 		free(msg);
 		cJSON_Delete(root);
 		root = NULL;
@@ -200,14 +203,16 @@ void after_analizer(cJSON *root)
 
 	if ((now_tm->tm_hour == RESET_COUNT_HOUR2) && now_tm->tm_min < RESET_COUNT_MIN)
 	{
-		// go into deep sleep until 7 o clock, so for 8 hours
-		const uint64_t sevenHours = 25200000000;
-		ESP_ERROR_CHECK(gpio_set_level(DISPLAY_POWER, 0));
 
-		esp_deep_sleep(sevenHours);
+		count = 0;
+		setCount_backup(count);
+
+		// go into deep sleep until 7 o clock, so for 8 hours
+		const uint32_t sevenHours = 25200;
+		deep_sleep_routine(sevenHours);
 	}
 
-	deep_sleep_routine();
+	deep_sleep_routine(WAKEUP_AFTER);
 }
 
 /**
@@ -244,7 +249,14 @@ void addEventToJSON(cJSON *root, uint8_t peopleCount, time_t time)
 
 	// we dont have 64 bit so do some shitty trick...
 	char *newEvent_str = malloc(SIZE_OF_MESSAGE);
-	sprintf(newEvent_str, "{\"timestamp\":%lld000,\"countPeople\":%d}", (long long)time, peopleCount);
+
+	// check if time is correct:
+	time_t tmpTime = time;
+	if (time < 16890228)
+	{
+		tmpTime = get_timestamp();
+	}
+	sprintf(newEvent_str, "{\"timestamp\":%lld000,\"countPeople\":%d}", (long long)tmpTime, peopleCount);
 
 	cJSON *newEvent = cJSON_Parse(newEvent_str);
 

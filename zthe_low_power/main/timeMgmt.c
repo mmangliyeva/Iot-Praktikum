@@ -36,8 +36,7 @@ void initSNTP(void)
     }
     if (retry == retry_count)
     {
-        ESP_LOGE(TAG, "Could not retrieve time.!\n");
-        esp_restart();
+        ESP_LOGE("PROGRESS", "Could not retrieve time.!\n");
     }
     time(&now);
 

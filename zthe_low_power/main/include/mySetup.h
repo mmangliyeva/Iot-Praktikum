@@ -9,6 +9,7 @@
 #include "sdkconfig.h"
 #include "esp_system.h"
 #include "esp_log.h"
+#include "freertos/semphr.h"
 
 #include "main.h"
 
@@ -52,7 +53,7 @@
 // we reset between 5:00 - 5:15 and 23:00 - 23:15 the counter
 #define RESET_COUNT_HOUR2 23 // at what hour we reset the count
 #define RESET_COUNT_MIN 15   // at what hour we reset the count
-
+#define SIZE_QUEUE 5
 #define SIZE_OF_MESSAGE 100
 
 void my_setup(void);
@@ -60,7 +61,7 @@ void my_setup(void);
 void displayCountPreTime(uint8_t prediction, uint8_t curCount);
 
 // inits all variables correctly before going into deepsleep
-void deep_sleep_routine(void);
+void deep_sleep_routine(uint32_t seconds);
 
 // struct with data that is inside the buffer
 typedef struct Barrier_data
@@ -79,5 +80,7 @@ extern RTC_NOINIT_ATTR time_t timeOffset;
 // generate test-data
 int testData_ingoing(int i);
 int testData_outgoing(int i);
+
+extern SemaphoreHandle_t xInternetActive; // internet connection success
 
 #endif
