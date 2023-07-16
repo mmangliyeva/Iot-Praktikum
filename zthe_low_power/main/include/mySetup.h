@@ -10,6 +10,7 @@
 #include "esp_system.h"
 #include "esp_log.h"
 #include "freertos/semphr.h"
+#include "driver/gpio.h"
 
 #include "main.h"
 
@@ -41,6 +42,9 @@
 #define OUTDOOR_BARRIER 25 // pin for outdoor barrier
 #define INDOOR_BARRIER 26  // pin for indoor barrier
 #define WAKE_UP_BUTTON 15
+#define TOGGL_ENERGY_PIN 23
+#define REST_ENERGY_PIN 22
+#define LED_PIN 19
 
 #define WAKE_UP_BUTTON_RTC 13
 #define OUTDOOR_BARRIER_RTC 6 // pin for outdoor barrier

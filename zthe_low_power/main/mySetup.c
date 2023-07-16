@@ -12,6 +12,12 @@
 #include "esp32/rom/rtc.h"
 #include "driver/rtc_io.h"
 #include "esp_sleep.h"
+// power managment
+#include "esp_pm.h"
+#include "powerMesurment.h"
+#include "esp32/clk.h"
+// #include "esp_private/esp_clk.h"
+#include "esp_timer.h"
 
 #ifdef WITH_DISPLAY
 void initDisplay(void);
@@ -31,18 +37,32 @@ RTC_NOINIT_ATTR time_t timeOffset = 0;
 void initInternet(void *args);
 void IRAM_ATTR isr_barrier(void *args);
 void pushInBuffer(void *args);
+// helpers
+void inintDFS_or_ALS(void);
 
 void my_setup(void)
 {
+	inintDFS_or_ALS();
 	esp_set_deep_sleep_wake_stub(&wakeup_routine);
 	initPins();
+	// if (rtc_get_reset_reason(0) == DEEPSLEEP_RESET)
+	// {
+	// 	// Measurment 6.
+	// 	stopMeasure();
+	// }
+	// Measurments 1.
+	// startMeasure();
+
 #ifdef WITH_DISPLAY
 	initDisplay(); // int external display
+
 #endif
+
 	if (rtc_get_reset_reason(0) != DEEPSLEEP_RESET)
 	{
 		displayCountPreTime(0, 0);
 		// go to deepsleep IF we did not woke up from deepsleep
+		// startMeasure();
 		deep_sleep_routine(WAKEUP_AFTER);
 	}
 	// continue here if ESP started from deepsleep
@@ -50,10 +70,15 @@ void my_setup(void)
 	//  pushes simoultanoiusly events in the buffer
 	xInternetActive = xSemaphoreCreateBinary();
 	queue = xQueueCreate(SIZE_QUEUE, sizeof(Barrier_data));
-
+#ifdef USE_WIFI
 	xTaskCreate(initInternet, "initInternet", 6000, NULL, 15, NULL);
+#else
+	xSemaphoreGive(xInternetActive);
+#endif
+
 	xTaskCreate(pushInBuffer, "push in Buffer", 2048, NULL, 3, NULL);
 }
+
 /**
  * TASK
  * that inits the internet
@@ -69,13 +94,35 @@ void initInternet(void *args)
 }
 
 /**
+ * inits automatic light sleep ALS or
+ * dynamic frequency scaling DFS
+ */
+void inintDFS_or_ALS(void)
+{
+#ifdef ALS_DFS
+
+	esp_pm_config_esp32_t pm_config = {
+		.max_freq_mhz = 240,
+		.min_freq_mhz = 80,
+		.light_sleep_enable = true};
+	ESP_ERROR_CHECK(esp_pm_configure(&pm_config));
+#endif
+
+#ifdef DFS
+	esp_pm_config_esp32_t pm_config = {
+		.max_freq_mhz = 240,
+		.min_freq_mhz = 80,
+		.light_sleep_enable = false};
+	ESP_ERROR_CHECK(esp_pm_configure(&pm_config));
+#endif
+}
+
+/**
  * this function goes to deepsleep for WAKEUP_AFTER seconds
  */
 void deep_sleep_routine(uint32_t seconds)
 {
-#ifdef WITH_DISPLAY
-	// epaperSleep();
-#endif
+
 	ESP_ERROR_CHECK(gpio_set_level(DISPLAY_POWER, 0));
 	head = 0;
 	fillSize = 0;
@@ -122,6 +169,16 @@ void initPins(void)
 	ESP_ERROR_CHECK(gpio_set_direction(DISPLAY_POWER, GPIO_MODE_OUTPUT));
 	ESP_ERROR_CHECK(gpio_set_level(DISPLAY_POWER, 0));
 
+	// LED measurment
+	ESP_ERROR_CHECK(gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT));
+	ESP_ERROR_CHECK(gpio_set_level(LED_PIN, 1));
+
+	// pins for measurment
+	ESP_ERROR_CHECK(gpio_set_direction(TOGGL_ENERGY_PIN, GPIO_MODE_OUTPUT));
+	ESP_ERROR_CHECK(gpio_set_level(TOGGL_ENERGY_PIN, 0));
+	ESP_ERROR_CHECK(gpio_set_direction(REST_ENERGY_PIN, GPIO_MODE_OUTPUT));
+	ESP_ERROR_CHECK(gpio_set_level(REST_ENERGY_PIN, 0));
+
 	// set isr to pin:
 	//(void*)OUTDOOR_BARRIER
 	gpio_isr_handler_add(OUTDOOR_BARRIER, isr_barrier, (void *)OUTDOOR_BARRIER);
@@ -154,7 +211,6 @@ void initDisplay(void)
 void displayCountPreTime(uint8_t prediction, uint8_t curCount)
 {
 #ifdef WITH_DISPLAY
-
 	ESP_ERROR_CHECK(gpio_set_level(DISPLAY_POWER, 1));
 
 	epaperClear();

@@ -101,7 +101,9 @@ void initWifi(void)
              * However these modes are deprecated and not advisable to be used. Incase your Access point
              * doesn't support WPA2, these mode can be enabled by commenting below line */
             .threshold.authmode = WIFI_AUTH_WPA2_PSK,
-
+#ifdef WIFI_SAVINGS
+            .listen_interval = 128, // factor of intervals between beacons
+#endif
             .pmf_cfg = {
                 .capable = true,
                 .required = false},
@@ -110,7 +112,9 @@ void initWifi(void)
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
     ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config));
     ESP_ERROR_CHECK(esp_wifi_start());
-
+#ifdef WIFI_SAVINGS
+    esp_wifi_set_ps(WIFI_PS_MAX_MODEM); // Required to specify list_interval
+#endif
     ESP_LOGI(TAG, "wifi_init_sta finished.");
 
     /* Waiting until either the connection is established (WIFI_CONNECTED_BIT) or connection failed for the maximum

@@ -1,0 +1,131 @@
+All five to ten measurements for each task can be found in the appendix.
+
+\subsection{Startup Phase}
+\begin{table}[h]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+        \input{sections/tables/Blatt 1-1\) Booting_average.tex}
+    }
+    \caption{The average mAs for the Startup phase.}
+    \label{tab_boot_avg}
+\end{table}
+
+\verb!startMeasurment()! is called after the initialization of the pins and
+\verb!stopMeasurment()! is called when every internet functionality is initialized.
+To restart the measurement, we disconnected the power supply of the ESP.
+The normal connecting time to Wifi was 5 seconds. In the university, we would measure
+different mAs because it takes longer to connect. DFS(80,240) showed the best performance
+(see table \ref{tab_boot_avg}) because
+it might have faster calculation than 80MHz due to dynamic frequency scaling.
+
+\subsection{Wifi Savings}
+To indicate Internet functionalities were initialized correctly, we give a semaphore.
+After the semaphore can be taken, the ESP starts the measurement
+and waits 10 seconds in a \verb!vTaskDelay()!. We can see that the bigger the beacon
+interval is the smaller the power consumption gets (see table \ref{tab_wifi_avg}).
+However, I did not test the drawbacks of a higher beacon interval.
+In addition, here we implemented an automatic restart with \verb!esp_restart()! after
+the measurements.
+
+\begin{table}[h]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+        \input{sections/tables/Blatt 2-2\) Wifi_average.tex}
+    }
+    \caption{The average mAs in Wifi savings for a corresponding beacon interval of 1, 2, 4, 16, 128, and 256.}
+    \label{tab_wifi_avg}
+\end{table}
+
+
+\subsection{Calculation Phase}
+
+Internet- and display functionalities were switched off by a \verb!#define!. In addition,
+we had to insert a \verb!vTaskDelay(10)! in the calculation \verb!for!-loop.
+Because the variance of the temporal execution and power consumption was not high, we
+only performed five measurements instead of ten. However, we see that again DFS(80,240) + ALS
+performs best. Even if 240MHz was a bit faster, it had a higher energy consumption.
+We point out, that even if the slower frequency had a slower execution, the power consumption
+of all frequencies are similar(as we see in table \ref{tab_cal_avg}).
+
+\begin{table}[h]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+        \input{sections/tables/Blatt 3-3\) Calculation_average.tex}
+    }
+    \caption{The average mAs and seconds during the calculation phase. Seconds are marked with the column name ``Time''.}
+    \label{tab_cal_avg}
+\end{table}
+
+
+
+\subsection{Parallelization of Calculation Phase}
+One of the most effective improvements of the calculation code is to split equally the
+most outer loop to the two cores. Such that core 1 executes the $t$ from 0 to 7 and core 2
+executes $t$ from 8 to 15. That reduces the execution time by a factor of $0.5$
+(see table \ref{tab_par_cal_avg}). Of course, there are no huge energy savings because
+we are using two cores at the same time.
+
+\begin{table}[h]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+        \input{sections/tables/Blatt 4-4) Parallization_average.tex}
+    }
+    \caption{The average mAs and seconds during the paralleled calculation phase. Seconds are marked with the column name ``Time''.}
+    \label{tab_par_cal_avg}
+\end{table}
+
+
+\subsection{Light and Deep Sleep}
+We use DFS(80,240) + ALS with Wifi savings and a beacon interval of 128. So, before entering
+for 10 seconds each sleep mode, internet will be activated. \\
+We see that there is a higher energy consumption with activated display and deep sleep
+consumed way less energy than light sleep, see table \ref{tab_sleep_avg}.
+Deep sleep consumed $0.1$ mAs for the 10 seconds without the display and $1$ mAs
+with the display.
+There is that inaccuracy in the table \ref{tab_sleep_avg} because the measurement is stopped
+after booting the ESP. So, it reveals how much energy is used to wake up form deep sleep too.
+
+
+\begin{table}[h]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+        \input{sections/tables/Blatt 5-5) Light sleep & 6) Deep sleep_average.tex}
+    }
+    \caption{The average mAs for the sleep modes.}
+    \label{tab_sleep_avg}
+\end{table}
+
+
+\subsection{Code explanations}
+The overall idea is to stay in deep sleep as long as possible and add there events to the buffer.
+We never tested how long the ESP might stay in deep sleep,
+such that it wakes up after \verb!WAKEUP_AFTER! seconds. Currently, it is limited to 20 minutes.
+Before sleeping 20 minutes after the first boot, it initializes internet parallel to
+activity receiving new events. This is necessary, first, because the last implementation
+rebooted if after 10 tries of established Wifi connection, that lead to a deletion of the buffer.
+This version tries infinitely to connect to Wifi.
+Second, the Wifi connection might take some minutes. During that time we would not detect
+incoming new events if the internet initialization is not parallel. So, waking up if the buffer is full
+is not an option because then this functionality is broken.
+After this, it will wait for the semaphore \verb!xInternetActive!
+before analyzing the buffer. The analyzing algorithm is the same as in the last report; however,
+this time we do not use the NVS. If the algorithm detected an increase or decrease in the count,
+it stores that in a \verb!cJSON! object which is hold in the RAM.
+After emptying the buffer, the \verb!cJSON! object is converted to a string, and it is sent via MQTT to
+the database. The last step before entering deep sleep is to check whether it is 23 o'clock.
+Then, we reset the count and enter the deep sleep for 7 hours. If that is not the case,
+we enter deep sleep for \verb!WAKEUP_AFTER! seconds.\\
+There is the possibility to refresh the ESP's display with a button because it can occur that the display's values
+are not up-to-date. Under the roof, this button forces the ESP to wake up from deep sleep and
+performs then the above described procedure. \\
+We renamed the \verb!wakeup_stub()! to \verb!wakeup_routine()!.
+
+
+
+
+
+\subsection{Battery lifetime}
+We are estimating the battery lifetime for our implementation that includes analyzing the buffer.
+Because the ESP uses about 900 mAs to boot from deep sleep, then analyzes the buffer which takes
+about 3 seconds we came to the conclusion that the ESP would live for one deep sleep cycle of
+one hour.
