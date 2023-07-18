@@ -126,6 +126,17 @@ We renamed the \verb!wakeup_stub()! to \verb!wakeup_routine()!.
 
 \subsection{Battery lifetime}
 We are estimating the battery lifetime for our implementation that includes analyzing the buffer.
-Because the ESP uses about 900 mAs to boot from deep sleep, then analyzes the buffer which takes
-about 3 seconds we came to the conclusion that the ESP would live for one deep sleep cycle of
-one hour.
+Because the ESP uses about $900 mAs$ to boot from deep sleep, then analyzing a full buffer takes about
+1 seconds such that one cycle consumes about $1000 mAs = 16.6 mAh$. So, the ESP would
+live $96$ cycles with a $1600 mAh$ battery. Currently, one cycle is $20$ minutes long, such that the
+lifetime would be $(20*96)/24 = 32 h$. \\
+A longer lifetime can be archived by increasing the buffer to $400$
+events and increasing the cycle to $3 h$. This setup will avoid buffer overflows if we assume that
+there are four events for an in- or out-going event, and 30 persons entering or leaving the room
+approximately every 2 hours, such that the buffer has to handle $240$ events every three hours.
+This would result in a lifetime of $(3*96)/24 = 12$ days. If we operate more risky and
+empty the buffer every 4 hours we archive a lifetime of $16$ days.\\
+This is in theory the longest lifetime if we assume that an event needs $(8+32+32)/8$ bytes:
+8 bits for the sensor ID, 32 bits for the time and additionally 32 bits for managing the struct.
+Further, we estimate that the accessible area of the 8 kB RTC RAM is 4000 bytes, which
+results in a max buffer size of $4000/((8+32+32)/8) = 444$ events.

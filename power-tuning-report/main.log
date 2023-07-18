@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Homebrew) (preloaded format=pdflatex 2023.6.22)  16 JUL 2023 16:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Homebrew) (preloaded format=pdflatex 2023.6.22)  18 JUL 2023 09:54
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1189,7 +1189,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 100--122
 \T1/ntxtlf/m/n/10.95 We re-named the [][]\T1/newtxtt/m/n/10.95 wakeup_stub() []\T1/ntxtlf/m/n/10.95 to
  []
 
-) (./sections/appendix.tex (./sections/tables/Blatt 1-1) Booting.tex) (./sections/tables/Blatt 2-2) Wifi.tex) (./sections/tables/Blatt 3-3) Calculation.tex) (./sections/tables/Blatt 4-4) Parallization.tex)
+) (./sections/appendix.tex (./sections/tables/Blatt 1-1) Booting.tex) (./sections/tables/Blatt 2-2) Wifi.tex) (./sections/tables/Blatt 3-3) Calculation.tex)
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+(./sections/tables/Blatt 4-4) Parallization.tex)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1206,18 +1210,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 37797 strings out of 476025
- 795736 string characters out of 5780533
+ 37800 strings out of 476025
+ 795758 string characters out of 5780533
  1889388 words of memory out of 5000000
  57548 multiletter control sequences out of 15000+600000
- 583871 words of font info for 105 fonts, out of 8000000 for 9000
+ 584648 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  140i,20n,134p,10600b,808s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/marvosym/marvosym.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtxtt/newtxtt.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/ztmr.pfb>
-Output written on main.pdf (3 pages, 156023 bytes).
+</usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/marvosym/marvosym.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtxtt/newtxtt.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/ztmr.pfb>
+Output written on main.pdf (3 pages, 175186 bytes).
 PDF statistics:
- 132 PDF objects out of 1000 (max. 8388607)
- 108 compressed objects within 2 object streams
+ 142 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  23 named destinations out of 1000 (max. 500000)
  85 words of extra memory for PDF output out of 10000 (max. 10000000)
 

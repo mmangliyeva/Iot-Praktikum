@@ -1729,6 +1729,11 @@ INPUT ./sections/tables/Blatt 5-5) Light sleep & 6) Deep sleep.tex
 INPUT sections/tables/Blatt 5-5) Light sleep & 6) Deep sleep.tex
 INPUT ./sections/tables/Blatt 5-5) Light sleep & 6) Deep sleep.tex
 INPUT sections/tables/Blatt 5-5) Light sleep & 6) Deep sleep.tex
+INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/vf/public/newtx/ntxmia.vf
+INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/tfm/public/newtx/txmiaSTbb.tfm
+INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/vf/public/newtx/ntxsy.vf
+INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/tfm/public/newtx/txsys.tfm
+INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/tfm/public/newtx/txex-bar.tfm
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
@@ -1737,6 +1742,8 @@ INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/m
 INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtxtt/newtxtt.pfb
 INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb
 INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb
+INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb
+INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/txsys.pfb
 INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb
 INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/ztmb.pfb
 INPUT /usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/type1/public/newtx/ztmr.pfb
