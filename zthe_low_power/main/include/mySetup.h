@@ -39,16 +39,16 @@
 
 // defines for the counting algorithm:
 
-#define OUTDOOR_BARRIER 25 // pin for outdoor barrier
-#define INDOOR_BARRIER 26  // pin for indoor barrier
+#define OUTDOOR_BARRIER 35 // pin for outdoor barrier
+#define INDOOR_BARRIER 13  // pin for indoor barrier
 #define WAKE_UP_BUTTON 15
 #define TOGGL_ENERGY_PIN 23
 #define REST_ENERGY_PIN 22
 #define LED_PIN 19
 
 #define WAKE_UP_BUTTON_RTC 13
-#define OUTDOOR_BARRIER_RTC 6 // pin for outdoor barrier
-#define INDOOR_BARRIER_RTC 7  // pin for indoor barrier
+#define OUTDOOR_BARRIER_RTC 5 // pin for outdoor barrier
+#define INDOOR_BARRIER_RTC 14 // pin for indoor barrier
 
 #define DISPLAY_POWER 18
 

@@ -76,10 +76,11 @@ RTC_IRAM_ATTR uint64_t my_rtc_time_get_us(void)
 
 const char RTC_RODATA_ATTR time_fmt_str[] = "Time: %llu\n";
 const char RTC_RODATA_ATTR statusFmtStr[] = "Status: %x\n";
-static const char RTC_RODATA_ATTR outerFmtStr[] = "Woken up by outer barrier\n";
-static const char RTC_RODATA_ATTR innerFmtStr[] = "Woken up by inner barrier\n";
-// static const char RTC_RODATA_ATTR info[] = "fillsize: %d, head: %d, sizeBuffer: %d\n";
-
+static const char RTC_RODATA_ATTR outerFmtStr[] = "Triggered by outer barrier\n";
+static const char RTC_RODATA_ATTR innerFmtStr[] = "Triggered by inner barrier\n";
+static const char RTC_RODATA_ATTR restartPinFmtStr[] = "Triggered by restart pin\n";
+static const char RTC_RODATA_ATTR info[] = "fillsize: %d, head: %d, sizeBuffer: %d\n";
+static const char RTC_RODATA_ATTR info_noSleep[] = "restart flag %d, wakeup after: %d\n";
 void RTC_IRAM_ATTR wakeup_routine(void)
 {
 
@@ -87,7 +88,7 @@ void RTC_IRAM_ATTR wakeup_routine(void)
     uint64_t rtc_time_sec = (my_rtc_time_get_us() / 1000000);
     uint64_t now = rtc_time_sec + timeOffset;
     // ets_printf(time_fmt_str, now);
-    // ets_printf(info, fillSize, head, SIZE_BUFFER);
+    ets_printf(info, fillSize, head, SIZE_BUFFER);
     // REG_WRITE(TIMG_WDTFEED_REG(0), 1);
 
     // Retrieve mask specifying which RTC pin triggered the wakeup
@@ -119,6 +120,7 @@ void RTC_IRAM_ATTR wakeup_routine(void)
     if (pinMaskS & (uint32_t)1 << WAKE_UP_BUTTON_RTC)
     {
         restart_flag = 0; // it restarts if flag is 0
+        ets_printf(restartPinFmtStr);
     }
     REG_WRITE(TIMG_WDTFEED_REG(0), 1);
 
@@ -131,6 +133,7 @@ void RTC_IRAM_ATTR wakeup_routine(void)
     // Set the pointer of the wake stub function.
     REG_WRITE(RTC_ENTRY_ADDR_REG, (uint32_t)&wakeup_routine);
     // deepsleep_for_us(20000000LL);
+    ets_printf(info_noSleep, restart_flag, WAKEUP_AFTER);
 
     if (restart_flag && (rtc_time_sec < WAKEUP_AFTER) && (fillSize < SIZE_BUFFER))
     {

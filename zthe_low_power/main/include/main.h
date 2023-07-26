@@ -4,16 +4,16 @@
 // active whether the ESP32 is at my home or in the institue
 // #define INSTITUTE
 // initilize the display
-#define WITH_DISPLAY
+// #define WITH_DISPLAY
 
 // for bugfixing pourpuses maybe you want to deactivate sending data to elastic
-#define SEND_DATA
+// #define SEND_DATA
 
 // after empting the whole buffer stay STAY_AWAKE seconds awake
 // 1200 sec == 20 min
-#define WAKEUP_AFTER 10 // sec
+#define WAKEUP_AFTER 30 // sec
 
-#define USE_WIFI
+// #define USE_WIFI
 #define WIFI_SAVINGS // power savings for wifi
 // #define WITH_CALCULATION // little bit of parrallel calcuation code
 // #define DFS // dynamic frequency scaling

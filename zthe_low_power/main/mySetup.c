@@ -87,8 +87,9 @@ void initInternet(void *args)
 {
 	initWifi();
 	initSNTP();
+#ifdef SEND_DATA
 	initMQTT();
-
+#endif
 	xSemaphoreGive(xInternetActive);
 	vTaskSuspend(NULL); // suspend own task
 }
@@ -170,14 +171,14 @@ void initPins(void)
 	ESP_ERROR_CHECK(gpio_set_level(DISPLAY_POWER, 0));
 
 	// LED measurment
-	ESP_ERROR_CHECK(gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT));
-	ESP_ERROR_CHECK(gpio_set_level(LED_PIN, 1));
+	// ESP_ERROR_CHECK(gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT));
+	// ESP_ERROR_CHECK(gpio_set_level(LED_PIN, 1));
 
-	// pins for measurment
-	ESP_ERROR_CHECK(gpio_set_direction(TOGGL_ENERGY_PIN, GPIO_MODE_OUTPUT));
-	ESP_ERROR_CHECK(gpio_set_level(TOGGL_ENERGY_PIN, 0));
-	ESP_ERROR_CHECK(gpio_set_direction(REST_ENERGY_PIN, GPIO_MODE_OUTPUT));
-	ESP_ERROR_CHECK(gpio_set_level(REST_ENERGY_PIN, 0));
+	// // pins for measurment
+	// ESP_ERROR_CHECK(gpio_set_direction(TOGGL_ENERGY_PIN, GPIO_MODE_OUTPUT));
+	// ESP_ERROR_CHECK(gpio_set_level(TOGGL_ENERGY_PIN, 0));
+	// ESP_ERROR_CHECK(gpio_set_direction(REST_ENERGY_PIN, GPIO_MODE_OUTPUT));
+	// ESP_ERROR_CHECK(gpio_set_level(REST_ENERGY_PIN, 0));
 
 	// set isr to pin:
 	//(void*)OUTDOOR_BARRIER

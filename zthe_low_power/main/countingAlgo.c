@@ -37,7 +37,9 @@ void start_counting_algo(void)
 	// ESP_LOGI("PROGRESS", "Wait for semaphore before analyzer()");
 	if (xSemaphoreTake(xInternetActive, portMAX_DELAY) == pdTRUE)
 	{
+#ifdef USE_WIFI
 		count = getCount_backup();
+#endif
 		ESP_LOGI("PROGRESS", "Restore count: %d", count);
 		xSemaphoreGive(xInternetActive);
 	}
@@ -94,7 +96,7 @@ void analyzer(void)
 				}
 				else
 				{
-					ESP_LOGE("analyzer()", "event ID unkown");
+					ESP_LOGE("analyzer()", "event ID unkown: %d", event.id);
 				}
 			}
 			else
@@ -109,7 +111,7 @@ void analyzer(void)
 				}
 				else
 				{
-					ESP_LOGE("analyzer()", "event ID unkown");
+					ESP_LOGE("analyzer()", "event ID unkown: %d", event.id);
 				}
 			}
 
@@ -177,17 +179,19 @@ void after_analizer(cJSON *root)
 	// sendFromNVS
 	time_t now = get_timestamp();
 	struct tm *now_tm = localtime(&now);
-	setCount_backup(count);
+#ifdef USE_WIFI
 
+	setCount_backup(count);
+#endif
 	if (root != NULL)
 	{
 		// send the stuff to mqtt
 		char *msg = cJSON_PrintUnformatted(root);
 
-		// ets_printf("\n sended message:\n%s\n", msg);
-
+// ets_printf("\n sended message:\n%s\n", msg);
+#ifdef USE_WIFI
 		sendToMQTT(msg, QOS_SAFE);
-
+#endif
 		free(msg);
 		cJSON_Delete(root);
 		root = NULL;
@@ -196,17 +200,20 @@ void after_analizer(cJSON *root)
 	// check if we are having the reset hours -> reset counter
 	now = time(NULL);
 	now_tm = localtime(&now);
-
+#ifdef USE_WIFI
 	// showRoomState
 	prediction = getPrediction();
+#endif
 	displayCountPreTime(prediction, count);
 
 	if ((now_tm->tm_hour == RESET_COUNT_HOUR2) && now_tm->tm_min < RESET_COUNT_MIN)
 	{
 
 		count = 0;
-		setCount_backup(count);
+#ifdef USE_WIFI
 
+		setCount_backup(count);
+#endif
 		// go into deep sleep until 7 o clock, so for 8 hours
 		const uint32_t sevenHours = 25200;
 		deep_sleep_routine(sevenHours);

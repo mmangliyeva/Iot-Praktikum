@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1689666846 "main.tex" "main.pdf" "main" 1689666849 0
+["pdflatex"] 1689870129 "main.tex" "main.pdf" "main" 1689870132 0
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1678549815 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc" 1678549815 2914 8283dfc24eaf1964346f843d7605c2b0 ""
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc" 1678549815 2083 60e36f8eac802fcaf19eabe2633b406e ""
@@ -254,11 +254,11 @@
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1678549815 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-dist/web2c/texmf.cnf" 1688206810 40748 4081c8bc921e56c865f975bd762e388c ""
   "/usr/local/Cellar/texlive/20230313_2/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1678549815 7884135 40615eb6b20613eb34c5a249ffb77270 ""
-  "main.aux" 1689666849 8114 ec8db758547d5847efb4770063a439ac "pdflatex"
-  "main.out" 1689666848 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.aux" 1689870132 8114 ab4b4b2db5c255be167d5d8f28ccc673 "pdflatex"
+  "main.out" 1689870132 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "main.tex" 1689517966 1671 73b19c51abc48fc3837d4780421be9d7 ""
   "sections/appendix.tex" 1689517824 1329 fcccf3e89da66ed452bfedb13c931c57 ""
-  "sections/measurments.tex" 1689666842 7396 ad8440765b736aae01ece0dd76dd8030 ""
+  "sections/measurments.tex" 1689870124 7434 9efc4a3eddb26bae134a2c9db0aee2d5 ""
   "sections/tables/Blatt 1-1) Booting.tex" 1689504602 932 7c3aabcc1a713d82d28c654cf61ca824 ""
   "sections/tables/Blatt 1-1) Booting_average.tex" 1689506121 255 7bf89f51eea09deee2295766533e394c ""
   "sections/tables/Blatt 2-2) Wifi.tex" 1689504606 1103 94a127240d21db30dae90bf365fc3fcf ""
