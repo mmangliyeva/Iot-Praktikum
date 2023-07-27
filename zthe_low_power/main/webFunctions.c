@@ -23,6 +23,7 @@ uint8_t getPrediction(void)
 
 uint8_t fetchNumber(const char *key)
 {
+#ifdef BACKUP_COUNT
     platform_api_init(fetch_url);
     platform_api_set_token(token);
     platform_api_set_query_string("type", "global");
@@ -43,10 +44,14 @@ uint8_t fetchNumber(const char *key)
     }
 
     return count;
+#else
+    return 0;
+#endif
 }
 
 void setCount_backup(uint8_t count)
 {
+#ifdef BACKUP_COUNT
     platform_api_init(update_url);
     platform_api_set_token(token);
     platform_api_set_query_string("type", "global");
@@ -59,4 +64,5 @@ void setCount_backup(uint8_t count)
     platform_api_cleanup();
 
     free(count_str);
+#endif
 }

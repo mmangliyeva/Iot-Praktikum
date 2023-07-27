@@ -51,7 +51,11 @@ void initSNTP(void)
  */
 time_t get_timestamp(void)
 {
+#ifdef USE_WIFI
     return time(NULL);
+#else
+    return 0;
+#endif
 }
 /**
  * returns the time as string

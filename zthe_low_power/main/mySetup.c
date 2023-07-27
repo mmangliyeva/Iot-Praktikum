@@ -60,6 +60,7 @@ void my_setup(void)
 
 	if (rtc_get_reset_reason(0) != DEEPSLEEP_RESET)
 	{
+
 		displayCountPreTime(0, 0);
 		// go to deepsleep IF we did not woke up from deepsleep
 		// startMeasure();
@@ -123,11 +124,13 @@ void inintDFS_or_ALS(void)
  */
 void deep_sleep_routine(uint32_t seconds)
 {
+#ifdef WITH_DISPLAY
+	epaperSleep();
+#endif
 
 	ESP_ERROR_CHECK(gpio_set_level(DISPLAY_POWER, 0));
 	head = 0;
 	fillSize = 0;
-
 	ESP_LOGI("PROGRESS", "Enter deep sleep");
 	timeOffset = get_timestamp();
 	esp_deep_sleep(1000000 * seconds);
@@ -144,21 +147,24 @@ void initPins(void)
 	// gpio_pad_select_gpio(OUTDOOR_BARRIER);
 	ESP_ERROR_CHECK(gpio_set_direction(OUTDOOR_BARRIER, GPIO_MODE_INPUT));
 	ESP_ERROR_CHECK(gpio_pulldown_en(OUTDOOR_BARRIER));
-	ESP_ERROR_CHECK(gpio_pullup_dis(OUTDOOR_BARRIER));
-
+	// ESP_ERROR_CHECK(gpio_pullup_en(OUTDOOR_BARRIER));
+	// ESP_ERROR_CHECK(gpio_pullup_dis(OUTDOOR_BARRIER));
+	// rtc_gpio_isolate(OUTDOOR_BARRIER);
 	// gpio_set_intr_type(OUTDOOR_BARRIER, GPIO_INTR_ANYEDGE);
 
 	// init light barrier 2
 	// gpio_pad_select_gpio(INDOOR_BARRIER);
 	ESP_ERROR_CHECK(gpio_set_direction(INDOOR_BARRIER, GPIO_MODE_INPUT));
 	ESP_ERROR_CHECK(gpio_pulldown_en(INDOOR_BARRIER));
-	ESP_ERROR_CHECK(gpio_pullup_dis(INDOOR_BARRIER));
+	// ESP_ERROR_CHECK(gpio_pullup_en(INDOOR_BARRIER));
+	// ESP_ERROR_CHECK(gpio_pullup_dis(INDOOR_BARRIER));
+	// rtc_gpio_isolate(INDOOR_BARRIER);
 	// gpio_set_intr_type(INDOOR_BARRIER, GPIO_INTR_ANYEDGE);
 
 	// wake up button
 	ESP_ERROR_CHECK(gpio_set_direction(WAKE_UP_BUTTON, GPIO_MODE_INPUT));
 	ESP_ERROR_CHECK(gpio_pulldown_en(WAKE_UP_BUTTON));
-	ESP_ERROR_CHECK(gpio_pullup_dis(WAKE_UP_BUTTON));
+	// ESP_ERROR_CHECK(gpio_pullup_en(WAKE_UP_BUTTON));
 
 	const uint64_t ext_wakeup_pin_1_mask = 1ULL << OUTDOOR_BARRIER;
 	const uint64_t ext_wakeup_pin_2_mask = 1ULL << INDOOR_BARRIER;
@@ -292,7 +298,11 @@ int testData_ingoing(int i)
 	buffer[i + 1] = (Barrier_data){INDOOR_BARRIER, get_timestamp()};
 	buffer[i + 2] = (Barrier_data){OUTDOOR_BARRIER, get_timestamp()};
 	buffer[i + 3] = (Barrier_data){INDOOR_BARRIER, get_timestamp()};
-	fillSize += 4;
+	if (i + 4 >= fillSize)
+	{
+
+		fillSize += i + 4 - fillSize;
+	}
 	return i + 4;
 }
 int testData_outgoing(int i)
@@ -302,6 +312,10 @@ int testData_outgoing(int i)
 	buffer[i + 1] = (Barrier_data){OUTDOOR_BARRIER, get_timestamp()};
 	buffer[i + 2] = (Barrier_data){INDOOR_BARRIER, get_timestamp()};
 	buffer[i + 3] = (Barrier_data){OUTDOOR_BARRIER, get_timestamp()};
-	fillSize += 4;
+	if (i + 4 >= fillSize)
+	{
+
+		fillSize += i + 4 - fillSize;
+	}
 	return i + 4;
 }

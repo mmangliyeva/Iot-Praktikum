@@ -16,6 +16,7 @@ void app_main(void)
     // esp_log_level_set("pushInBuffer()", ESP_LOG_INFO);
     // esp_log_level_set("analyzer()", ESP_LOG_INFO);
     // esp_log_level_set("platform_api", ESP_LOG_INFO);
+    ESP_LOGI("PROGRESS", "reason 0: %d and reason 1: %d", rtc_get_reset_reason(0), rtc_get_reset_reason(1));
 
     my_setup();
     // wait until wifi is ready56
@@ -47,7 +48,6 @@ void app_main(void)
         // empty buffer if we woke up from deepsleep
 
         ESP_LOGI("PROGRESS", "Woke up from deep sleep");
-        ESP_LOGI("PROGRESS", "fillsize: %d, head: %d", fillSize, head);
         // for (int i = 0; i < fillSize; i++)
         // {
         //     ESP_LOGI("PROGRESS", "first element buffer. ID: %d, time: %lld", buffer[i].id, (long long)buffer[i].time);
@@ -60,6 +60,7 @@ void app_main(void)
         i = testData_outgoing(i);
         i = testData_outgoing(i);
         i = testData_ingoing(i);
+        ESP_LOGI("PROGRESS", "fillsize: %d, head: %d", fillSize, head);
 
         start_counting_algo();
     }

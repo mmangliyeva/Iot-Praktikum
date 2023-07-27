@@ -73,28 +73,28 @@ RTC_IRAM_ATTR uint64_t my_rtc_time_get_us(void)
 
     return now1;
 }
-
 const char RTC_RODATA_ATTR time_fmt_str[] = "Time: %llu\n";
 const char RTC_RODATA_ATTR statusFmtStr[] = "Status: %x\n";
 static const char RTC_RODATA_ATTR outerFmtStr[] = "Triggered by outer barrier\n";
 static const char RTC_RODATA_ATTR innerFmtStr[] = "Triggered by inner barrier\n";
 static const char RTC_RODATA_ATTR restartPinFmtStr[] = "Triggered by restart pin\n";
 static const char RTC_RODATA_ATTR info[] = "fillsize: %d, head: %d, sizeBuffer: %d\n";
-static const char RTC_RODATA_ATTR info_noSleep[] = "restart flag %d, wakeup after: %d\n";
+// static const char RTC_RODATA_ATTR info_noSleep[] = "restart flag %d, wakeup after: %d\n";
 void RTC_IRAM_ATTR wakeup_routine(void)
 {
 
     REG_WRITE(TIMG_WDTFEED_REG(0), 1);
     uint64_t rtc_time_sec = (my_rtc_time_get_us() / 1000000);
     uint64_t now = rtc_time_sec + timeOffset;
-    // ets_printf(time_fmt_str, now);
+    ets_printf(time_fmt_str, now);
     ets_printf(info, fillSize, head, SIZE_BUFFER);
     // REG_WRITE(TIMG_WDTFEED_REG(0), 1);
 
     // Retrieve mask specifying which RTC pin triggered the wakeup
     uint32_t pinMaskS = REG_GET_FIELD(RTC_CNTL_EXT_WAKEUP1_STATUS_REG, RTC_CNTL_EXT_WAKEUP1_STATUS);
 
-    uint8_t restart_flag = 1; // it restarts if flag is 0
+    uint8_t barrier_flag = 0;
+    uint8_t restart_flag = 0;
     // ets_printf(statusFmtStr, pinMaskS);
     if (fillSize < SIZE_BUFFER)
     {
@@ -103,6 +103,7 @@ void RTC_IRAM_ATTR wakeup_routine(void)
             Barrier_data data = {INDOOR_BARRIER, now};
             buffer[fillSize] = data;
             fillSize++;
+            barrier_flag = 1;
             ets_printf(innerFmtStr);
         }
         REG_WRITE(TIMG_WDTFEED_REG(0), 1);
@@ -113,13 +114,14 @@ void RTC_IRAM_ATTR wakeup_routine(void)
             Barrier_data data = {OUTDOOR_BARRIER, now};
             buffer[fillSize] = data;
             fillSize++;
+            barrier_flag = 1;
             ets_printf(outerFmtStr);
         }
         REG_WRITE(TIMG_WDTFEED_REG(0), 1);
     }
     if (pinMaskS & (uint32_t)1 << WAKE_UP_BUTTON_RTC)
     {
-        restart_flag = 0; // it restarts if flag is 0
+        restart_flag = 1; // it restarts if flag is 0
         ets_printf(restartPinFmtStr);
     }
     REG_WRITE(TIMG_WDTFEED_REG(0), 1);
@@ -133,14 +135,27 @@ void RTC_IRAM_ATTR wakeup_routine(void)
     // Set the pointer of the wake stub function.
     REG_WRITE(RTC_ENTRY_ADDR_REG, (uint32_t)&wakeup_routine);
     // deepsleep_for_us(20000000LL);
-    ets_printf(info_noSleep, restart_flag, WAKEUP_AFTER);
+    // ets_printf(info_noSleep, restart_flag, WAKEUP_AFTER);
 
-    if (restart_flag && (rtc_time_sec < WAKEUP_AFTER) && (fillSize < SIZE_BUFFER))
+    // if (restart_flag && (rtc_time_sec < WAKEUP_AFTER) && (fillSize < SIZE_BUFFER))
+    // if barrier was pushed we dont want to check the time...
+    if (barrier_flag)
+    {
+
+        // continue sleeping
+        CLEAR_PERI_REG_MASK(RTC_CNTL_STATE0_REG, RTC_CNTL_SLEEP_EN);
+        SET_PERI_REG_MASK(RTC_CNTL_STATE0_REG, RTC_CNTL_SLEEP_EN);
+    }
+    if ((restart_flag == 0) && (rtc_time_sec < WAKEUP_AFTER) && (fillSize < SIZE_BUFFER))
     {
         // continue sleeping
         CLEAR_PERI_REG_MASK(RTC_CNTL_STATE0_REG, RTC_CNTL_SLEEP_EN);
         SET_PERI_REG_MASK(RTC_CNTL_STATE0_REG, RTC_CNTL_SLEEP_EN);
     }
-
+    // if (restart_flag)
+    // {
+    //     deepsleep_for_us(10);
+    // }
+    // esp_default_wake_deep_sleep();
     return;
 }

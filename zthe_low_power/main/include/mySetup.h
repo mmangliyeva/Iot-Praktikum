@@ -39,7 +39,7 @@
 
 // defines for the counting algorithm:
 
-#define OUTDOOR_BARRIER 35 // pin for outdoor barrier
+#define OUTDOOR_BARRIER 14 // pin for outdoor barrier
 #define INDOOR_BARRIER 13  // pin for indoor barrier
 #define WAKE_UP_BUTTON 15
 #define TOGGL_ENERGY_PIN 23
@@ -47,8 +47,8 @@
 #define LED_PIN 19
 
 #define WAKE_UP_BUTTON_RTC 13
-#define OUTDOOR_BARRIER_RTC 5 // pin for outdoor barrier
-#define INDOOR_BARRIER_RTC 14 // pin for indoor barrier
+#define OUTDOOR_BARRIER_RTC 16 // pin for outdoor barrier
+#define INDOOR_BARRIER_RTC 14  // pin for indoor barrier
 
 #define DISPLAY_POWER 18
 
@@ -80,7 +80,6 @@ extern RTC_NOINIT_ATTR uint8_t head;
 extern RTC_NOINIT_ATTR uint8_t fillSize;
 // to have correct time in deepsleep
 extern RTC_NOINIT_ATTR time_t timeOffset;
-
 // generate test-data
 int testData_ingoing(int i);
 int testData_outgoing(int i);

@@ -96,7 +96,7 @@ void analyzer(void)
 				}
 				else
 				{
-					ESP_LOGE("analyzer()", "event ID unkown: %d", event.id);
+					// ESP_LOGE("analyzer()", "event ID unkown: %d", event.id);
 				}
 			}
 			else
@@ -111,7 +111,7 @@ void analyzer(void)
 				}
 				else
 				{
-					ESP_LOGE("analyzer()", "event ID unkown: %d", event.id);
+					// ESP_LOGE("analyzer()", "event ID unkown: %d", event.id);
 				}
 			}
 
